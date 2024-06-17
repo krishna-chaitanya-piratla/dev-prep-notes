@@ -1,0 +1,16 @@
+{
+    "name": "dev-prep-notes",
+    "version": "1.0.0",
+    "scripts": {
+        "install": "cd frontend && npm install && cd ../backend && npm install",
+        "build": "npm run build:frontend && npm run build:backend",
+        "dev": "npm run dev:frontend & cd .. & npm run dev:backend",
+        "dev:frontend": "cd frontend && npm start",
+        "dev:backend": "cd backend && npm run start:dev",
+        "start": "npm run start:backend & cd .. & npm run start:frontend",
+        "start:frontend": "cd frontend && npm start",
+        "start:backend": "cd backend && npm run start"
+
+    }
+  }
+  
