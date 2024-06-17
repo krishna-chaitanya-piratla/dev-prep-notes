@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { GlobalStyle } from './styles/GlobalStyle';
 import Navigation from './components/Navigation';
 import Page from './components/Page';
+import Header from './components/Header';
 
 const App: React.FC = () => {
   return (
@@ -14,8 +15,11 @@ const App: React.FC = () => {
         />
       </Helmet>
       <GlobalStyle />
-      <Navigation />
-      <Page />
+      <Header />
+      <div style={{ display: 'flex', flexGrow: 1 }}>
+        <Navigation />
+        <Page />
+      </div>
     </>
   );
 };

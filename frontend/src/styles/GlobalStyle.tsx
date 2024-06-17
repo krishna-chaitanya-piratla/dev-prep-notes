@@ -2,12 +2,15 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --background-color: #000000;
+    --background-color: #333333;
     --page-background-color: #ffffff;
-    --nav-background-color: #333333;
+    --nav-theme-color: #000000;
+    --nav-background-color: var(--nav-theme-color);
+    --header-background-color: var(--nav-theme-color);
     --text-color: #ffffff;
-    --nav-width: 20%;
+    --nav-width: 15%;
     --page-width: calc(100% - var(--nav-width));
+    --header-height: 5rem; /* Header height */
   }
 
   body {
@@ -20,5 +23,6 @@ export const GlobalStyle = createGlobalStyle`
 
   #root {
     display: flex;
+    flex-direction: column;
   }
 `;
