@@ -1,7 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { GlobalStyle } from './styles/GlobalStyle';
-import Navigation from './components/Navigation';
+import MainNavigation from './components/MainNavigation';
+import PageNavigation from './components/PageNavigation';
 import Page from './components/Page';
 import Header from './components/Header';
 
@@ -17,8 +18,9 @@ const App: React.FC = () => {
       <GlobalStyle />
       <Header />
       <div style={{ display: 'flex', flexGrow: 1 }}>
-        <Navigation />
+        <MainNavigation />
         <Page />
+        <PageNavigation />
       </div>
     </>
   );

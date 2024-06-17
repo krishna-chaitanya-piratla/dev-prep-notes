@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --background-color: #333333;
+    --background-color: #000000;
     --page-background-color: #ffffff;
     --nav-theme-color: #000000;
     --nav-background-color: var(--nav-theme-color);
