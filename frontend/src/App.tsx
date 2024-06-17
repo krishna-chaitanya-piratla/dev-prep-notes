@@ -5,6 +5,7 @@ import PageNavigation from './components/PageNavigation';
 import Page from './components/Page';
 import Header from './components/Header';
 import StyleHelmet from './components/StyleHelmet';
+import { StyledLayout } from './styles/AppStyles';
 
 const App: React.FC = () => {
   return (
@@ -12,11 +13,11 @@ const App: React.FC = () => {
       <StyleHelmet />
       <GlobalStyle />
       <Header />
-      <div style={{ display: 'flex', flexGrow: 1 }}>
+      <StyledLayout>
         <MainNavigation />
         <Page />
         <PageNavigation />
-      </div>
+      </StyledLayout>
     </>
   );
 };
