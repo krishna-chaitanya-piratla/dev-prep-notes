@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import appStore from '../stores/AppStore';
-import { ColorPickerWrapper, ColorDiv } from '../styles/ColorPicker';
+import { ColorPickerWrapper, ColorDiv } from '../styles/PageNavigation';
 
 const ColorPicker: React.FC = observer(() => {
   const colors = ['#000000', '#333333', '#674529'];

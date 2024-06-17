@@ -1,19 +1,12 @@
 import React from 'react';
-import { HeaderWrapper, IconContainer } from '../styles/Header';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import HomeIcon from '@mui/icons-material/Home';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import ColorPicker from './ColorPicker';
+import { HeaderWrapper, TitleContainer } from '../styles/Header';
 
 const Header: React.FC = () => {
   return (
     <HeaderWrapper>
-      <IconContainer>
-        <KeyboardArrowLeftIcon />
-        <HomeIcon />
-        <KeyboardArrowRightIcon />
-      </IconContainer>
-      <ColorPicker />
+      <TitleContainer>
+        <h1>Dev Notes</h1>
+      </TitleContainer>
     </HeaderWrapper>
   );
 };

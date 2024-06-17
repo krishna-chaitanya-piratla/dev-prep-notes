@@ -5,19 +5,23 @@ import PageNavigation from './components/PageNavigation';
 import Page from './components/Page';
 import Header from './components/Header';
 import StyleHelmet from './components/StyleHelmet';
-import { StyledLayout } from './styles/AppStyles';
+import { StyledLayout, AppContainer } from './styles/AppStyles';
 
 const App: React.FC = () => {
   return (
     <>
       <StyleHelmet />
       <GlobalStyle />
-      <Header />
-      <StyledLayout>
-        <MainNavigation />
-        <Page />
-        <PageNavigation />
-      </StyledLayout>
+      <AppContainer>
+        <StyledLayout>
+          <MainNavigation />
+          <div style={{ flexGrow: 1 }}>
+            <Header />
+            <Page />
+          </div>
+          <PageNavigation />
+        </StyledLayout>
+      </AppContainer>
     </>
   );
 };

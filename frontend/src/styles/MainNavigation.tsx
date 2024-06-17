@@ -9,5 +9,13 @@ export const MainNavigationWrapper = styled.nav`
   box-sizing: border-box;
   position: sticky;
   top: 0;
-  margin-right: 2rem;
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  & > svg {
+    margin-right: 1rem;
+  }
 `;
