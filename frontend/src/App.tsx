@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+import { Helmet } from 'react-helmet';
 import Navigation from './components/Navigation';
 import Page from './components/Page';
 
@@ -26,6 +27,12 @@ const GlobalStyle = createGlobalStyle`
 const App: React.FC = () => {
   return (
     <>
+      <Helmet>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </Helmet>
       <GlobalStyle />
       <Navigation />
       <Page />
