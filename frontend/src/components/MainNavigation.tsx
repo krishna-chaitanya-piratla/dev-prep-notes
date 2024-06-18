@@ -1,10 +1,14 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
+import dataStore from '../stores/DataStore';
 import { MainNavigationWrapper, IconContainer } from '../styles/MainNavigation';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import HomeIcon from '@mui/icons-material/Home';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
-const MainNavigation: React.FC = () => {
+const MainNavigation: React.FC = observer(() => {
+  const { linkName } = dataStore;
+
   return (
     <MainNavigationWrapper>
       <IconContainer>
@@ -14,12 +18,12 @@ const MainNavigation: React.FC = () => {
       </IconContainer>
       <h2>Main Navigation</h2>
       <ul>
-        <li>Home</li>
+        <li>{linkName}</li>
         <li>Notes</li>
         <li>Settings</li>
       </ul>
     </MainNavigationWrapper>
   );
-};
+});
 
 export default MainNavigation;
