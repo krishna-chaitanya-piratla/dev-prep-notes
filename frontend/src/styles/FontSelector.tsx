@@ -9,6 +9,7 @@ export const FontSelectorWrapper = styled.div`
   background-color: inherit;
   color: var(--text-color) !important;
   padding: 0.25rem 0.5rem;
+  padding-left: 0;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: fit-content;
