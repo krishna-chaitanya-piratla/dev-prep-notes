@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import appStore from '../stores/AppStore';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
@@ -10,11 +11,12 @@ export const GlobalStyle = createGlobalStyle`
     --nav-width: 15%;
     --page-width: calc(100% - var(--nav-width));
     --header-height: 5rem; /* Header height */
+    --font-family: ${appStore.fontFamily}; /* Font family */
   }
 
   body {
     margin: 0;
-    font-family: 'Lato', sans-serif;
+    font-family: var(--font-family);
     font-size: 16px; /* Root level font size */
     background-color: var(--background-color);
     color: var(--text-color);
