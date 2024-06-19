@@ -19,7 +19,8 @@ export const GlobalStyle = createGlobalStyle`
     --link-base-color: #cccccc;
     --link-hover-color: #ffffff;
     --link-active-color: #ffffff;
-    --link-empty-color: #999999;
+    --nav-context-link-color: #999999;
+    --nav-placeholder-color: #999999;
   }
 
   body {

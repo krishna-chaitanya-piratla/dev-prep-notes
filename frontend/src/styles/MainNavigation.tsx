@@ -1,3 +1,5 @@
+// src/styles/MainNavigation.tsx
+
 import styled from 'styled-components';
 
 export const MainNavigationWrapper = styled.nav`
@@ -23,7 +25,8 @@ export const IconContainer = styled.div`
 interface LinkItemProps {
   isActive: boolean;
   depth: number;
-  hasChildren: boolean; // Add hasChildren prop here
+  hasChildren: boolean;
+  isHovered: boolean;
 }
 
 export const LinkItem = styled.div<LinkItemProps>`
@@ -40,13 +43,13 @@ export const LinkItem = styled.div<LinkItemProps>`
   &:hover {
     color: var(--link-hover-color);
     & > .expand-icon {
-      color: var(--link-hover-color);
+      color: ${({ hasChildren }) => (hasChildren ? 'var(--link-hover-color)' : 'var(--nav-background-color)')};
     }
   }
 `;
 
 interface ExpandIconProps {
-  hasChildren: boolean;
+  isHovered: boolean;
 }
 
 export const ExpandIcon = styled.div<ExpandIconProps>`
@@ -55,7 +58,7 @@ export const ExpandIcon = styled.div<ExpandIconProps>`
   align-items: center;
   justify-content: center;
   margin-right: 0.5rem;
-  color: var(--text-color);
+  color: ${({ isHovered }) => (isHovered ? 'var(--nav-context-link-color)' : 'var(--nav-background-color)')};
   transition: color 0.3s ease;
 
   & > svg {
@@ -72,7 +75,7 @@ export const NoPagesPlaceholder = styled.div<{depth: number}>`
   line-height: var(--navigation-line-height);
   padding: 0.5rem 0;
   padding-left: ${({ depth }) => depth * 1.15}rem;
-  color: var(--link-empty-color);
+  color: var(--nav-placeholder-color);
   cursor: default;
   display: flex;
   align-items: center;
