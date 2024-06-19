@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledLayout = styled.div`
   display: flex;
   flex-grow: 1;
-  margin-top: 1rem; /* Adjust if necessary to align with header */
+  margin-top: 0; /* Adjust if necessary to align with header */
   justify-content: space-between;
 `;
 
