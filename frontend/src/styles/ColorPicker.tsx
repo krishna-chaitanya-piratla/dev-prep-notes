@@ -4,7 +4,6 @@ import styled from 'styled-components';
 export const ColorPickerWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
   background-color: white;
   width: fit-content;
 `;

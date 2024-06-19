@@ -1,5 +1,5 @@
 import React from 'react';
-import { SettingsMenuWrapper, CloseButton, CloseIconWrapper, SettingsMenuItem, Divider } from '../styles/SettingsMenu';
+import { SettingsMenuWrapper, CloseButton, CloseIconWrapper, SettingsMenuItem, Divider, SettingsLabel } from '../styles/SettingsMenu';
 import ColorPicker from './ColorPicker';
 import FontSelector from './FontSelector';
 import CloseIcon from '@mui/icons-material/Close';
@@ -15,10 +15,12 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ onClose }) => {
         <CloseIcon />
       </CloseIconWrapper>
       <SettingsMenuItem>
+        <SettingsLabel>Background:</SettingsLabel>
         <ColorPicker />
       </SettingsMenuItem>
       <Divider />
       <SettingsMenuItem>
+        <SettingsLabel>Font:</SettingsLabel>
         <FontSelector />
       </SettingsMenuItem>
       <CloseButton onClick={onClose}>Close</CloseButton>

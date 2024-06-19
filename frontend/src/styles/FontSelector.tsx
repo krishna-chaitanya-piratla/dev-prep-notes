@@ -8,8 +8,6 @@ export const FontSelectorWrapper = styled.div`
   align-items: center;
   background-color: inherit;
   color: var(--text-color) !important;
-  padding: 0.25rem 0.5rem;
-  padding-left: 0;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: fit-content;
@@ -35,7 +33,6 @@ export const FontSelectorWrapper = styled.div`
 
   .MuiSelect-nativeInput {
     display: none; /* Hide the native input */
-    padding: 0.25rem;
   }
 
   .MuiSvgIcon-root {

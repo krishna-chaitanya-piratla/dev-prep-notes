@@ -10,7 +10,6 @@ export const GlobalStyle = createGlobalStyle`
     --text-color: #ffffff;
     --nav-width: 20%;
     --page-width: calc(100% - 2*var(--nav-width));
-    // --header-height: 5rem;
     --header-height: 3%;
     --font-family: ${appStore.fontFamily}; /* Font family */
     --base-text-size: 18px;

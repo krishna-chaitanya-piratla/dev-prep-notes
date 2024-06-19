@@ -28,13 +28,22 @@ export const CloseIconWrapper = styled.div`
 `;
 
 export const SettingsMenuItem = styled.div`
-  background: var(--page-background-color);
+  background: var(--background-color);
   padding: 1rem;
   width: 80%;
   max-width: 400px;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: space-between;
+`;
+
+export const SettingsLabel = styled.span`
+  margin-right: 1rem; /* Space between label and component */
+  color: var(--text-color);
+  font-size: var(--base-text-size);
 `;
 
 export const Divider = styled.div`
