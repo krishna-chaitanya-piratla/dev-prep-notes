@@ -12,15 +12,6 @@ export const HeaderWrapper = styled.header`
   box-sizing: border-box;
 `;
 
-export const IconContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: auto; /* Push to the left */
-  & > svg {
-    margin-right: 1rem;
-  }
-`;
-
 export const TitleContainer = styled.div`
   flex-grow: 1; /* Allow it to grow and take available space */
   display: flex;
