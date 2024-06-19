@@ -4,7 +4,7 @@ export const HeaderWrapper = styled.header`
   background-color: var(--header-background-color);
   color: var(--text-color);
   height: var(--header-height);
-  width: 100%;
+  width: auto;
   display: flex;
   align-items: center;
   justify-content: center; /* Center items horizontally */

@@ -5,7 +5,7 @@ import PageNavigation from './components/PageNavigation';
 import Page from './components/Page';
 import Header from './components/Header';
 import StyleHelmet from './components/StyleHelmet';
-import { StyledLayout, AppContainer } from './styles/AppStyles';
+import { StyledLayout, AppContainer, PageContainer } from './styles/AppStyles';
 
 const App: React.FC = () => {
   return (
@@ -15,10 +15,10 @@ const App: React.FC = () => {
       <AppContainer>
         <StyledLayout>
           <MainNavigation />
-          <div style={{ flexGrow: 1 }}>
+          <PageContainer>
             <Header />
             <Page />
-          </div>
+          </PageContainer>
           <PageNavigation />
         </StyledLayout>
       </AppContainer>

@@ -8,16 +8,19 @@ export const GlobalStyle = createGlobalStyle`
     --nav-background-color: var(--background-color);
     --header-background-color: var(--background-color);
     --text-color: #ffffff;
-    --nav-width: 15%;
-    --page-width: calc(100% - var(--nav-width));
+    --nav-width: 20%;
+    --page-width: calc(100% - 2*var(--nav-width));
     --header-height: 5rem; /* Header height */
     --font-family: ${appStore.fontFamily}; /* Font family */
+    --base-text-size: 18px;
+    --base-line-height: calc(1.5*var(--base-text-size));
   }
 
   body {
     margin: 0;
     font-family: var(--font-family);
-    font-size: 16px; /* Root level font size */
+    font-size: var(--base-text-size); /* Root level font size */
+    line-height: var(--base-line-height);
     background-color: var(--background-color);
     color: var(--text-color);
   }
