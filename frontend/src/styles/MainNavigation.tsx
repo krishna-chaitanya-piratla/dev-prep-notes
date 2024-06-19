@@ -19,3 +19,16 @@ export const IconContainer = styled.div`
     margin-right: 1rem;
   }
 `;
+
+interface LinkItemProps {
+  isActive: boolean;
+}
+
+export const LinkItem = styled.div<LinkItemProps>`
+  cursor: pointer;
+  padding: 0.5rem 0;
+  color: ${({ isActive }) => (isActive ? 'var(--link-active-color)' : 'var(--link-base-color)')};
+  &:hover {
+    color: var(--link-hover-color);
+  }
+`;

@@ -14,6 +14,9 @@ export const GlobalStyle = createGlobalStyle`
     --font-family: ${appStore.fontFamily}; /* Font family */
     --base-text-size: 18px;
     --base-line-height: calc(1.5*var(--base-text-size));
+    --link-base-color: #cccccc;
+    --link-hover-color: #ffffff;
+    --link-active-color: #ffffff;
   }
 
   body {
