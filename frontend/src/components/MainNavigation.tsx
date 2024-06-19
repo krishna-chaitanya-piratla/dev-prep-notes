@@ -1,5 +1,3 @@
-// src/components/MainNavigation.tsx
-
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../stores/DataStore';
@@ -8,9 +6,22 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import HomeIcon from '@mui/icons-material/Home';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
-const MainNavigation: React.FC = observer(() => {
-  const { pages, setPage, currentPage } = dataStore;
+const renderPageTree = (pages: any[], depth: number = 0) => {
+  return pages.map((page) => (
+    <React.Fragment key={page.metadata.link}>
+      <LinkItem
+        onClick={() => dataStore.setPage(page)}
+        isActive={dataStore.currentPage.metadata.link === page.metadata.link}
+        depth={depth}
+      >
+        {page.metadata.linkName}
+      </LinkItem>
+      {page.children.length > 0 && renderPageTree(page.children, depth + 1)}
+    </React.Fragment>
+  ));
+};
 
+const MainNavigation: React.FC = observer(() => {
   return (
     <MainNavigationWrapper>
       <IconContainer>
@@ -19,17 +30,7 @@ const MainNavigation: React.FC = observer(() => {
         <KeyboardArrowRightIcon />
       </IconContainer>
       <h2>Main Navigation</h2>
-      <div>
-        {pages.map((page) => (
-          <LinkItem
-            key={page.metadata.link}
-            onClick={() => setPage(page)}
-            isActive={currentPage.metadata.link === page.metadata.link}
-          >
-            {page.metadata.linkName}
-          </LinkItem>
-        ))}
-      </div>
+      <div>{renderPageTree(dataStore.pageTree)}</div>
     </MainNavigationWrapper>
   );
 });

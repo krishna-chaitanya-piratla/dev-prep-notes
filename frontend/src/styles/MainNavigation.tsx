@@ -22,12 +22,16 @@ export const IconContainer = styled.div`
 
 interface LinkItemProps {
   isActive: boolean;
+  depth: number;
 }
 
 export const LinkItem = styled.div<LinkItemProps>`
   cursor: pointer;
+  font-size: var(--navigation-text-size);
+  line-height: var(--navigation-line-height);
   padding: 0.5rem 0;
   color: ${({ isActive }) => (isActive ? 'var(--link-active-color)' : 'var(--link-base-color)')};
+  padding-left: ${({ depth }) => depth * 1.15}rem;
   &:hover {
     color: var(--link-hover-color);
   }
