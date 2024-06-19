@@ -66,3 +66,14 @@ export const ExpandIcon = styled.div<ExpandIconProps>`
 export const LinkText = styled.span`
   flex-grow: 1; /* Ensure link text takes up remaining space */
 `;
+
+export const NoPagesPlaceholder = styled.div<{depth: number}>`
+  font-size: var(--navigation-text-size);
+  line-height: var(--navigation-line-height);
+  padding: 0.5rem 0;
+  padding-left: ${({ depth }) => depth * 1.15}rem;
+  color: var(--link-empty-color);
+  cursor: default;
+  display: flex;
+  align-items: center;
+`;

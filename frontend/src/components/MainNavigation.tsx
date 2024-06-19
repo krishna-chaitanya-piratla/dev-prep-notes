@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../stores/DataStore';
-import { MainNavigationWrapper, IconContainer, LinkItem, ExpandIcon, LinkText } from '../styles/MainNavigation';
+import { MainNavigationWrapper, IconContainer, LinkItem, ExpandIcon, LinkText, NoPagesPlaceholder } from '../styles/MainNavigation';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import HomeIcon from '@mui/icons-material/Home';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -24,7 +24,15 @@ const renderPageTree = (pages: any[], depth: number = 0) => {
         </ExpandIcon>
         <LinkText>{page.metadata.linkName}</LinkText>
       </LinkItem>
-      {dataStore.isExpanded(page.metadata.id) && renderPageTree(page.children, depth + 1)}
+      {dataStore.isExpanded(page.metadata.id) && (
+        page.children.length > 0 ? (
+          renderPageTree(page.children, depth + 1)
+        ) : (
+          <NoPagesPlaceholder depth={depth + 1}>
+            No pages inside
+          </NoPagesPlaceholder>
+        )
+      )}
     </React.Fragment>
   ));
 };
