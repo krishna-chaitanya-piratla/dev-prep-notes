@@ -2,6 +2,7 @@ import React from 'react';
 import { SettingsMenuWrapper, CloseButton, CloseIconWrapper, SettingsMenuItem, Divider, SettingsLabel } from '../styles/SettingsMenu';
 import ColorPicker from './ColorPicker';
 import FontSelector from './FontSelector';
+import FontSize from './FontSize';
 import CloseIcon from '@mui/icons-material/Close';
 
 interface SettingsMenuProps {
@@ -22,6 +23,11 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ onClose }) => {
       <SettingsMenuItem>
         <SettingsLabel>Font:</SettingsLabel>
         <FontSelector />
+      </SettingsMenuItem>
+      <Divider />
+      <SettingsMenuItem>
+        <SettingsLabel>Font Size:</SettingsLabel>
+        <FontSize />
       </SettingsMenuItem>
       <CloseButton onClick={onClose}>Close</CloseButton>
     </SettingsMenuWrapper>

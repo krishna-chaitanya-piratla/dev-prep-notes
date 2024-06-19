@@ -12,10 +12,10 @@ export const GlobalStyle = createGlobalStyle`
     --page-width: calc(100% - 2*var(--nav-width));
     --header-height: 3%;
     --font-family: ${appStore.fontFamily}; /* Font family */
-    --base-text-size: 18px;
-    --base-line-height: calc(1.6*var(--base-text-size));
-    --navigation-text-size: calc(8*var(--base-text-size)/9);
-    --navigation-line-height: calc(1.6*var(--navigation-text-size));
+    --base-text-size: ${appStore.fontSize}px; /* Font size */
+    --base-line-height: calc(1.6 * var(--base-text-size));
+    --navigation-text-size: calc(8 * var(--base-text-size) / 9);
+    --navigation-line-height: calc(1.6 * var(--navigation-text-size));
     --link-base-color: #cccccc;
     --link-hover-color: #ffffff;
     --link-active-color: #ffffff;
