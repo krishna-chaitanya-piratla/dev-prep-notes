@@ -7,6 +7,7 @@ export const SettingsMenuWrapper = styled.div`
   width: 50%;
   height: 75%;
   background: var(--nav-background-color);
+  opacity: 0.9;
   display: flex;
   flex-direction: column;
   align-items: center;
