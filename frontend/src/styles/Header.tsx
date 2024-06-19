@@ -4,12 +4,15 @@ export const HeaderWrapper = styled.header`
   background-color: var(--header-background-color);
   color: var(--text-color);
   height: var(--header-height);
-  width: auto;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center; /* Center items horizontally */
   padding: 0 1rem;
   box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 `;
 
 export const TitleContainer = styled.div`
