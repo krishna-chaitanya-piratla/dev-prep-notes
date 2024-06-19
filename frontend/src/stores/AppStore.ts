@@ -6,7 +6,7 @@ class AppStore {
 
   constructor() {
     this.navBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
-    this.fontFamily = 'Lato, sans-serif'; // Default font
+    this.fontFamily = 'Wotfard, sans-serif'; // Default font
     makeAutoObservable(this);
   }
 
