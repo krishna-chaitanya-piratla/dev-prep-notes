@@ -23,6 +23,7 @@ export const IconContainer = styled.div`
 interface LinkItemProps {
   isActive: boolean;
   depth: number;
+  hasChildren: boolean; // Add hasChildren prop here
 }
 
 export const LinkItem = styled.div<LinkItemProps>`
@@ -32,7 +33,36 @@ export const LinkItem = styled.div<LinkItemProps>`
   padding: 0.5rem 0;
   color: ${({ isActive }) => (isActive ? 'var(--link-active-color)' : 'var(--link-base-color)')};
   padding-left: ${({ depth }) => depth * 1.15}rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+
   &:hover {
     color: var(--link-hover-color);
+    & > .expand-icon {
+      color: var(--link-hover-color);
+    }
   }
+`;
+
+interface ExpandIconProps {
+  hasChildren: boolean;
+}
+
+export const ExpandIcon = styled.div<ExpandIconProps>`
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+
+  & > svg {
+    font-size: 1rem;
+  }
+`;
+
+export const LinkText = styled.span`
+  flex-grow: 1; /* Ensure link text takes up remaining space */
 `;

@@ -1,10 +1,11 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../stores/DataStore';
-import { MainNavigationWrapper, IconContainer, LinkItem } from '../styles/MainNavigation';
+import { MainNavigationWrapper, IconContainer, LinkItem, ExpandIcon, LinkText } from '../styles/MainNavigation';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import HomeIcon from '@mui/icons-material/Home';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const renderPageTree = (pages: any[], depth: number = 0) => {
   return pages.map((page) => (
@@ -13,10 +14,17 @@ const renderPageTree = (pages: any[], depth: number = 0) => {
         onClick={() => dataStore.setPage(page)}
         isActive={dataStore.currentPage.metadata.link === page.metadata.link}
         depth={depth}
+        hasChildren={page.children.length > 0} // Add hasChildren prop here
       >
-        {page.metadata.linkName}
+        <ExpandIcon
+          hasChildren={page.children.length > 0}
+          onClick={(e) => { e.stopPropagation(); dataStore.toggleExpand(page.metadata.id); }}
+        >
+          {dataStore.isExpanded(page.metadata.id) ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
+        </ExpandIcon>
+        <LinkText>{page.metadata.linkName}</LinkText>
       </LinkItem>
-      {page.children.length > 0 && renderPageTree(page.children, depth + 1)}
+      {dataStore.isExpanded(page.metadata.id) && renderPageTree(page.children, depth + 1)}
     </React.Fragment>
   ));
 };
