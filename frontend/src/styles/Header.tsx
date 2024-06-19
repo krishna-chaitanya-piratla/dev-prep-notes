@@ -7,7 +7,7 @@ export const HeaderWrapper = styled.header`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center; /* Center items horizontally */
+  justify-content: space-between; /* Space between title and settings icon */
   padding: 0 1rem;
   box-sizing: border-box;
   position: sticky;
@@ -20,4 +20,15 @@ export const TitleContainer = styled.div`
   display: flex;
   justify-content: center; /* Center the title horizontally */
   align-items: center; /* Center the title vertically */
+`;
+
+export const SettingsIconWrapper = styled.div`
+  align-self: flex-end;
+  cursor: pointer;
+  margin-bottom: 1rem;
+
+  & > svg {
+    font-size: 1.5rem;
+    color: var(--text-color);
+  }
 `;

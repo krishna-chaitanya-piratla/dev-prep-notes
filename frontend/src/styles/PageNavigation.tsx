@@ -13,21 +13,3 @@ export const PageNavigationWrapper = styled.nav`
   flex-direction: column;
 `;
 
-export const FontSelectorWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: fit-content;
-
-  select {
-    border: none;
-    background: none;
-    font-size: 1rem;
-    outline: none;
-    cursor: pointer;
-    width: auto; /* Make sure select element has auto width */
-  }
-`;
