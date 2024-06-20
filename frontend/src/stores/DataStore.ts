@@ -16,11 +16,13 @@ class DataStore {
     this.pageTree = this.buildPageTree();
     this.expandedPages = new Set();
     makeAutoObservable(this);
+    this.processCurrentPage();
   }
 
   setPage = (page: Page) => {
     this.currentPage = page;
     this.linkName = page.metadata.linkName;
+    this.processCurrentPage();
   };
 
   toggleExpand = (pageId: string) => {
@@ -52,6 +54,18 @@ class DataStore {
     });
 
     return roots;
+  }
+
+  processCurrentPage() {
+    const generateId = (type: string, blockIndex: number, contentIndex: number) => {
+      return `${type}-${blockIndex}-${contentIndex}`;
+    };
+
+    this.currentPage.contents.forEach((block, blockIndex) => {
+      block.contents.forEach((content: any, contentIndex: number) => {
+        content.id = generateId(content.type, blockIndex, contentIndex);
+      });
+    });
   }
 }
 

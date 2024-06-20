@@ -1,5 +1,3 @@
-// src/styles/MainNavigation.tsx
-
 import styled from 'styled-components';
 
 export const MainNavigationWrapper = styled.nav`

@@ -1,5 +1,3 @@
-// src/components/MainNavigation.tsx
-
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../stores/DataStore';
