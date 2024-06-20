@@ -7,9 +7,18 @@ const scrollToSection = (id: string) => {
   const element = document.getElementById(id);
   console.log(`Scrolling to element with id: ${id}`);
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const headerOffset = document.querySelector('header')?.clientHeight || 0;
+    const elementPosition = element.getBoundingClientRect().top;
+    const remToPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const offsetPosition = elementPosition + window.scrollY - headerOffset - (2 * remToPx); // 2rem gap
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    });
   }
 };
+
 
 const PageNavigation: React.FC = observer(() => {
   const headers = dataStore.currentPage.contents.flatMap(block =>
