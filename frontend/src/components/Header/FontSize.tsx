@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import appStore from '../stores/AppStore';
+import appStore from '../../stores/AppStore';
 import { Slider } from '@mui/material';
 
 const FontSize: React.FC = observer(() => {

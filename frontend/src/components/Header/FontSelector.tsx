@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import appStore from '../stores/AppStore';
-import { FontSelectorWrapper, StyledSelect, StyledMenuItem } from '../styles/FontSelector';
+import appStore from '../../stores/AppStore';
+import { FontSelectorWrapper, StyledSelect, StyledMenuItem } from '../../styles/Header/FontSelector';
 import { SelectChangeEvent } from '@mui/material/Select';
 
 const FontSelector: React.FC = observer(() => {

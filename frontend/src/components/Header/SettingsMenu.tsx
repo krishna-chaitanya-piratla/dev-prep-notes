@@ -1,5 +1,5 @@
 import React from 'react';
-import { SettingsMenuWrapper, CloseButton, CloseIconWrapper, SettingsMenuItem, Divider, SettingsLabel } from '../styles/SettingsMenu';
+import { SettingsMenuWrapper, CloseButton, CloseIconWrapper, SettingsMenuItem, Divider, SettingsLabel } from '../../styles/Header/SettingsMenu';
 import ColorPicker from './ColorPicker';
 import FontSelector from './FontSelector';
 import FontSize from './FontSize';

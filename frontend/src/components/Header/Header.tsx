@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HeaderWrapper, TitleContainer, SettingsIconWrapper } from '../styles/Header';
+import { HeaderWrapper, TitleContainer, SettingsIconWrapper } from '../../styles/Header/Header';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SettingsMenu from './SettingsMenu';
 

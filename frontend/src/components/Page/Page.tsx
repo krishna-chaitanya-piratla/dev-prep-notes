@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import dataStore from '../stores/DataStore';
-import { BannerWrapper, ContentWrapper, PageWrapper } from '../styles/Page';
+import dataStore from '../../stores/DataStore';
+import { BannerWrapper, ContentWrapper, PageWrapper } from '../../styles/Page/Page';
 import Banner from './Banner';
 
 const renderContent = (content: any) => {

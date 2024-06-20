@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledBanner, StyledBannerText, AddCover } from '../styles/Banner';
+import { StyledBanner, StyledBannerText, AddCover } from '../../styles/Page/Banner';
 
 interface BannerProps {
   imageUrl?: string;

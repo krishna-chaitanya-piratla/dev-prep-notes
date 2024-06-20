@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import dataStore from '../stores/DataStore';
-import { MainNavigationWrapper, IconContainer, LinkItem, ExpandIcon, LinkText, NoPagesPlaceholder } from '../styles/MainNavigation';
+import dataStore from '../../stores/DataStore';
+import { MainNavigationWrapper, IconContainer, LinkItem, ExpandIcon, LinkText, NoPagesPlaceholder } from '../../styles/MainNavigation/MainNavigation';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import HomeIcon from '@mui/icons-material/Home';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';

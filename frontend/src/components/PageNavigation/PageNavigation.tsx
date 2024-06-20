@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import dataStore from '../stores/DataStore';
-import { PageNavigationWrapper, NavigationItem } from '../styles/PageNavigation';
+import dataStore from '../../stores/DataStore';
+import { PageNavigationWrapper, NavigationItem } from '../../styles/PageNavigation/PageNavigation';
 
 const scrollToSection = (id: string) => {
   const element = document.getElementById(id);
