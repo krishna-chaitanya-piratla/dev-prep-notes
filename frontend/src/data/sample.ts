@@ -305,6 +305,7 @@ export const dummy_page_04 = {
         "parentId": "001"
     },
     "title": {
+        "bannerUrl": "../assets/banners/banner4.webp",
         "h4Text": "Test Sub-Page",
         "h2Text": "Test Sub Page 01"
     },

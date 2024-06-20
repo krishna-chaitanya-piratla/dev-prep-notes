@@ -32,10 +32,10 @@ const Page: React.FC = observer(() => {
     <PageWrapper>
       <BannerWrapper>
         <Banner
-            imageUrl={currentPage.title.bannerUrl}
-            h4Text={currentPage.title.h4Text}
-            h2Text={currentPage.title.h2Text}
-          />
+          imageUrl={currentPage.title.bannerUrl}
+          h4Text={currentPage.title.h4Text}
+          h2Text={currentPage.title.h2Text}
+        />
       </BannerWrapper>
       <ContentWrapper>
         {currentPage.contents.map((block, index) => (
@@ -47,7 +47,6 @@ const Page: React.FC = observer(() => {
         ))}
       </ContentWrapper>
     </PageWrapper>
-
   );
 });
 
