@@ -8,6 +8,7 @@ export const dummy_page_01 = {
         "pageType": "page"
     },
     "title": {
+        "bannerUrl": "../assets/banners/banner.jpg",
         "h4Text": "Test1",
         "h2Text": "Test Page 01"
     },
@@ -101,6 +102,7 @@ export const dummy_page_02 = {
         "pageType": "page"
     },
     "title": {
+        "bannerUrl": "../assets/banners/banner2.jpg",
         "h4Text": "Test2",
         "h2Text": "Test Page 02"
     },
@@ -201,6 +203,7 @@ export const dummy_page_03 = {
         "pageType": "page"
     },
     "title": {
+        "bannerUrl": "../assets/banners/banner3.webp",
         "h4Text": "Test3",
         "h2Text": "Test Page 03"
     },

@@ -1,7 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../stores/DataStore';
-import { PageWrapper } from '../styles/Page';
+import { BannerWrapper, ContentWrapper, PageWrapper } from '../styles/Page';
+import Banner from './Banner';
 
 const renderContent = (content: any) => {
   switch (content.type) {
@@ -29,16 +30,24 @@ const Page: React.FC = observer(() => {
 
   return (
     <PageWrapper>
-      <h2>{currentPage.title.h2Text}</h2>
-      <h4>{currentPage.title.h4Text}</h4>
-      {currentPage.contents.map((block, index) => (
-        <div key={index}>
-          {block.contents.map((content: any, subIndex: number) => (
-            <div key={subIndex}>{renderContent(content)}</div>
-          ))}
-        </div>
-      ))}
+      <BannerWrapper>
+        <Banner
+            imageUrl={currentPage.title.bannerUrl}
+            h4Text={currentPage.title.h4Text}
+            h2Text={currentPage.title.h2Text}
+          />
+      </BannerWrapper>
+      <ContentWrapper>
+        {currentPage.contents.map((block, index) => (
+          <div key={index}>
+            {block.contents.map((content: any, subIndex: number) => (
+              <div key={subIndex}>{renderContent(content)}</div>
+            ))}
+          </div>
+        ))}
+      </ContentWrapper>
     </PageWrapper>
+
   );
 });
 

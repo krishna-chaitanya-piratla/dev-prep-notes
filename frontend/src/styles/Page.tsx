@@ -5,8 +5,25 @@ export const PageWrapper = styled.div`
   color: black;
   width: auto;
   min-height: 100vh;
-  padding: 4rem;
+  padding: 0;
   border-radius: 10px;
   box-sizing: border-box;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const BannerWrapper = styled.div`
+  color: black;
+  display: flex;
+  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+  padding: 0;
+`;
+
+export const ContentWrapper = styled.div `
+  padding: 3.75rem;
+
+
 `;
