@@ -8,7 +8,7 @@ class AppStore {
   constructor() {
     this.navBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
     this.fontFamily = 'Wotfard, sans-serif'; // Default font
-    this.fontSize = 18; // Default font size in pixels
+    this.fontSize = 16; // Default font size in pixels
     makeAutoObservable(this);
   }
 
