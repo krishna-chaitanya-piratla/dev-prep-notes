@@ -19,11 +19,10 @@ const scrollToSection = (id: string) => {
   }
 };
 
-
 const PageNavigation: React.FC = observer(() => {
   const headers = dataStore.currentPage.contents.flatMap(block =>
     block.contents.filter(content =>
-      ['h1', 'h2', 'h3'].includes(content.type)
+      ['h1', 'h2'].includes(content.type) // Exclude h3
     ).map(content => ({
       id: content.id,
       type: content.type,
@@ -38,7 +37,7 @@ const PageNavigation: React.FC = observer(() => {
         {headers.map(header => (
           <NavigationItem
             key={header.id}
-            depth={header.type === 'h1' ? 0 : header.type === 'h2' ? 1 : 2}
+            depth={header.type === 'h1' ? 0 : 1} // Adjust depth since we only have h1 and h2
             onClick={() => scrollToSection(header.id!)}
           >
             {header.contents}
