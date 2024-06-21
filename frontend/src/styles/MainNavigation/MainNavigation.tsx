@@ -20,6 +20,17 @@ export const IconContainer = styled.div`
   }
 `;
 
+export const MainNavigationHeader = styled.h2`
+  padding-top: calc(var(--base-text-size) * 8.5); 
+  margin-bottom: calc(var(--base-text-size) * 2);
+  font-weight: 500;
+  font-size: calc(var(--base-text-size) * 1); /* Use CSS variable */
+  text-transform: uppercase;
+  color: #d9e0e8;
+  letter-spacing: calc(var(--base-text-size) * 0.125);
+  text-rendering: optimizelegibility;
+`;
+
 interface LinkItemProps {
   isActive: boolean;
   depth: number;
@@ -33,7 +44,7 @@ export const LinkItem = styled.div<LinkItemProps>`
   line-height: var(--navigation-line-height);
   padding: 0.5rem 0;
   color: ${({ isActive }) => (isActive ? 'var(--link-active-color)' : 'var(--link-base-color)')};
-  padding-left: ${({ depth }) => depth * 1.15}rem;
+  padding-left: ${({ depth }) => `calc(${depth} * var(--navigation-text-size) * 1.15)`};
   display: flex;
   align-items: center;
   position: relative;
@@ -72,9 +83,10 @@ export const NoPagesPlaceholder = styled.div<{depth: number}>`
   font-size: var(--navigation-text-size);
   line-height: var(--navigation-line-height);
   padding: 0.5rem 0;
-  padding-left: ${({ depth }) => depth * 1.15}rem;
+  padding-left: ${({ depth }) => `calc(${depth + 1} * var(--navigation-text-size) * 1.15)`};
   color: var(--nav-placeholder-color);
   cursor: default;
   display: flex;
   align-items: center;
+  position: relative;
 `;

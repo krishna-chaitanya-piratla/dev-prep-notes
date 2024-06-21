@@ -5,8 +5,8 @@ export const PageNavigationWrapper = styled.nav`
   color: var(--text-color);
   width: var(--nav-width);
   height: 100vh;
-  padding: 1.25rem; /* 20px */
-  padding-left: 3rem;
+  padding: calc(var(--base-text-size) * 1.25); /* Adjust padding dynamically */
+  padding-left: calc(var(--base-text-size) * 3);
   box-sizing: border-box;
   position: sticky;
   top: 0;
@@ -14,9 +14,9 @@ export const PageNavigationWrapper = styled.nav`
   flex-direction: column;
 
   h2 {
-    margin-bottom: 1rem;
-  }`
-;
+    margin-bottom: calc(var(--base-text-size) * 1);
+  }
+`;
 
 interface NavigationItemProps {
   depth: number;
@@ -27,36 +27,36 @@ export const NavigationItem = styled.div<NavigationItemProps>`
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding-left: ${({ depth }) => depth * 1.15}rem;
-  height: ${({ depth }) => (depth === 0 ? '3.125rem' : '2.5rem')}; /* Adjust height based on depth */
+  padding-left: ${({ depth }) => `calc(${depth} * var(--base-text-size) * 1.15)`}; /* Adjust padding dynamically */
+  height: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 3.125)' : 'calc(var(--base-text-size) * 2.5)')}; /* Adjust height dynamically */
   color: #9ca8b4;
-  font-size: ${({ depth }) => (depth === 0 ? 1 : 0.875)}rem;
+  font-size: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 1)' : 'calc(var(--base-text-size) * 0.875)')}; /* Use CSS variables */
 
   &:hover {
     color: var(--link-hover-color);
-  }`
-;
+  }
+`;
 
 interface CircleProps {
   isActive: boolean;
 }
 
 export const Circle = styled.div<CircleProps>`
-  width: ${({ isActive }) => (isActive ? '1.125rem' : '0.75rem')};
-  height: ${({ isActive }) => (isActive ? '1.125rem' : '0.75rem')};
+  width: ${({ isActive }) => (isActive ? 'calc(var(--base-text-size) * 1.125)' : 'calc(var(--base-text-size) * 0.75)')}; /* Use CSS variables */
+  height: ${({ isActive }) => (isActive ? 'calc(var(--base-text-size) * 1.125)' : 'calc(var(--base-text-size) * 0.75)')}; /* Use CSS variables */
   border-radius: 50%;
   background: ${({ isActive }) => (isActive ? '#1aecff' : '#5c6670')};
-  margin-right: 1rem;
-  transform: ${({ isActive }) => (isActive ? 'translateX(-3px)' : 'none')};`
-;
+  margin-right: calc(var(--base-text-size) * 1);
+  transform: ${({ isActive }) => (isActive ? 'translateX(calc(var(--base-text-size) * -0.167))' : 'none')};
+`;
 
-export const ContentsHeader = styled.h2`
-  padding-top: 10rem; 
-  margin-bottom: 2rem;
+export const PageNavigationHeader = styled.h2`
+  padding-top: calc(var(--base-text-size) * 10); 
+  margin-bottom: calc(var(--base-text-size) * 2);
   font-weight: 500;
-  font-size: 1rem;
+  font-size: calc(var(--base-text-size) * 1); /* Use CSS variable */
   text-transform: uppercase;
   color: #d9e0e8;
-  letter-spacing: 2px;
-  text-rendering: optimizelegibility;`
-;
+  letter-spacing: calc(var(--base-text-size) * 0.125);
+  text-rendering: optimizelegibility;
+`;
