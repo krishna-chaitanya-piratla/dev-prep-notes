@@ -26,6 +26,7 @@ export const ContentWrapper = styled.div `
   padding: 3.75rem;
   font-size: calc(1.125*var(--base-text-size));
   line-height: calc(1.125*var(--base-line-height));
+  letter-spacing: 0.9px;
 
 
 `;
