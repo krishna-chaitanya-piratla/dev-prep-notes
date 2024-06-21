@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../../stores/DataStore';
-import { PageNavigationWrapper, NavigationItem } from '../../styles/PageNavigation/PageNavigation';
+import { PageNavigationWrapper, NavigationItem, ContentsHeader } from '../../styles/PageNavigation/PageNavigation';
 
 const scrollToSection = (id: string) => {
   const element = document.getElementById(id);
@@ -33,7 +33,7 @@ const PageNavigation: React.FC = observer(() => {
 
   return (
     <PageNavigationWrapper>
-      <h2>Contents</h2>
+      <ContentsHeader>Contents</ContentsHeader>
       <div>
         {headers.map(header => (
           <NavigationItem

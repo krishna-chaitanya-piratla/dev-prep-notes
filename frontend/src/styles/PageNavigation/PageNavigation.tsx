@@ -6,6 +6,7 @@ export const PageNavigationWrapper = styled.nav`
   width: var(--nav-width);
   height: 100vh;
   padding: 1.25rem; /* 20px */
+  padding-left: 3rem;
   box-sizing: border-box;
   position: sticky;
   top: 0;
@@ -25,9 +26,20 @@ export const NavigationItem = styled.div<NavigationItemProps>`
   cursor: pointer;
   padding-left: ${({ depth }) => depth * 1.15}rem;
   margin-bottom: 0.5rem;
-  color: var(--link-base-color);
+  color: #9ca8b4;
 
   &:hover {
     color: var(--link-hover-color);
   }
+`;
+
+export const ContentsHeader = styled.h2`
+  padding-top: 10rem; 
+  margin-bottom: 2rem;
+  font-weight: 500;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #d9e0e8;
+  letter-spacing: 2px;
+  text-rendering: optimizelegibility;
 `;
