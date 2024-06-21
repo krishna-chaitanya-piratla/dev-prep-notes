@@ -27,6 +27,7 @@ export const NavigationItem = styled.div<NavigationItemProps>`
   padding-left: ${({ depth }) => depth * 1.15}rem;
   margin-bottom: 0.5rem;
   color: #9ca8b4;
+  font-size: ${({ depth }) => depth === 0 ? 1 : 0.875}rem;
 
   &:hover {
     color: var(--link-hover-color);
