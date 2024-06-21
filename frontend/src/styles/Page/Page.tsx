@@ -24,7 +24,7 @@ export const BannerWrapper = styled.div`
 
 export const ContentWrapper = styled.div `
   padding: 3.75rem;
-  font-size: 1.125rem;
+  font-size: calc(1.125*var(--base-text-size));
   line-height: calc(1.125*var(--base-line-height));
 
 

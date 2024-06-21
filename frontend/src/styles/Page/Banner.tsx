@@ -6,7 +6,7 @@ interface StyledBannerProps {
 
 export const StyledBanner = styled.div<StyledBannerProps>`
   width: 100%;
-  height: ${({ imageUrl }) => imageUrl ? '27.7rem' : '13.85rem'}; /* 500px or 250px */
+  height: ${({ imageUrl }) => imageUrl ? `calc(27.7*var(--base-text-size))` : `calc(13.85*var(--base-text-size))`}; /* 500px or 250px for root-level 16px*/
   background-size: cover;
   background-position: center;
   position: relative;
@@ -37,13 +37,16 @@ export const StyledBannerText = styled.div`
 
   h4 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: calc(1.5*var(--base-text-size));
     font-weight: 400;
+    letter-spacing: 2px;
   }
 
   h2 {
     margin: 0.5rem 0 0;
-    font-size: 2.5rem;
+    font-size: calc(2.5*var(--base-text-size));
+    font-weight: 400;
+    letter-spacing: 3px;
   }
 `;
 
