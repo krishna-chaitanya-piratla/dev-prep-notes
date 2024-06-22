@@ -3,7 +3,6 @@ import "highlight.js/styles/github.css";
 import { marked } from "marked";
 import hljs from "highlight.js";
 import { StyledCodeBlock } from '../styles/CodeBlock';
-import '../styles/CodeBlockCustomTheme.css';
 
 interface CodeBlockProps {
   language: string;
