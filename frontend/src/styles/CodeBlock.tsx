@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // Base styles for the code block
 export const StyledCodeBlock = styled.div`
   max-width: 95%;
-  font-size: 0.85rem;
+  font-size: calc(0.85*var(--base-text-size));
   margin: 0;
   letter-spacing: 1px;
 
@@ -28,7 +28,7 @@ export const StyledCodeBlock = styled.div`
     background: #f5f6f9 !important;
     color: #000000;
     font-family: "Source Code Pro", "Fira Mono", monospace;
-    font-size: 0.85rem;
+    font-size: calc(0.85*var(--base-text-size));
   }
 
   .hljs *::selection {
