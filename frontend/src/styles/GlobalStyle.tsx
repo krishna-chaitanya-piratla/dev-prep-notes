@@ -8,9 +8,9 @@ export const GlobalStyle = createGlobalStyle`
     --nav-background-color: var(--background-color);
     --header-background-color: var(--background-color);
     --text-color: #ffffff;
-    --nav-width: 20%;
+    --nav-width: 25%;
     --page-width: calc(100% - 2*var(--nav-width));
-    --header-height: 3%;
+    --header-height: 2%;
     --font-family: ${appStore.fontFamily}; /* Font family */
     --base-text-size: ${appStore.fontSize}px; /* Font size */
     --base-line-height: calc(1.6 * var(--base-text-size));

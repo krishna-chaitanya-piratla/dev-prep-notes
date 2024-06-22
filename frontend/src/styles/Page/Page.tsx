@@ -22,15 +22,21 @@ export const BannerWrapper = styled.div`
   padding: 0;
 `;
 
-export const ContentWrapper = styled.div `
+export const ContentWrapper = styled.div`
   padding: 3.75rem;
   font-size: calc(1.125*var(--base-text-size));
   line-height: calc(1.125*var(--base-line-height));
   letter-spacing: 0.9px;
+
+  h1, h2, h3, h4, h5, h6, p {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
   em {
-          font-family: "Sriracha", cursive;
-          color: #e60067;
-          font-style: normal;
-          letter-spacing: 0.9px;
-        }
+    font-family: "Sriracha", cursive;
+    color: #e60067;
+    font-style: normal;
+    letter-spacing: 0.9px;
+  }
 `;
