@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../../stores/DataStore';
-import { HeaderWrapper, TitleContainer, SettingsIconWrapper } from '../../styles/Header/Header';
+import {
+  HeaderWrapper,
+  TitleContainer,
+  SettingsIconWrapper,
+  BreadcrumbContainer,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbCurrent
+} from '../../styles/Header/Header';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SettingsMenu from './SettingsMenu';
-import { Page } from '../../types/Page';
+import { Page, PageWithChildren } from '../../types/Page';
 
-const findPageById = (id: string, pages: (Page & { children: any[] })[]): (Page & { children: any[] }) | null => {
+// Helper function to find a page by its ID in a nested structure
+const findPageById = (id: string, pages: PageWithChildren[]): PageWithChildren | null => {
   for (const page of pages) {
     if (page.metadata.id === id) {
       return page;
@@ -19,14 +28,15 @@ const findPageById = (id: string, pages: (Page & { children: any[] })[]): (Page 
   return null;
 };
 
-const getBreadcrumbPath = (currentPage: Page, pages: (Page & { children: any[] })[]): string => {
-  let path = currentPage.metadata.linkName;
+// Function to construct the breadcrumb path
+const getBreadcrumbPath = (currentPage: PageWithChildren, pages: PageWithChildren[]): PageWithChildren[] => {
+  const path = [currentPage];
   let parentId = currentPage.metadata.parentId;
 
   while (parentId) {
     const parentPage = findPageById(parentId, pages);
     if (parentPage) {
-      path = `${parentPage.metadata.linkName} / ${path}`;
+      path.unshift(parentPage);
       parentId = parentPage.metadata.parentId;
     } else {
       break;
@@ -39,13 +49,32 @@ const getBreadcrumbPath = (currentPage: Page, pages: (Page & { children: any[] }
 const Header: React.FC = observer(() => {
   const [isSettingsMenuOpen, setIsSettingsMenuOpen] = useState(false);
 
-  const breadcrumbPath = getBreadcrumbPath(dataStore.currentPage, dataStore.pageTree);
+  const breadcrumbPath = getBreadcrumbPath(dataStore.currentPage as PageWithChildren, dataStore.pageTree);
+
+  const handlePageClick = (page: Page) => {
+    dataStore.setPage(page);
+  };
 
   return (
     <>
       <HeaderWrapper>
         <TitleContainer>
-          <p>{breadcrumbPath}</p>
+          <BreadcrumbContainer>
+            {breadcrumbPath.map((page, index) => (
+              <React.Fragment key={page.metadata.id}>
+                {index < breadcrumbPath.length - 1 ? (
+                  <>
+                    <BreadcrumbLink href="#" onClick={() => handlePageClick(page)}>
+                      {page.metadata.linkName}
+                    </BreadcrumbLink>
+                    <BreadcrumbSeparator sx={{fontSize: 'inherit', transform: 'scale(1.5)'}}/>
+                  </>
+                ) : (
+                  <BreadcrumbCurrent>{page.metadata.linkName}</BreadcrumbCurrent>
+                )}
+              </React.Fragment>
+            ))}
+          </BreadcrumbContainer>
         </TitleContainer>
         <SettingsIconWrapper onClick={() => setIsSettingsMenuOpen(true)}>
           <SettingsIcon />

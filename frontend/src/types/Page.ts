@@ -24,3 +24,7 @@ export interface Page {
   };
   contents: Block[];
 }
+
+export interface PageWithChildren extends Page {
+  children: PageWithChildren[];
+}

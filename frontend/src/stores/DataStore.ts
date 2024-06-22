@@ -1,12 +1,12 @@
 import { makeAutoObservable } from 'mobx';
 import { data } from '../data/sample';
-import { Page } from '../types/Page';
+import { Page, PageWithChildren } from '../types/Page';
 
 class DataStore {
   pages: Page[];
   currentPage: Page;
   linkName: string;
-  pageTree: any[];
+  pageTree: PageWithChildren[];
   expandedPages: Set<string>;
 
   constructor() {
@@ -38,9 +38,9 @@ class DataStore {
   };
 
   buildPageTree() {
-    const map: { [key: string]: Page & { children: (Page & { children: any[] })[] } } = {};
-    const roots: (Page & { children: any[] })[] = [];
-    
+    const map: { [key: string]: PageWithChildren } = {};
+    const roots: PageWithChildren[] = [];
+
     this.pages.forEach(page => {
       map[page.metadata.id] = { ...page, children: [] };
     });
