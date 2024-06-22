@@ -51,6 +51,8 @@ export const BreadcrumbLink = styled.a`
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 20ch; /* Approximate maximum characters width */
+  display: inline-block;
+  vertical-align: middle;
 
   &:hover {
     color: var(--link-hover-color);
@@ -62,9 +64,13 @@ export const BreadcrumbSeparator = styled(KeyboardArrowRightIcon)`
   color: var(--text-color);
   stroke: var(--background-color);
   stroke-width: 1;
+  display: inline-block;
+  vertical-align: middle;
 `;
 
 export const BreadcrumbCurrent = styled.span`
   color: var(--text-color);
   font-weight: bold;
+  display: inline-block;
+  vertical-align: middle;
 `;

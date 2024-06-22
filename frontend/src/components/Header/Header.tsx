@@ -65,7 +65,7 @@ const Header: React.FC = observer(() => {
                 {index < breadcrumbPath.length - 1 ? (
                   <>
                     <BreadcrumbLink href="#" onClick={() => handlePageClick(page)}>
-                      {page.metadata.linkName.length > 20 ? `${page.metadata.linkName.substring(0, 20)}...` : page.metadata.linkName}
+                      {page.metadata.linkName}
                     </BreadcrumbLink>
                     <BreadcrumbSeparator sx={{ fontSize: 'inherit', transform: 'scale(1.5)' }} />
                   </>
