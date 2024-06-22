@@ -26,7 +26,6 @@ export const TitleContainer = styled.div`
 export const SettingsIconWrapper = styled.div`
   align-self: flex-end;
   cursor: pointer;
-  margin-bottom: 1rem;
 
   & > svg {
     font-size: 1.5rem;
