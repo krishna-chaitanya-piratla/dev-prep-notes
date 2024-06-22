@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ReactNode } from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../../stores/DataStore';
 import { PageNavigationWrapper, NavigationItem, PageNavigationHeader, Circle } from '../../styles/PageNavigation/PageNavigation';
+import { Content } from '../../types/Page';
 
 const scrollToSection = (id: string, setSelectedId: React.Dispatch<React.SetStateAction<string | null>>) => {
   const element = document.getElementById(id);
@@ -62,6 +63,18 @@ const PageNavigation: React.FC = observer(() => {
     }))
   );
 
+  const renderContent = (content: string | Content[]): ReactNode => {
+    if (typeof content === 'string') {
+      return content;
+    } else if (Array.isArray(content)) {
+      return content.map((nestedContent, index) => (
+        <div key={index}>{renderContent(nestedContent.contents)}</div>
+      ));
+    } else {
+      return null;
+    }
+  };
+
   return (
     <PageNavigationWrapper>
       <PageNavigationHeader>Contents</PageNavigationHeader>
@@ -74,7 +87,7 @@ const PageNavigation: React.FC = observer(() => {
             onClick={() => scrollToSection(header.id!, setSelectedId)}
           >
             <Circle isActive={selectedId === header.id} />
-            {header.contents}
+            {renderContent(header.contents as string | Content[])}
           </NavigationItem>
         ))}
       </div>

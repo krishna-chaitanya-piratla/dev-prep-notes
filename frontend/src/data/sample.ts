@@ -20,30 +20,35 @@ export const dummy_page_01 = {
                 "type": "h1",
                 "contents": "This is Heading1 text"
                 },
+
                 {
-                    "type": "h2",
-                    "contents": "This is Heading2 text"
+                    "type": "code-block",
+                    "contents": [
+                        {
+                            "type": "html",
+                            "contents": "  <p>Hello codeblock within a callout-box world</p>\n"
+                        }
+                    ]
                 },
                 {
-                    "type": "h3",
-                    "contents": "This is Heading3 text"
+                    "type": "code-block",
+                    "contents": [
+                        {
+                            "type": "css",
+                            "contents": "p {\n  color: red;\n}\n"
+                        }
+                    ]
                 },
                 {
-                    "type": "h4",
-                    "contents": "This is Heading4 text"
+                    "type": "code-block",
+                    "contents": [
+                        {
+                            "type": "javascript",
+                            "contents": "const abcd = 123;\n"
+                        }
+                    ]
                 },
-                {
-                    "type": "h5",
-                    "contents": "This is Heading5 text"
-                },
-                {
-                    "type": "h6",
-                    "contents": "This is Heading6 text"
-                },
-                {
-                    "type": "p",
-                    "contents": "This is a simple paragraph text"
-                },
+                
                 {
                     "type": "p",
                     "contents": "This is a paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, and some <em>emphasis</em> styling."
@@ -51,6 +56,10 @@ export const dummy_page_01 = {
                 {
                     "type": "p",
                     "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu non sodales neque sodales ut etiam sit amet. At auctor urna nunc id cursus metus aliquam. Suscipit adipiscing bibendum est ultricies. Ac auctor augue mauris augue neque gravida in. Proin libero nunc consequat interdum varius. Fusce ut placerat orci nulla pellentesque dignissim enim sit. Morbi tempus iaculis urna id volutpat lacus laoreet non. Adipiscing tristique risus nec feugiat in fermentum posuere. Nibh sit amet commodo nulla facilisi. Urna cursus eget nunc scelerisque viverra mauris in aliquam. Semper quis lectus nulla at volutpat diam ut venenatis. Quam nulla porttitor massa id. Risus nec feugiat in fermentum posuere urna nec tincidunt."
+                },
+                {
+                    "type": "h2",
+                    "contents": "This is Heading2 text"
                 },
                 {
                     "type": "p",

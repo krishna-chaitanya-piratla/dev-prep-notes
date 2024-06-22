@@ -1,6 +1,6 @@
 export interface Content {
   type: string;
-  contents: string;
+  contents: string | Content[];
   id?: string;
 }
 
