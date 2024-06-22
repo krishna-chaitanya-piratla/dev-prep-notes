@@ -26,7 +26,7 @@ export const dummy_page_01 = {
                     "contents": [
                         {
                             "type": "html",
-                            "contents": "  <p>Hello codeblock within a callout-box world</p>\n"
+                            "contents": "  <p>Hello from codeblock world</p>\n"
                         }
                     ]
                 },
