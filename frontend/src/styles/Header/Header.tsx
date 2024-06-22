@@ -47,7 +47,11 @@ export const BreadcrumbLink = styled.a`
   color: var(--link-base-color);
   text-decoration: none;
   cursor: pointer;
-  
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20ch; /* Approximate maximum characters width */
+
   &:hover {
     color: var(--link-hover-color);
   }
