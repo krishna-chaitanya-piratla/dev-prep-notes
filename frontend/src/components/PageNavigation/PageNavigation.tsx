@@ -1,7 +1,7 @@
 import React, { useEffect, useState, ReactNode } from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../../stores/DataStore';
-import { PageNavigationWrapper, NavigationItem, PageNavigationHeader, Circle } from '../../styles/PageNavigation/PageNavigation';
+import { PageNavigationWrapper, NavigationItem, PageNavigationHeader } from '../../styles/PageNavigation/PageNavigation';
 import { Content } from '../../types/Page';
 
 const scrollToSection = (id: string, setSelectedId: React.Dispatch<React.SetStateAction<string | null>>) => {
@@ -86,7 +86,6 @@ const PageNavigation: React.FC = observer(() => {
             isActive={selectedId === header.id}
             onClick={() => scrollToSection(header.id!, setSelectedId)}
           >
-            <Circle isActive={selectedId === header.id} />
             {renderContent(header.contents as string | Content[])}
           </NavigationItem>
         ))}

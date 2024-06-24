@@ -8,8 +8,8 @@ export const GlobalStyle = createGlobalStyle`
     --nav-background-color: var(--background-color);
     --header-background-color: var(--background-color);
     --text-color: #ffffff;
-    --main-nav-width: 300px;
-    --page-nav-width: 300px;
+    --main-nav-width: 280px;
+    --page-nav-width: 320px;
     --page-width: 900px;
     --header-height: 2%;
     --font-family: ${appStore.fontFamily}; /* Font family */

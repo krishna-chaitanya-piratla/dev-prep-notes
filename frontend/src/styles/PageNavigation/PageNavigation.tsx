@@ -19,6 +19,7 @@ export const PageNavigationWrapper = styled.nav`
 
   @media (max-width: 1540px) {
     visibility: hidden;
+    display: none;
   }
 `;
 
@@ -34,7 +35,9 @@ export const NavigationItem = styled.div<NavigationItemProps>`
   padding-left: ${({ depth }) => `calc(${depth} * var(--base-text-size) * 1.15)`}; /* Adjust padding dynamically */
   height: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 2.5)' : 'calc(var(--base-text-size) * 2)')}; /* Adjust height dynamically */
   color: #9ca8b4;
-  font-size: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 0.8)' : 'calc(var(--base-text-size) * 0.7)')}; /* Use CSS variables */
+  font-size: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 0.9)' : 'calc(var(--base-text-size) * 0.75)')}; /* Use CSS variables */
+  letter-spacing: 1px;
+  text-shadow: ${({ isActive }) => (isActive ? '0.5px 0.5px 0.5px rgb(68 51 255);' : 'none')};
 
   &:hover {
     color: var(--link-hover-color);

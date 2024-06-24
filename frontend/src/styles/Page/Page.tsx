@@ -12,6 +12,9 @@ export const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 1240px) {
+    width: auto;
+  }
 `;
 
 export const BannerWrapper = styled.div`

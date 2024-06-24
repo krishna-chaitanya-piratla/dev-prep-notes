@@ -3,12 +3,20 @@ import styled from 'styled-components';
 export const AppWrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 99vw;
+  padding; 0;
+  margin; 0;
 
 
   @media (max-width: 1540px) {
     justify-content: left;
   }
+
+  @media (max-width: 1240px) {
+    justify-content: center;
+  }
+
+
 `;
 
 export const StyledLayout = styled.div`
@@ -33,4 +41,10 @@ export const PageContainer = styled.div`
   align-items: center;
   flex-basis: var(--page-width);
   box-sizing: border-box; /* Include padding and border in element's total width and height */
+
+  @media (max-width: 1240px) {
+    width: auto;
+    margin-left: 20px;
+    margin-right: 40px;
+  }
 `;
