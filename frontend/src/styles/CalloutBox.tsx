@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const CalloutBox = styled.aside`
   position: relative;
-  margin: 10px 0;
+  margin: 1rem 0;
 `;
 
 const infoStyles = css`
@@ -29,11 +29,12 @@ const warningStyles = css`
   }
 `;
 
-export const CalloutContent = styled.div<{ type: 'info' | 'warning' }>`
+export const CalloutContent = styled.div<{ type: string }>`
   padding: 10px;
+  border-radius: 5px;
 
   h4 {
-    margin: 10px 0;
+    margin: 0;
   }
 
   p {
@@ -43,7 +44,7 @@ export const CalloutContent = styled.div<{ type: 'info' | 'warning' }>`
   ${(props) => (props.type === 'warning' ? warningStyles : infoStyles)}
 `;
 
-export const CalloutIcon = styled.span<{ type: 'info' | 'warning' }>`
+export const CalloutIcon = styled.span<{ type: string }>`
   font-size: 24px;
   margin-right: 10px;
 
@@ -52,4 +53,16 @@ export const CalloutIcon = styled.span<{ type: 'info' | 'warning' }>`
     css`
       color: #ff9d00;
     `}
+  
+  ${(props) =>
+    props.type === 'info' &&
+    css`
+      color: #4433ff;
+    `}
+`;
+
+export const CalloutHeader = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 `;

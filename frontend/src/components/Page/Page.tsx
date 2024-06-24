@@ -5,7 +5,7 @@ import { BannerWrapper, ContentWrapper, PageWrapper } from '../../styles/Page/Pa
 import Banner from './Banner';
 import CodeBlock from '../CodeBlock';
 import CalloutBoxComponent from '../CalloutBox';
-import { Content } from '../../types/Page';
+import { Content, CalloutBoxContent } from '../../types/Page';
 
 const renderContent = (content: Content) => {
   switch (content.type) {
@@ -32,14 +32,7 @@ const renderContent = (content: Content) => {
         </div>
       );
     case 'callout-box':
-      return (
-        <CalloutBoxComponent
-          key={content.id}
-          type={content.boxType}
-          title={content.title}
-          contents={(content.contents as Content[]).map((item) => renderContent(item))}
-        />
-      );
+      return <CalloutBoxComponent content={content as CalloutBoxContent} />;
     default:
       return null;
   }
