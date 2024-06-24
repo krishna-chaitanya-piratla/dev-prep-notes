@@ -1,6 +1,8 @@
 import React from 'react';
-import { CalloutBox, CalloutContent, CalloutIcon, CalloutHeader } from '../styles/CalloutBox';
-import { CalloutBoxContent, Content, TextContent, CodeBlockContent } from '../types/Page';
+import { CalloutBox, CalloutContent, CalloutIconContainer, CalloutHeader, CalloutTitle, CalloutIcon } from '../styles/CalloutBox';
+import { CalloutBoxContent, Content } from '../types/Page';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 interface CalloutBoxProps {
   content: CalloutBoxContent;
@@ -30,26 +32,32 @@ const renderContent = (content: Content) => {
           ))}
         </div>
       );
-    case 'callout-box':
-      return <CalloutBoxComponent key={content.id} content={content as CalloutBoxContent} />;
     default:
       return null;
   }
 };
 
 const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content }) => {
-  const icon = content.boxType === 'warning' ? '⚠️' : '💡';
+  const Icon = content.boxType === 'warning' ? WarningAmberIcon : InfoOutlinedIcon;
 
   return (
     <CalloutBox>
       <CalloutContent type={content.boxType}>
         <CalloutHeader>
-          <CalloutIcon type={content.boxType}>{icon}</CalloutIcon>
-          <h4>{content.title}</h4>
+          <CalloutIconContainer type={content.boxType}>
+            <CalloutIcon type={content.boxType}>
+              <Icon fontSize="inherit" />
+            </CalloutIcon>
+          </CalloutIconContainer>
+          <CalloutTitle>{content.title}</CalloutTitle>
         </CalloutHeader>
-        {content.contents.map((item, index) => (
-          <div key={index}>{renderContent(item)}</div>
-        ))}
+        {Array.isArray(content.contents) ? (
+          content.contents.map((item, index) => (
+            <div key={index}>{renderContent(item)}</div>
+          ))
+        ) : (
+          <div>{renderContent(content.contents as Content)}</div>
+        )}
       </CalloutContent>
     </CalloutBox>
   );
