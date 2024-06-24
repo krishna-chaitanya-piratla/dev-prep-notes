@@ -62,7 +62,7 @@ export const dummy_page_01: Page = {
             id: "paragraph-002"
           },
           {
-            type: "h2",
+            type: "h3",
             contents: "This is an informative Callout Box",
             id: "heading2-001"
           },
@@ -73,17 +73,17 @@ export const dummy_page_01: Page = {
             contents: [
               {
                 type: "p",
-                contents: "<p>here is paragraph</p>",
+                contents: "here is paragraph",
                 id: "callout-paragraph-001"
               },
               {
                 type: "h3",
-                contents: "<h3>This is a heading3</h3>",
+                contents: "This is a heading3",
                 id: "callout-heading3-001"
               },
               {
                 type: "p",
-                contents: "<p>This is some more text</p>",
+                contents: "This is some more text",
                 id: "callout-paragraph-002"
               },
               {
@@ -131,17 +131,17 @@ export const dummy_page_01: Page = {
             contents: [
               {
                 type: "p",
-                contents: "<p>here is paragraph</p>",
+                contents: "here is paragraph",
                 id: "callout-paragraph-003"
               },
               {
                 type: "h3",
-                contents: "<h3>This is a heading3</h3>",
+                contents: "This is a heading3",
                 id: "callout-heading3-002"
               },
               {
                 type: "p",
-                contents: "<p>This is some more text</p>",
+                contents: "This is some more text",
                 id: "callout-paragraph-004"
               },
               {
