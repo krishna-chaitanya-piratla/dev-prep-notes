@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const PageNavigationWrapper = styled.nav`
   background-color: var(--nav-background-color);
   color: var(--text-color);
-  width: var(--nav-width);
+  width: var(--page-nav-width);
   height: 100vh;
   padding: calc(var(--base-text-size) * 1.25); /* Adjust padding dynamically */
   padding-left: calc(var(--base-text-size) * 3);
@@ -15,6 +15,10 @@ export const PageNavigationWrapper = styled.nav`
 
   h2 {
     margin-bottom: calc(var(--base-text-size) * 1);
+  }
+
+  @media (max-width: 1540px) {
+    visibility: hidden;
   }
 `;
 
@@ -28,9 +32,9 @@ export const NavigationItem = styled.div<NavigationItemProps>`
   align-items: center;
   cursor: pointer;
   padding-left: ${({ depth }) => `calc(${depth} * var(--base-text-size) * 1.15)`}; /* Adjust padding dynamically */
-  height: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 3.125)' : 'calc(var(--base-text-size) * 2.5)')}; /* Adjust height dynamically */
+  height: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 2.5)' : 'calc(var(--base-text-size) * 2)')}; /* Adjust height dynamically */
   color: #9ca8b4;
-  font-size: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 1)' : 'calc(var(--base-text-size) * 0.875)')}; /* Use CSS variables */
+  font-size: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 0.8)' : 'calc(var(--base-text-size) * 0.7)')}; /* Use CSS variables */
 
   &:hover {
     color: var(--link-hover-color);
@@ -42,11 +46,11 @@ interface CircleProps {
 }
 
 export const Circle = styled.div<CircleProps>`
-  width: ${({ isActive }) => (isActive ? 'calc(var(--base-text-size) * 1.125)' : 'calc(var(--base-text-size) * 0.75)')}; /* Use CSS variables */
-  height: ${({ isActive }) => (isActive ? 'calc(var(--base-text-size) * 1.125)' : 'calc(var(--base-text-size) * 0.75)')}; /* Use CSS variables */
+  width: ${({ isActive }) => (isActive ? 'calc(var(--base-text-size) * 0.75)' : 'calc(var(--base-text-size) * 0.5)')}; /* Use CSS variables */
+  height: ${({ isActive }) => (isActive ? 'calc(var(--base-text-size) * 0.75)' : 'calc(var(--base-text-size) * 0.5)')}; /* Use CSS variables */
   border-radius: 50%;
   background: ${({ isActive }) => (isActive ? '#1aecff' : '#5c6670')};
-  margin-right: calc(var(--base-text-size) * 1);
+  margin-right: calc(var(--base-text-size) * 0.5);
   transform: ${({ isActive }) => (isActive ? 'translateX(calc(var(--base-text-size) * -0.167))' : 'none')};
 `;
 

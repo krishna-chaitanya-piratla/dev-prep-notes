@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const PageWrapper = styled.div`
   background-color: var(--page-background-color);
   color: black;
-  width: auto;
+  width: var(--page-width);
   min-height: 100vh;
   padding: 0;
   border-radius: 10px;

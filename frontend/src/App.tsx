@@ -5,23 +5,25 @@ import PageNavigation from './components/PageNavigation/PageNavigation';
 import Page from './components/Page/Page';
 import Header from './components/Header/Header';
 import StyleHelmet from './components/StyleHelmet';
-import { StyledLayout, AppContainer, PageContainer } from './styles/AppStyles';
+import { AppWrapper, StyledLayout, AppContainer, PageContainer } from './styles/AppStyles';
 
 const App: React.FC = () => {
   return (
     <>
       <StyleHelmet />
       <GlobalStyle />
-      <AppContainer>
-        <StyledLayout>
-          <MainNavigation />
-          <PageContainer>
-            <Header />
-            <Page />
-          </PageContainer>
-          <PageNavigation />
-        </StyledLayout>
-      </AppContainer>
+      <AppWrapper>
+        <AppContainer>
+          <StyledLayout>
+            <MainNavigation />
+            <PageContainer>
+              <Header />
+              <Page />
+            </PageContainer>
+            <PageNavigation />
+          </StyledLayout>
+        </AppContainer>
+      </AppWrapper>
     </>
   );
 };
