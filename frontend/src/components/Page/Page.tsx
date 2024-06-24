@@ -4,7 +4,8 @@ import dataStore from '../../stores/DataStore';
 import { BannerWrapper, ContentWrapper, PageWrapper } from '../../styles/Page/Page';
 import Banner from './Banner';
 import CodeBlock from '../CodeBlock';
-import { Content } from '../../types/Page';
+import CalloutBox from '../CalloutBox';
+import { Content, CalloutBoxContent } from '../../types/Page';
 
 const renderContent = (content: Content) => {
   switch (content.type) {
@@ -30,6 +31,8 @@ const renderContent = (content: Content) => {
           ))}
         </div>
       );
+    case 'callout-box':
+      return <CalloutBox {...(content as CalloutBoxContent)} />;
     default:
       return null;
   }

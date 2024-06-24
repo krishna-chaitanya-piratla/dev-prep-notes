@@ -1,8 +1,26 @@
-export interface Content {
+export interface BaseContent {
   type: string;
-  contents: string | Content[];
   id?: string;
 }
+
+export interface TextContent extends BaseContent {
+  type: 'text' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+  contents: string;
+}
+
+export interface CodeBlockContent extends BaseContent {
+  type: 'code-block';
+  contents: { type: string; contents: string }[];
+}
+
+export interface CalloutBoxContent extends BaseContent {
+  type: 'callout-box';
+  boxType: 'info' | 'warning';
+  title: string;
+  contents: (TextContent | CodeBlockContent)[];
+}
+
+export type Content = TextContent | CodeBlockContent | CalloutBoxContent;
 
 export interface Block {
   type: string;
