@@ -44,7 +44,6 @@ export const CalloutContent = styled.div<{ type: 'info' | 'warning' }>`
   border-radius: 6px 6px 6px 3px;
   position: relative;
 
-
   h4 {
     margin: 0 0 10px 0;
   }
@@ -54,6 +53,28 @@ export const CalloutContent = styled.div<{ type: 'info' | 'warning' }>`
   }
 
   ${(props) => (props.type === 'warning' ? warningStyles : infoStyles)}
+
+  pre, code {
+    width: 95%;
+    padding: 0;
+    margin-left: 1.5rem;
+  }
+
+  .hljs {
+    width: 100%;
+    margin-left: 0;
+    ${(props) =>
+        props.type === 'warning' &&
+        css`
+          background-color: rgba(255, 221, 0, 0.25) !important;
+        `}
+    
+      ${(props) =>
+        props.type === 'info' &&
+        css`
+          background-color: rgba(223, 235, 246, 0.25) !important;
+        `}
+  }
 `;
 
 export const CalloutIconContainer = styled.div<{ type: 'info' | 'warning' }>`

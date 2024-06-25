@@ -3,6 +3,7 @@ import { CalloutBox, CalloutContent, CalloutIconContainer, CalloutHeader, Callou
 import { CalloutBoxContent, Content } from '../types/Page';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import CodeBlock from './CodeBlock';
 
 interface CalloutBoxProps {
   content: CalloutBoxContent;
@@ -28,7 +29,7 @@ const renderContent = (content: Content) => {
       return (
         <div id={content.id}>
           {(content.contents as { type: string; contents: string }[]).map((item, index) => (
-            <pre key={index}><code>{item.contents}</code></pre>
+            <CodeBlock key={index} language={item.type} contents={item.contents as string} />
           ))}
         </div>
       );

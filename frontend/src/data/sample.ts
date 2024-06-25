@@ -26,7 +26,7 @@ export const dummy_page_01: Page = {
             contents: [
               {
                 type: "html",
-                contents: "  <p>Hello from codeblock world</p>\n"
+                contents: "<p>Hello from codeblock world</p>\n<p>Hello from codeblock world</p>"
               }
             ],
             id: "codeblock-html-001"
@@ -91,7 +91,7 @@ export const dummy_page_01: Page = {
                 contents: [
                   {
                     type: "html",
-                    contents: "  <p>Hello codeblock within a callout-box world</p>\n"
+                    contents: "<p>Hello codeblock within a callout-box world</p>\n"
                   }
                 ],
                 id: "callout-codeblock-html-001"
@@ -149,7 +149,7 @@ export const dummy_page_01: Page = {
                 contents: [
                   {
                     type: "html",
-                    contents: "  <p>Hello codeblock within a callout-box world</p>\n"
+                    contents: "<p>Hello codeblock within a callout-box world</p>\n"
                   }
                 ],
                 id: "callout-codeblock-html-002"
@@ -173,7 +173,12 @@ export const dummy_page_01: Page = {
                   }
                 ],
                 id: "callout-codeblock-js-002"
-              }
+              },
+              {
+                type: "p",
+                contents: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu non sodales neque sodales ut etiam sit amet. At auctor urna nunc id cursus metus aliquam. Suscipit adipiscing bibendum est ultricies. Ac auctor augue mauris augue neque gravida in. Proin libero nunc consequat interdum varius. Fusce ut placerat orci nulla pellentesque dignissim enim sit. Morbi tempus iaculis urna id volutpat lacus laoreet non. Adipiscing tristique risus nec feugiat in fermentum posuere. Nibh sit amet commodo nulla facilisi. Urna cursus eget nunc scelerisque viverra mauris in aliquam. Semper quis lectus nulla at volutpat diam ut venenatis. Quam nulla porttitor massa id. Risus nec feugiat in fermentum posuere urna nec tincidunt.",
+                id: "paragraph-002"
+              },
             ],
             id: "calloutbox-002"
           },
