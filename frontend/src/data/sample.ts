@@ -22,6 +22,36 @@ export const dummy_page_01: Page = {
             id: "heading1-001"
           },
           {
+            type: "ordered-list",
+            depthNumbering: true,
+            contents: [
+              {
+                type: "ordered-list-item",
+                contents: "First item",
+                id: "list-item-001",
+                subItems: [
+                  {
+                    type: "ordered-list-item",
+                    contents: "Sub-item 1",
+                    id: "list-item-002",
+                    subItems: [
+                      {
+                        type: "ordered-list-item",
+                        contents: "Sub-sub-item 1",
+                        id: "list-item-003"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                type: "ordered-list-item",
+                contents: "Second item",
+                id: "list-item-004"
+              }
+            ]
+          },
+          {
             type: "code-block",
             contents: [
               {

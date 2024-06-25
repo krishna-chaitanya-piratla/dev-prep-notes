@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const PageWrapper = styled.div`
+interface PageWrapperProps {
+  depthNumbering: boolean;
+}
+
+export const PageWrapper = styled.div<PageWrapperProps>`
   background-color: var(--page-background-color);
   color: black;
   width: var(--page-width);
@@ -15,6 +19,38 @@ export const PageWrapper = styled.div`
   @media (max-width: 1240px) {
     width: auto;
   }
+
+  ${(props) =>
+    props.depthNumbering &&
+    css`
+      ol {
+        list-style-type: none;
+        counter-reset: item;
+        margin: 0;
+        padding: 0;
+        padding-left: 1rem;
+      }
+
+      ol > li {
+        display: table;
+        counter-increment: item;
+        margin-bottom: 0.6em;
+      }
+
+      ol > li:before {
+        content: counters(item, ".") ". ";
+        display: table-cell;
+        padding-right: 0.6em;    
+      }
+
+      li ol > li {
+        margin: 0;
+      }
+
+      li ol > li:before {
+        content: counters(item, ".") " ";
+      }
+    `}
 `;
 
 export const BannerWrapper = styled.div`

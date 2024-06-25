@@ -13,16 +13,28 @@ export interface CodeBlockContent extends BaseContent {
   contents: { type: string; contents: string }[];
 }
 
+export interface ListItemContent extends BaseContent {
+  type: 'ordered-list-item';
+  contents: string;
+  subItems?: ListItemContent[];
+}
+
+export interface OrderedListContent extends BaseContent {
+  type: 'ordered-list';
+  depthNumbering?: boolean;
+  contents: ListItemContent[];
+}
+
 export interface CalloutBoxContent extends BaseContent {
   type: 'callout-box';
   boxType: 'info' | 'warning';
-  collapsedByDefault: boolean;
-  collapsedTitle?: string;
   title: string;
+  collapsedTitle?: string;
+  collapsedByDefault: boolean;
   contents: (TextContent | CodeBlockContent)[];
 }
 
-export type Content = TextContent | CodeBlockContent | CalloutBoxContent;
+export type Content = TextContent | CodeBlockContent | CalloutBoxContent | OrderedListContent;
 
 export interface Block {
   type: string;

@@ -3,14 +3,22 @@ import { observer } from 'mobx-react-lite';
 import dataStore from '../../stores/DataStore';
 import { BannerWrapper, ContentWrapper, PageWrapper } from '../../styles/Page/Page';
 import Banner from './Banner';
-import { Content } from '../../types/Page';
+import { Content, OrderedListContent } from '../../types/Page';
 import { renderPageContent } from '../../utils/helpers';
 
 const Page: React.FC = observer(() => {
   const { currentPage } = dataStore;
+  const depthNumbering = currentPage.contents.some(
+    (block) =>
+      block.contents.some(
+        (content) =>
+          content.type === 'ordered-list' &&
+          (content as OrderedListContent).depthNumbering !== false
+      )
+  );
 
   return (
-    <PageWrapper>
+    <PageWrapper depthNumbering={depthNumbering}>
       <BannerWrapper>
         <Banner
           imageUrl={currentPage.title.bannerUrl}
