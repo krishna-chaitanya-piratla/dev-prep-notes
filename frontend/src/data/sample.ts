@@ -69,7 +69,8 @@ export const dummy_page_01: Page = {
           {
             type: "callout-box",
             boxType: "info",
-            title: "This is the title",
+            collapsedByDefault: true,
+            title: "This is a long long title that is being written unnecessarily to keep testing how the component handles long title text",
             contents: [
               {
                 type: "p",
@@ -126,6 +127,7 @@ export const dummy_page_01: Page = {
           },
           {
             type: "callout-box",
+            collapsedByDefault: false,
             boxType: "warning",
             title: "Beware of winter storms!",
             contents: [

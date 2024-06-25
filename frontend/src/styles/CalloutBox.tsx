@@ -39,10 +39,17 @@ const warningStyles = css`
   }
 `;
 
-export const CalloutContent = styled.div<{ type: 'info' | 'warning' }>`
+export const CalloutContent = styled.div<{ type: 'info' | 'warning'; maxHeight: string }>`
   padding: 10px;
   border-radius: 6px 6px 6px 3px;
   position: relative;
+  transition: max-height 0.5s ease;
+
+  .callout-body {
+    max-height: ${({ maxHeight }) => maxHeight};
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
 
   h4 {
     margin: 0 0 10px 0;
@@ -120,13 +127,20 @@ export const CalloutIcon = styled.span<{ type: 'info' | 'warning' }>`
 
 export const CalloutHeader = styled.div`
   display: flex;
-  flex-direction: column; /* Change direction to column to stack icon and title vertically */
-  align-items: flex-start; /* Align items to the start (left) */
-  margin-bottom: 10px;
-  margin-top: 1rem;
+  flex-direction: row; /* Align items horizontally */
+  align-items: center; /* Align items to the center vertically */
+  justify-content: space-between; /* Add space between title and icon */
+  cursor: pointer;
 `;
 
 export const CalloutTitle = styled.h4`
   margin: 0; /* Remove margin for tighter alignment */
   text-align: left; /* Align the title to the left */
+`;
+
+export const ToggleIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
 `;
