@@ -65,6 +65,8 @@ const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content }) => {
     setIsCollapsed(!isCollapsed);
   };
 
+  const title = isCollapsed && content.collapsedTitle ? content.collapsedTitle : content.title;
+
   return (
     <CalloutBox>
       <CalloutContent type={content.boxType} maxHeight={maxHeight}>
@@ -74,7 +76,7 @@ const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content }) => {
               <Icon fontSize="inherit" />
             </CalloutIcon>
           </CalloutIconContainer>
-          <CalloutTitle>{content.title}</CalloutTitle>
+          <CalloutTitle>{title}</CalloutTitle>
           <ToggleIcon>
             <ToggleIconComponent />
           </ToggleIcon>

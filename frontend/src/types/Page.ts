@@ -17,6 +17,7 @@ export interface CalloutBoxContent extends BaseContent {
   type: 'callout-box';
   boxType: 'info' | 'warning';
   collapsedByDefault: boolean;
+  collapsedTitle?: string;
   title: string;
   contents: (TextContent | CodeBlockContent)[];
 }

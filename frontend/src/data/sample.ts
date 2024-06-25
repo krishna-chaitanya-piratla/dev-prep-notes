@@ -70,6 +70,7 @@ export const dummy_page_01: Page = {
             type: "callout-box",
             boxType: "info",
             collapsedByDefault: true,
+            collapsedTitle: 'What is hidden here? Take a guess',
             title: "This is a long long title that is being written unnecessarily to keep testing how the component handles long title text",
             contents: [
               {
