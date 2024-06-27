@@ -15,13 +15,13 @@ import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSha
 import KeyboardArrowUpSharpIcon from '@mui/icons-material/KeyboardArrowUpSharp';
 import { renderCalloutBox } from '../utils/helpers';
 
-
 interface CalloutBoxProps {
   content: CalloutBoxContent;
 }
 
 const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content }) => {
   const [isCollapsed, setIsCollapsed] = useState(content.collapsedByDefault);
+  const [hasClicked, setHasClicked] = useState(false);
   const [maxHeight, setMaxHeight] = useState('0px');
   const contentRef = useRef<HTMLDivElement>(null);
   const Icon = content.boxType === 'warning' ? WarningAmberIcon : InfoOutlinedIcon;
@@ -29,18 +29,25 @@ const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content }) => {
 
   useEffect(() => {
     if (contentRef.current) {
-      setMaxHeight(isCollapsed ? '0px' : `${contentRef.current.scrollHeight}px`);
+      if (!hasClicked && !content.collapsedByDefault) {
+        setMaxHeight('fit-content');
+      } else {
+        setMaxHeight(isCollapsed ? '0px' : `${contentRef.current.scrollHeight}px`);
+      }
     }
-  }, [isCollapsed]);
+  }, [isCollapsed, hasClicked, content.collapsedByDefault]);
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
+    setHasClicked(true);
   };
 
   const title = isCollapsed && content.collapsedTitle ? content.collapsedTitle : content.title;
 
+  const calloutBoxClasses = `${hasClicked ? 'clicked' : 'not-clicked'} ${content.collapsedByDefault ? 'collapsed-by-default' : 'expanded-by-default'}`;
+
   return (
-    <CalloutBox>
+    <CalloutBox className={calloutBoxClasses}>
       <CalloutContent type={content.boxType} maxHeight={maxHeight}>
         <CalloutHeader onClick={toggleCollapse}>
           <CalloutIconContainer type={content.boxType}>

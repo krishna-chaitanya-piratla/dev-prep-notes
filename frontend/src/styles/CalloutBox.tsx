@@ -82,6 +82,14 @@ export const CalloutContent = styled.div<{ type: 'info' | 'warning'; maxHeight: 
           background-color: rgba(223, 235, 246, 0.25) !important;
         `}
   }
+
+  &.collapsed-by-default.not-clicked .callout-body {
+    max-height: 0;
+  }
+
+  &.expanded-by-default.not-clicked .callout-body {
+    max-height: fit-content;
+  }
 `;
 
 export const CalloutIconContainer = styled.div<{ type: 'info' | 'warning' }>`
