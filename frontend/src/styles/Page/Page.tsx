@@ -19,6 +19,14 @@ export const PageWrapper = styled.div<PageWrapperProps>`
   @media (max-width: 1240px) {
     width: auto;
   }
+
+  & code {
+    color: red;
+    background-color: rgba(255, 0, 0, 0.1);
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    letter-spacing: -0.25px;
+  }
 `;
 
 export const BannerWrapper = styled.div`
