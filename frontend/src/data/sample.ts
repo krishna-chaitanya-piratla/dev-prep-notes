@@ -51,6 +51,49 @@ export const dummy_page_01: Page = {
               }
             ]
           },
+
+          {
+            type: "ordered-list",
+            depthNumbering: false,
+            contents: [
+              {
+                type: "ordered-list-item",
+                contents: "First item",
+                id: "list-item-001",
+                subItems: [
+                  {
+                    type: "ordered-list-item",
+                    contents: "Sub-item 1",
+                    id: "list-item-002",
+                    subItems: [
+                      {
+                        type: "ordered-list-item",
+                        contents: "Sub-sub-item 1",
+                        id: "list-item-003"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                type: "ordered-list-item",
+                contents: "Second item",
+                id: "list-item-004"
+              }
+            ]
+          },
+          
+          {
+            type: "p",
+            contents: "This is a paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, and some <em>emphasis</em> styling.",
+            id: "paragraph-001"
+          },
+          {
+            type: "p",
+            contents: "This is a paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, <code>variable</code>, and some <em>emphasis</em> styling.",
+            id: "paragraph-001"
+          },
+
           {
             type: "code-block",
             contents: [
@@ -80,11 +123,6 @@ export const dummy_page_01: Page = {
               }
             ],
             id: "codeblock-js-001"
-          },
-          {
-            type: "p",
-            contents: "This is a paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, and some <em>emphasis</em> styling.",
-            id: "paragraph-001"
           },
           {
             type: "p",

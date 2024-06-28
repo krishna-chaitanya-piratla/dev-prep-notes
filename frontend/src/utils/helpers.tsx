@@ -1,6 +1,7 @@
 import { CalloutBoxContent, Content, ListItemContent, OrderedListContent } from "../types/Page";
 import CodeBlock from "../components/CodeBlock";
 import CalloutBoxComponent from "../components/CalloutBox";
+import { ListContainer, OrderedList } from "../styles/Page/OrderedList";
 
 export const text_types = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'];
 
@@ -45,14 +46,14 @@ export function renderCalloutBox(content: Content) {
   }
 }
 
-function renderListItem(item: ListItemContent) {
+function renderListItem(item: ListItemContent, depthNumbering: boolean) {
   return (
     <li key={item.id}>
       {item.contents}
       {item.subItems && (
-        <ol>
-          {item.subItems.map((subItem) => renderListItem(subItem))}
-        </ol>
+        <OrderedList depthNumbering={depthNumbering}>
+          {item.subItems.map((subItem) => renderListItem(subItem, depthNumbering))}
+        </OrderedList>
       )}
     </li>
   );
@@ -60,9 +61,11 @@ function renderListItem(item: ListItemContent) {
 
 export function renderOrderedList(content: OrderedListContent) {
   return (
-    <ol id={content.id}>
-      {content.contents.map((item) => renderListItem(item))}
-    </ol>
+    <ListContainer id={content.id} depthNumbering={content.depthNumbering !== false}>
+    <OrderedList id={content.id} depthNumbering={content.depthNumbering !== false}>
+      {content.contents.map((item) => renderListItem(item, content.depthNumbering !== false))}
+    </OrderedList>
+    </ListContainer>
   );
 }
 
