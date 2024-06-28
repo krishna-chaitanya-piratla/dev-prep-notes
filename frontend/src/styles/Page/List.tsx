@@ -38,13 +38,28 @@ export const OrderedList = styled.ol<OrderedListProps>`
     `}
 `;
 
+export const UnorderedList = styled.ul<ListProps>`
+  margin: 0;
+  padding-left: 3rem;
+  ${(props) =>
+    props.highlightBorder &&
+    css`
+      border: 1px solid deeppink;
+      padding: 1rem;
+    `}
+  
+  li {
+    margin-bottom: 0.6em;
+  }
+`;
 
-export const ListContainer = styled.div<OrderedListProps>`
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+
+export const ListContainer = styled.div<ListProps>`
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     width: fit-content;
     padding-right: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border: ${(props) => (props.highlightBorder ? '1px solid deeppink' : 'none')};
+    border: ${(props) => (props.highlightBorder ? '4px dotted deeppink' : 'none')};
 `;

@@ -14,7 +14,7 @@ export interface CodeBlockContent extends BaseContent {
 }
 
 export interface ListItemContent extends BaseContent {
-  type: 'ordered-list-item';
+  type: 'ordered-list-item' | 'unordered-list-item';
   contents: string;
   subItems?: ListItemContent[];
 }
@@ -22,6 +22,11 @@ export interface ListItemContent extends BaseContent {
 export interface OrderedListContent extends BaseContent {
   type: 'ordered-list';
   depthNumbering?: boolean;
+  contents: ListItemContent[];
+}
+
+export interface UnorderedListContent extends BaseContent {
+  type: 'unordered-list';
   contents: ListItemContent[];
 }
 
@@ -34,7 +39,7 @@ export interface CalloutBoxContent extends BaseContent {
   contents: (TextContent | CodeBlockContent)[];
 }
 
-export type Content = TextContent | CodeBlockContent | CalloutBoxContent | OrderedListContent;
+export type Content = TextContent | CodeBlockContent | CalloutBoxContent | OrderedListContent | UnorderedListContent;
 
 export interface Block {
   type: string;

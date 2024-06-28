@@ -1,7 +1,7 @@
-import { CalloutBoxContent, Content, ListItemContent, OrderedListContent } from "../types/Page";
+import { CalloutBoxContent, Content, ListItemContent, OrderedListContent, UnorderedListContent } from "../types/Page";
 import CodeBlock from "../components/CodeBlock";
 import CalloutBoxComponent from "../components/CalloutBox";
-import { ListContainer, OrderedList } from "../styles/Page/OrderedList";
+import { ListContainer, OrderedList, UnorderedList } from "../styles/Page/List";
 
 export const text_types = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'];
 
@@ -59,12 +59,35 @@ function renderListItem(item: ListItemContent, depthNumbering: boolean) {
   );
 }
 
+function renderUnorderedListItem(item: ListItemContent) {
+  return (
+    <li key={item.id}>
+      {item.contents}
+      {item.subItems && (
+        <UnorderedList>
+          {item.subItems.map((subItem) => renderUnorderedListItem(subItem))}
+        </UnorderedList>
+      )}
+    </li>
+  );
+}
+
 export function renderOrderedList(content: OrderedListContent) {
   return (
-    <ListContainer id={content.id} depthNumbering={content.depthNumbering !== false}>
-    <OrderedList id={content.id} depthNumbering={content.depthNumbering !== false}>
-      {content.contents.map((item) => renderListItem(item, content.depthNumbering !== false))}
-    </OrderedList>
+    <ListContainer id={content.id}>
+      <OrderedList id={content.id} depthNumbering={content.depthNumbering !== false}>
+        {content.contents.map((item) => renderListItem(item, content.depthNumbering !== false))}
+      </OrderedList>
+    </ListContainer>
+  );
+}
+
+export function renderUnorderedList(content: UnorderedListContent) {
+  return (
+    <ListContainer id={content.id}>
+      <UnorderedList id={content.id}>
+        {content.contents.map((item) => renderUnorderedListItem(item))}
+      </UnorderedList>
     </ListContainer>
   );
 }
@@ -80,6 +103,8 @@ export function renderPageContent(content: Content) {
       return <CalloutBoxComponent content={content as CalloutBoxContent} />;
     case 'ordered-list':
       return renderOrderedList(content as OrderedListContent);
+    case 'unordered-list':
+      return renderUnorderedList(content as UnorderedListContent);
     default:
       return null;
   }
