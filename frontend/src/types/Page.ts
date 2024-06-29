@@ -14,9 +14,10 @@ export interface CodeBlockContent extends BaseContent {
 }
 
 export interface ListItemContent extends BaseContent {
-  type: 'ordered-list-item' | 'unordered-list-item';
+  type: 'ordered-list-item' | 'unordered-list-item' | 'checklist-item';
   contents: string;
   subItems?: ListItemContent[];
+  completed?: boolean; // For checklist items
 }
 
 export interface OrderedListContent extends BaseContent {
@@ -30,6 +31,11 @@ export interface UnorderedListContent extends BaseContent {
   contents: ListItemContent[];
 }
 
+export interface ChecklistContent extends BaseContent {
+  type: 'checklist';
+  contents: ListItemContent[];
+}
+
 export interface CalloutBoxContent extends BaseContent {
   type: 'callout-box';
   boxType: 'info' | 'warning';
@@ -39,7 +45,7 @@ export interface CalloutBoxContent extends BaseContent {
   contents: (TextContent | CodeBlockContent)[];
 }
 
-export type Content = TextContent | CodeBlockContent | CalloutBoxContent | OrderedListContent | UnorderedListContent;
+export type Content = TextContent | CodeBlockContent | CalloutBoxContent | OrderedListContent | UnorderedListContent | ChecklistContent;
 
 export interface Block {
   type: string;

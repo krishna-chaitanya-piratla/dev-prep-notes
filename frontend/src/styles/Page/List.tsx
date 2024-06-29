@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 
 interface ListProps {
-    highlightBorder?: boolean;
+  highlightBorder?: boolean;
 }
 
 interface OrderedListProps extends ListProps {
-    depthNumbering: boolean;
+  depthNumbering: boolean;
 }
 
 export const OrderedList = styled.ol<OrderedListProps>`
@@ -53,13 +53,44 @@ export const UnorderedList = styled.ul<ListProps>`
   }
 `;
 
-
 export const ListContainer = styled.div<ListProps>`
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    width: fit-content;
-    padding-right: 1rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    border: ${(props) => (props.highlightBorder ? '4px dotted deeppink' : 'none')};
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: fit-content;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border: ${(props) => (props.highlightBorder ? '4px dotted deeppink' : 'none')};
+`;
+
+export const Checklist = styled.ul`
+  list-style-type: none;
+  padding-left: 1.5rem; /* Adjust padding for alignment */
+  margin: 0;
+
+  li {
+    display: block; /* Ensure items are displayed vertically */
+    align-items: flex-start; /* Align items to the start */
+    margin-bottom: 0.5em;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 0.5em;
+  }
+
+  label {
+    display: inline-block; /* Ensure labels are displayed vertically */
+    align-items: center;
+    cursor: pointer;
+  }
+
+  li.completed label {
+    text-decoration: line-through;
+    color: gray;
+  }
+
+  ul {
+    padding-left: 1.5rem; /* Adjust padding for nested lists */
+    margin: 0;
+  }
 `;

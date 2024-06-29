@@ -1,7 +1,7 @@
-import { CalloutBoxContent, Content, ListItemContent, OrderedListContent, UnorderedListContent } from "../types/Page";
+import { CalloutBoxContent, Content, ListItemContent, OrderedListContent, UnorderedListContent, ChecklistContent } from "../types/Page";
 import CodeBlock from "../components/CodeBlock";
 import CalloutBoxComponent from "../components/CalloutBox";
-import { ListContainer, OrderedList, UnorderedList } from "../styles/Page/List";
+import { ListContainer, OrderedList, UnorderedList, Checklist } from "../styles/Page/List";
 
 export const text_types = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'];
 
@@ -72,6 +72,20 @@ function renderUnorderedListItem(item: ListItemContent) {
   );
 }
 
+function renderChecklistItem(item: ListItemContent) {
+  return (
+    <li key={item.id} className={item.completed ? 'completed' : ''}>
+      <input type="checkbox" checked={item.completed} readOnly />
+      <label>{item.contents}</label>
+      {item.subItems && (
+        <Checklist>
+          {item.subItems.map((subItem) => renderChecklistItem(subItem))}
+        </Checklist>
+      )}
+    </li>
+  );
+}
+
 export function renderOrderedList(content: OrderedListContent) {
   return (
     <ListContainer id={content.id}>
@@ -92,6 +106,16 @@ export function renderUnorderedList(content: UnorderedListContent) {
   );
 }
 
+export function renderChecklist(content: ChecklistContent) {
+  return (
+    <ListContainer id={content.id}>
+      <Checklist id={content.id}>
+        {content.contents.map((item) => renderChecklistItem(item))}
+      </Checklist>
+    </ListContainer>
+  );
+}
+
 export function renderPageContent(content: Content) {
   if (text_types.includes(content.type)) {
     return renderText(content);
@@ -105,6 +129,8 @@ export function renderPageContent(content: Content) {
       return renderOrderedList(content as OrderedListContent);
     case 'unordered-list':
       return renderUnorderedList(content as UnorderedListContent);
+    case 'checklist':
+      return renderChecklist(content as ChecklistContent);
     default:
       return null;
   }
