@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
     --main-nav-width: 280px;
     --page-nav-width: 320px;
     --page-width: 900px;
-    --header-height: 2%;
+    --header-height: 4%;
     --font-family: ${appStore.fontFamily}; /* Font family */
     --base-text-size: ${appStore.fontSize}px; /* Font size */
     --base-line-height: calc(1.6 * var(--base-text-size));
