@@ -1,6 +1,7 @@
 import { CalloutBoxContent, Content, ListItemContent, OrderedListContent, UnorderedListContent, ChecklistContent } from "../types/Page";
 import CodeBlock from "../components/CodeBlock";
 import CalloutBoxComponent from "../components/CalloutBox";
+import ChecklistItem from "../components/ChecklistItem";
 import { ListContainer, OrderedList, UnorderedList, Checklist } from "../styles/Page/List";
 
 export const text_types = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'];
@@ -72,20 +73,6 @@ function renderUnorderedListItem(item: ListItemContent) {
   );
 }
 
-function renderChecklistItem(item: ListItemContent) {
-  return (
-    <li key={item.id} className={item.completed ? 'completed' : ''}>
-      <input type="checkbox" checked={item.completed} readOnly />
-      <label>{item.contents}</label>
-      {item.subItems && (
-        <Checklist>
-          {item.subItems.map((subItem) => renderChecklistItem(subItem))}
-        </Checklist>
-      )}
-    </li>
-  );
-}
-
 export function renderOrderedList(content: OrderedListContent) {
   return (
     <ListContainer id={content.id}>
@@ -110,7 +97,9 @@ export function renderChecklist(content: ChecklistContent) {
   return (
     <ListContainer id={content.id}>
       <Checklist id={content.id}>
-        {content.contents.map((item) => renderChecklistItem(item))}
+        {content.contents.map((item) => (
+          <ChecklistItem key={item.id} item={item} />
+        ))}
       </Checklist>
     </ListContainer>
   );

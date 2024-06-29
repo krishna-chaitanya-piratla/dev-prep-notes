@@ -14,10 +14,9 @@ export interface CodeBlockContent extends BaseContent {
 }
 
 export interface ListItemContent extends BaseContent {
-  type: 'ordered-list-item' | 'unordered-list-item' | 'checklist-item';
+  type: 'ordered-list-item' | 'unordered-list-item';
   contents: string;
   subItems?: ListItemContent[];
-  completed?: boolean; // For checklist items
 }
 
 export interface OrderedListContent extends BaseContent {
@@ -31,9 +30,16 @@ export interface UnorderedListContent extends BaseContent {
   contents: ListItemContent[];
 }
 
+export interface ChecklistItemContent extends BaseContent {
+  type: 'checklist-item';
+  contents: string;
+  completed: boolean;
+  subItems?: ChecklistItemContent[];
+}
+
 export interface ChecklistContent extends BaseContent {
   type: 'checklist';
-  contents: ListItemContent[];
+  contents: ChecklistItemContent[];
 }
 
 export interface CalloutBoxContent extends BaseContent {
@@ -45,7 +51,13 @@ export interface CalloutBoxContent extends BaseContent {
   contents: (TextContent | CodeBlockContent)[];
 }
 
-export type Content = TextContent | CodeBlockContent | CalloutBoxContent | OrderedListContent | UnorderedListContent | ChecklistContent;
+export type Content =
+  | TextContent
+  | CodeBlockContent
+  | CalloutBoxContent
+  | OrderedListContent
+  | UnorderedListContent
+  | ChecklistContent;
 
 export interface Block {
   type: string;
@@ -70,4 +82,8 @@ export interface Page {
 
 export interface PageWithChildren extends Page {
   children: PageWithChildren[];
+}
+
+export interface ChecklistItemProps {
+  item: ChecklistItemContent;
 }

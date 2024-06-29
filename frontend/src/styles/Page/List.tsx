@@ -84,13 +84,31 @@ export const Checklist = styled.ul`
     cursor: pointer;
   }
 
-  li.completed label {
-    text-decoration: line-through;
-    color: gray;
-  }
-
   ul {
     padding-left: 1.5rem; /* Adjust padding for nested lists */
     margin: 0;
   }
 `;
+
+
+export const ChecklistItemWrapper = styled.li`
+  display: block;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+
+  .completed {
+    text-decoration: line-through;
+    color: gray;
+  }
+`;
+
+export const ChecklistInput = styled.input`
+  margin-right: 0.5em;
+`;
+
+export const ChecklistLabel = styled.label`
+  display: inline-block;
+  align-items: center;
+  cursor: pointer;
+`;
+
