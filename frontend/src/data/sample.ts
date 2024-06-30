@@ -468,6 +468,106 @@ export const page_with_checklists: Page = {
   ]
 }
 
+
+export const page_with_tables: Page = {
+  metadata: {
+    id: "005",
+    link: "/test-page-05",
+    linkName: "Page with Table",
+    pageType: "page"
+  },
+  title: {
+    bannerUrl: "../assets/banners/banner4.webp",
+    h4Text: "Test4",
+    h2Text: "Page with Table"
+  },
+  contents: [
+    {
+      type: "text",
+      contents: [
+        {
+          type: "h1",
+          contents: "This is Heading1 text",
+          id: "heading1-001"
+        },
+
+        {
+          "type": "table",
+          "id": "table-001",
+          "contents": [
+            {
+              "type":"column-headers",
+              "contents": ["Box Name", "Items in Box", "Verified?"],
+              "columnTypes": ["Alphanumeric", "Number", "Boolean"]
+            },
+            {
+              "type": "table-row",
+              "contents": ["Red", 3, true]
+            },
+            {
+              "type": "table-row",
+              "contents": ["Green", 4, true]
+            },
+            {
+              "type": "table-row",
+              "contents": ["Blue", "2", true]
+            },
+            {
+              "type": "table-row",
+              "contents": ["White", "9", true]
+            },
+            {
+              "type": "table-row",
+              "contents": ["Mystery", "99", false]
+            },
+          ]
+        },
+
+        {
+          type: "p",
+          contents: "This is a paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, and some <em>emphasis</em> styling.",
+          id: "paragraph-001"
+        },
+        {
+          type: "p",
+          contents: "This is a paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, <code>variable</code>, and some <em>emphasis</em> styling.",
+          id: "paragraph-001"
+        },
+        {
+          type: "code-block",
+          contents: [
+            {
+              type: "html",
+              contents: "<p>Hello from codeblock world</p>\n<p>Hello from codeblock world</p>"
+            }
+          ],
+          id: "codeblock-html-001"
+        },
+        {
+          type: "code-block",
+          contents: [
+            {
+              type: "css",
+              contents: "p {\n  color: red;\n}\n"
+            }
+          ],
+          id: "codeblock-css-001"
+        },
+        {
+          type: "code-block",
+          contents: [
+            {
+              type: "javascript",
+              contents: "const abcd = 123;\n"
+            }
+          ],
+          id: "codeblock-js-001"
+        },
+      ]
+    },
+  ]
+}
+
 export const dummy_page_04: Page = {
   metadata: {
     id: "002",
@@ -1169,4 +1269,37 @@ export const dummy_page_04: Page = {
 
 // export const data: Page[] = [dummy_page_01, dummy_page_02, dummy_page_03, dummy_page_04, dummy_page_05]
 
-export const data: Page[] = [page_with_code_blocks, page_with_callout_boxes, page_with_lists, page_with_checklists];
+export const data: Page[] = [page_with_code_blocks, page_with_callout_boxes, page_with_lists, page_with_checklists, page_with_tables];
+
+
+const table_data = {
+  "type": "table",
+  "id": "table-001",
+  "contents": [
+    {
+      "type":"column-headers",
+      "contents": ["Box Name", "Items in Box", "Verified?"],
+      "column-types": ["Alphanumeric", "Number", "Boolean"]
+    },
+    {
+      "type": "table-row",
+      "contents": ["Red", "3", true]
+    },
+    {
+      "type": "table-row",
+      "contents": ["Green", "4", true]
+    },
+    {
+      "type": "table-row",
+      "contents": ["Blue", "2", true]
+    },
+    {
+      "type": "table-row",
+      "contents": ["White", "9", true]
+    },
+    {
+      "type": "table-row",
+      "contents": ["Mystery", "99", false]
+    },
+  ]
+}

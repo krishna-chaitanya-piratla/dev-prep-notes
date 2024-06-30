@@ -1,8 +1,9 @@
-import { CalloutBoxContent, Content, ListItemContent, OrderedListContent, UnorderedListContent, ChecklistContent } from "../types/Page";
+import { CalloutBoxContent, Content, ListItemContent, OrderedListContent, UnorderedListContent, ChecklistContent, TableContent } from "../types/Page";
 import CodeBlock from "../components/CodeBlock";
 import CalloutBoxComponent from "../components/CalloutBox";
 import ChecklistItem from "../components/ChecklistItem";
 import { ListContainer, OrderedList, UnorderedList, Checklist } from "../styles/Page/List";
+import Table from "../components/Table";
 
 export const text_types = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'];
 
@@ -105,6 +106,12 @@ export function renderChecklist(content: ChecklistContent) {
   );
 }
 
+export function renderTable(content: TableContent) {
+  return (
+    <Table content={content} />
+  );
+}
+
 export function renderPageContent(content: Content) {
   if (text_types.includes(content.type)) {
     return renderText(content);
@@ -120,6 +127,8 @@ export function renderPageContent(content: Content) {
       return renderUnorderedList(content as UnorderedListContent);
     case 'checklist':
       return renderChecklist(content as ChecklistContent);
+    case 'table':
+      return renderTable(content as TableContent);
     default:
       return null;
   }

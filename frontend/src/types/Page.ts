@@ -51,13 +51,36 @@ export interface CalloutBoxContent extends BaseContent {
   contents: (TextContent | CodeBlockContent)[];
 }
 
+export interface TableColumnHeaders extends BaseContent {
+  type: 'column-headers';
+  contents: string[];
+  columnTypes: string[];
+}
+
+export interface TableRow extends BaseContent {
+  type: 'table-row';
+  contents: (string | number | boolean)[];
+}
+
+export interface TableContent extends BaseContent {
+  type: 'table';
+  contents: (TableColumnHeaders | TableRow)[];
+}
+
 export type Content =
   | TextContent
   | CodeBlockContent
   | CalloutBoxContent
   | OrderedListContent
   | UnorderedListContent
-  | ChecklistContent;
+  | ChecklistContent
+  | TableContent;
+
+export interface Block {
+  type: string;
+  contents: Content[];
+}
+
 
 export interface Block {
   type: string;
