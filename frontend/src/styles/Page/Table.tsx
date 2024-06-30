@@ -32,6 +32,8 @@ export const TableHeader = styled.th`
   padding: 0.5rem;
   background-color: #f2f2f2;
   text-align: left;
+  position: relative;
+  cursor: pointer;
 `;
 
 export const TableRowWrapper = styled.tr`
@@ -52,5 +54,30 @@ export const TableCell = styled.td`
     border-right: 2px solid red;
     width: 0.75rem;
     height: 0.75rem;
+  }
+`;
+
+export const SortIconContainer = styled.span`
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.5rem;
+`;
+
+export const SortIcon = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ResetSortButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.25rem;
+  color: red;
+
+  &:hover {
+    color: darkred;
   }
 `;
