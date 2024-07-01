@@ -4,6 +4,7 @@ export const TableWrapper = styled.table`
   width: 100%;
   border-collapse: collapse;
   margin: 1rem 0;
+  text-align: center;
 
   .invalid {
     position: relative;
@@ -31,7 +32,6 @@ export const TableHeader = styled.th`
   border: 1px solid #ddd;
   padding: 0.5rem;
   background-color: #f2f2f2;
-  text-align: left;
   position: relative;
   cursor: pointer;
 `;
