@@ -34,6 +34,14 @@ export const TableHeader = styled.th`
   background-color: #f2f2f2;
   position: relative;
   cursor: pointer;
+  text-align: center; /* Ensure text is centered */
+  white-space: nowrap; /* Prevent text from wrapping */
+`;
+
+export const TableHeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TableRowWrapper = styled.tr`
@@ -81,3 +89,60 @@ export const ResetSortButton = styled.button`
     color: darkred;
   }
 `;
+
+export const FilterIconContainer = styled.span`
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 0.5rem;
+`;
+
+export const Dropdown = styled.div`
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  z-index: 100;
+  top: 100%;
+  left: 0;
+  text-align: left;
+
+  label {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  input[type='checkbox'] {
+    margin-right: 0.5rem;
+  }
+`;
+
+export const FilterButton = styled.button`
+  display: block;
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+
+  &:hover {
+    background-color: #e2e2e2;
+  }
+`;
+
+export const ClearFiltersButton = styled.button`
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 1rem;
+
+  &:hover {
+    background-color: #e2e2e2;
+  }
+`;
+
