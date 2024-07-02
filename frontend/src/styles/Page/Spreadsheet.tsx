@@ -22,6 +22,22 @@ export const StyledSpreadsheet = styled.div`
   border-radius: 8px;
 
   .reactgrid {
-    width: 100%;  /* Ensure reactgrid takes full width of the container */
+    width: 100%;
+  }
+
+  .rg-header-cell, .header-cell {
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    background: #f0f0f0;
+  }
+
+  .rg-text-cell, .text-cell {
+    justify-content:center;
+    text-align: center;
+  }
+
+  .rg-cell {
+    text-align: center;
   }
 `;
