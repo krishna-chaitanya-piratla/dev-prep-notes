@@ -2,12 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ReactGrid, Column, Row, CellChange, DefaultCellTypes, TextCell } from '@silevis/reactgrid';
 import '@silevis/reactgrid/styles.css';
 import { SpreadsheetWrapper, StyledSpreadsheet } from '../styles/Page/Spreadsheet';
-import { 
-  initializeColumns, 
-  initializeRows, 
-  generateGrid, 
-  createTextCell 
-} from '../utils/spreadsheet';
+import { initializeColumns, initializeRows, generateGrid } from '../utils/spreadsheet';
 
 interface SpreadsheetProps {
   data: {
@@ -27,22 +22,21 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ data }) => {
   }, [data]);
 
   const handleChanges = (changes: CellChange<DefaultCellTypes>[]) => {
-    const newRows = [...rows];
-    changes.forEach(change => {
-      const row = newRows.find(r => r.rowId === change.rowId);
-      if (row) {
-        const cellIndex = row.cells.findIndex(c => (c as any).columnId === change.columnId);
-        if (cellIndex !== -1) {
-          const cell = row.cells[cellIndex];
-          if ((cell as TextCell).type === 'text') {
-            const textCell = cell as TextCell;
-            textCell.text = (change.newCell as TextCell).text;
-            row.cells[cellIndex] = textCell;
+    setRows(prevRows => {
+      const newRows = [...prevRows];
+      changes.forEach(change => {
+        const row = newRows.find(r => r.rowId === change.rowId);
+        if (row) {
+          const cellIndex = row.cells.findIndex(c => (c as any).columnId === change.columnId);
+          if (cellIndex !== -1) {
+            row.cells[cellIndex] = { ...change.newCell } as TextCell;
+          } else {
+            row.cells.push({ ...change.newCell } as TextCell); // Add new cell if it doesn't exist
           }
         }
-      }
+      });
+      return newRows;
     });
-    setRows(newRows);
   };
 
   const { gridColumns, gridRows } = generateGrid(columns, rows);

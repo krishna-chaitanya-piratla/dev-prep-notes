@@ -28,7 +28,7 @@ export const initializeColumns = (columns: Column[]): Column[] => {
 
 export const initializeRows = (rows: Row<DefaultCellTypes>[], columns: Column[]): Row<DefaultCellTypes>[] => {
   const initializedRows = rows.map(row => {
-    const newRow = { ...row };
+    const newRow = { ...row, cells: [...row.cells] };
     for (let i = row.cells.length; i < columns.length; i++) {
       newRow.cells.push(createTextCell(''));
     }
@@ -38,7 +38,11 @@ export const initializeRows = (rows: Row<DefaultCellTypes>[], columns: Column[])
   for (let i = rows.length; i < defaultRowCount; i++) {
     const newRow: Row<DefaultCellTypes> = {
       rowId: `row_${i}`,
-      cells: columns.map(col => createTextCell('')),
+      cells: columns.map((col, index) => ({
+        ...createTextCell(''),
+        columnId: col.columnId,
+        rowId: `row_${i}`,
+      })),
     };
     initializedRows.push(newRow);
   }
@@ -54,19 +58,17 @@ export const generateColumnHeaders = (columns: Column[]): HeaderCell[] => {
   return headers;
 };
 
-export const generateRowHeaders = (rows: Row<DefaultCellTypes>[]): Row<DefaultCellTypes>[] => {
-  const headers: Row<DefaultCellTypes>[] = [];
-  for (let i = 0; i < rows.length; i++) {
-    headers.push({
-      rowId: `header_${i}`,
-      cells: [createHeaderCell((i + 1).toString())],
-    });
-  }
-  return headers;
-};
-
 export const generateGrid = (columns: Column[], rows: Row<DefaultCellTypes>[]) => {
   const gridColumns = [{ columnId: 'header', width: 50 }, ...columns];
-  const gridRows = [{ rowId: 'header', cells: [{ type: 'text', text: '', className: 'header-cell' }, ...generateColumnHeaders(columns)] }, ...rows.map((row, index) => ({ rowId: row.rowId, cells: [{ type: 'text', text: (index + 1).toString(), nonEditable: true, className: 'header-cell' }, ...row.cells.map(cell => createTextCell((cell as TextCell).text))] }))];
+  const gridRows = [
+    { rowId: 'header', cells: [{ type: 'text', text: '', className: 'header-cell' }, ...generateColumnHeaders(columns)] },
+    ...rows.map((row, index) => ({
+      rowId: row.rowId,
+      cells: [
+        { type: 'text', text: (index + 1).toString(), nonEditable: true, className: 'header-cell', columnId: 'header' },
+        ...row.cells.map((cell, cellIndex) => ({ ...cell, columnId: columns[cellIndex].columnId })),
+      ],
+    })),
+  ];
   return { gridColumns, gridRows };
 };
