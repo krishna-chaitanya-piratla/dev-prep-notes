@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ReactGrid, Column, Row, CellChange, TextCell, DefaultCellTypes, HeaderCell } from '@silevis/reactgrid';
 import '@silevis/reactgrid/styles.css';
 import { SpreadsheetWrapper, StyledSpreadsheet } from '../styles/Page/Spreadsheet';
@@ -23,8 +23,48 @@ const createTextCell = (text: string): TextCell => ({
 });
 
 const Spreadsheet: React.FC<SpreadsheetProps> = ({ data }) => {
-  const [columns, setColumns] = useState<Column[]>(data.columns || []);
-  const [rows, setRows] = useState<Row<DefaultCellTypes>[]>(data.rows || []);
+  const defaultRowCount = 8;
+  const defaultColCount = 5;
+
+  const initializeColumns = (columns: Column[]) => {
+    const initializedColumns = [...columns];
+    for (let i = columns.length; i < defaultColCount; i++) {
+      initializedColumns.push({
+        columnId: `column_${i}`,
+        width: 150,
+      });
+    }
+    return initializedColumns;
+  };
+
+  const initializeRows = (rows: Row<DefaultCellTypes>[], columns: Column[]) => {
+    const initializedRows = rows.map(row => {
+      const newRow = { ...row };
+      for (let i = row.cells.length; i < columns.length; i++) {
+        newRow.cells.push(createTextCell(''));
+      }
+      return newRow;
+    });
+
+    for (let i = rows.length; i < defaultRowCount; i++) {
+      const newRow: Row<DefaultCellTypes> = {
+        rowId: `row_${i}`,
+        cells: columns.map(col => createTextCell('')),
+      };
+      initializedRows.push(newRow);
+    }
+
+    return initializedRows;
+  };
+
+  const [columns, setColumns] = useState<Column[]>(initializeColumns(data.columns || []));
+  const [rows, setRows] = useState<Row<DefaultCellTypes>[]>(initializeRows(data.rows || [], columns));
+
+  useEffect(() => {
+    const initializedColumns = initializeColumns(data.columns || []);
+    setColumns(initializedColumns);
+    setRows(initializeRows(data.rows || [], initializedColumns));
+  }, [data]);
 
   const handleChanges = (changes: CellChange<DefaultCellTypes>[]) => {
     const newRows = [...rows];
