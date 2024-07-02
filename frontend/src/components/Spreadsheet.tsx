@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ReactGrid, Column, Row, CellChange, TextCell, Id, DefaultCellTypes } from '@silevis/reactgrid';
 import '@silevis/reactgrid/styles.css';
+import { SpreadsheetWrapper, StyledSpreadsheet } from '../styles/Page/Spreadsheet';
 
 interface SpreadsheetProps {
   data: {
@@ -33,11 +34,15 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ data }) => {
   };
 
   return (
-    <ReactGrid
-      rows={rows}
-      columns={columns}
-      onCellsChanged={handleChanges}
-    />
+    <SpreadsheetWrapper>
+      <StyledSpreadsheet>
+        <ReactGrid
+          rows={rows}
+          columns={columns}
+          onCellsChanged={handleChanges}
+        />
+      </StyledSpreadsheet>
+    </SpreadsheetWrapper>
   );
 };
 
