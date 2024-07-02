@@ -568,6 +568,103 @@ export const page_with_tables: Page = {
   ]
 }
 
+export const page_with_spreadsheet: Page = {
+  metadata: {
+    id: "006",
+    link: "/test-page-06",
+    linkName: "Page with Spreadsheet",
+    pageType: "page"
+  },
+  title: {
+    bannerUrl: "../assets/banners/banner4.webp",
+    h4Text: "Spreadsheet",
+    h2Text: "Page with Spreadsheet"
+  },
+  contents: [
+    {
+      type: "text",
+      contents: [
+        {
+          type: "h1",
+          contents: "This page contains a Spreadsheet component",
+          id: "heading1-001"
+        },
+
+        {
+          "type": "spreadsheet",
+          "id": "spreadsheet-001",
+          "contents": {
+            "columns": [
+              { "columnId": "col1", "width": 150 },
+              { "columnId": "col2", "width": 150 },
+              { "columnId": "col3", "width": 150 }
+            ],
+            "rows": [
+              {
+                "rowId": "row1",
+                "cells": [
+                  { "type": "text", "text": "A1", "columnId": "col1" },
+                  { "type": "text", "text": "B1", "columnId": "col2" },
+                  { "type": "text", "text": "C1", "columnId": "col3" }
+                ]
+              },
+              {
+                "rowId": "row2",
+                "cells": [
+                  { "type": "text", "text": "A2", "columnId": "col1" },
+                  { "type": "text", "text": "B2", "columnId": "col2" },
+                  { "type": "text", "text": "C2", "columnId": "col3" }
+                ]
+              }
+            ]
+          }
+        },
+
+        {
+          type: "p",
+          contents: "This is a paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, and some <em>emphasis</em> styling.",
+          id: "paragraph-001"
+        },
+        {
+          type: "p",
+          contents: "This is a paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, <code>variable</code>, and some <em>emphasis</em> styling.",
+          id: "paragraph-001"
+        },
+        {
+          type: "code-block",
+          contents: [
+            {
+              type: "html",
+              contents: "<p>Hello from codeblock world</p>\n<p>Hello from codeblock world</p>"
+            }
+          ],
+          id: "codeblock-html-001"
+        },
+        {
+          type: "code-block",
+          contents: [
+            {
+              type: "css",
+              contents: "p {\n  color: red;\n}\n"
+            }
+          ],
+          id: "codeblock-css-001"
+        },
+        {
+          type: "code-block",
+          contents: [
+            {
+              type: "javascript",
+              contents: "const abcd = 123;\n"
+            }
+          ],
+          id: "codeblock-js-001"
+        },
+      ]
+    },
+  ]
+}
+
 export const dummy_page_04: Page = {
   metadata: {
     id: "002",
@@ -1269,7 +1366,7 @@ export const dummy_page_04: Page = {
 
 // export const data: Page[] = [dummy_page_01, dummy_page_02, dummy_page_03, dummy_page_04, dummy_page_05]
 
-export const data: Page[] = [page_with_code_blocks, page_with_callout_boxes, page_with_lists, page_with_checklists, page_with_tables];
+export const data: Page[] = [page_with_code_blocks, page_with_callout_boxes, page_with_lists, page_with_checklists, page_with_tables, page_with_spreadsheet];
 
 
 const table_data = {

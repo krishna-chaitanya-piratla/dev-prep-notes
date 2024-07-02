@@ -67,6 +67,14 @@ export interface TableContent extends BaseContent {
   contents: (TableColumnHeaders | TableRow)[];
 }
 
+export interface SpreadsheetContent extends BaseContent {
+  type: 'spreadsheet';
+  contents: {
+    columns: any[];
+    rows: any[];
+  };
+}
+
 export type Content =
   | TextContent
   | CodeBlockContent
@@ -74,7 +82,8 @@ export type Content =
   | OrderedListContent
   | UnorderedListContent
   | ChecklistContent
-  | TableContent;
+  | TableContent
+  | SpreadsheetContent;
 
 export interface Block {
   type: string;
