@@ -7,10 +7,11 @@ export const MainNavigationWrapper = styled.nav`
   height: 100vh;
   padding: 1.25rem; /* 20px */
   padding-right: 0px;
-  margin-right: 20px;
+  margin-right: 0; /* Remove the margin */
   box-sizing: border-box;
   position: sticky;
   top: 0;
+  flex-shrink: 0; /* Prevent shrinking */
 
   @media (max-width: 940px) {
     visibility: hidden;

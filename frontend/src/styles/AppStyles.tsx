@@ -21,26 +21,28 @@ export const StyledLayout = styled.div`
   flex-grow: 1;
   margin-top: 0;
   justify-content: space-between;
+  width: 100%; /* Ensure the layout takes full width */
 `;
 
 export const AppContainer = styled.div`
+  display: flex; /* Make it a flex container */
   background-color: var(--background-color);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   box-sizing: border-box;
 `;
 
 export const PageContainer = styled.div<{ isMinimized?: boolean }>`
+  flex-grow: 1; /* Allow it to take up the remaining space */
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-basis: ${({ isMinimized = true }) => isMinimized ? 'calc(100% - var(--main-nav-width) - var(--page-nav-minimized-width))' : 'calc(100% - var(--main-nav-width) - var(--page-nav-expanded-width))'};
-  max-width: var(--page-width);  /* Ensure the container doesn't grow beyond this width */
   box-sizing: border-box;
+  overflow: hidden; /* Prevent content from causing overflow */
+  width: ${({ isMinimized = true }) => isMinimized ? `calc(100% - var(--main-nav-width) - var(--page-nav-minimized-width))` : `calc(100% - var(--main-nav-width) - var(--page-nav-expanded-width))`}; /* Calculate width dynamically */
 
   @media (max-width: 1540px) {
-    flex-basis: calc(100% - var(--main-nav-width));
+    width: calc(100% - var(--main-nav-width));
   }
 
   @media (max-width: 1240px) {
@@ -50,6 +52,6 @@ export const PageContainer = styled.div<{ isMinimized?: boolean }>`
   }
 
   @media (max-width: 940px) {
-    flex-basis: 100%;
+    width: 100%;
   }
 `;

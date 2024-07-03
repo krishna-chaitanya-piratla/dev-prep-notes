@@ -7,11 +7,13 @@ export const PageNavigationWrapper = styled.nav`
   height: 100vh;
   padding: calc(var(--base-text-size) * 1.25);
   padding-left: calc(var(--base-text-size) * 3);
+  margin-left: 0; /* Remove the margin */
   box-sizing: border-box;
   position: sticky;
   top: 0;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0; /* Prevent shrinking */
 
   @media (max-width: 1540px) {
     visibility: hidden;
@@ -34,6 +36,7 @@ export const MinimizedPageNavigationWrapper = styled.div`
   position: sticky;
   top: 0;
   cursor: pointer;
+  flex-shrink: 0; /* Prevent shrinking */
 
   @media (max-width: 1540px) {
     visibility: hidden;
