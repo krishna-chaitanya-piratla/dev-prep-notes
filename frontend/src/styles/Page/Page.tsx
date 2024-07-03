@@ -7,7 +7,7 @@ interface PageWrapperProps {
 export const PageWrapper = styled.div<PageWrapperProps>`
   background-color: var(--page-background-color);
   color: black;
-  width: 100%;  /* Ensure the wrapper takes full width available */
+  width: 100%;
   min-height: 100vh;
   padding: 0;
   border-radius: 10px;
@@ -39,8 +39,8 @@ export const BannerWrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  width: 100%; /* Ensure the content wrapper takes full width available */
-  max-width: var(--page-width); /* Constrain the content to a max width */
+  width: 100%;
+  max-width: var(--page-width);
   padding: 3.75rem;
   font-size: calc(1.125 * var(--base-text-size));
   line-height: calc(1.125 * var(--base-line-height));
