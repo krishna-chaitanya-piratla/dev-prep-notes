@@ -1,52 +1,29 @@
-import { CalloutBoxContent, Content, ListItemContent, OrderedListContent, UnorderedListContent, ChecklistContent, TableContent, SpreadsheetContent } from "../types/Page";
+import { Content, CalloutBoxContent, OrderedListContent, UnorderedListContent, ChecklistContent, TableContent, SpreadsheetContent, CodeBlockContent, ListItemContent } from "../types/Page";
 import CodeBlock from "../components/CodeBlock";
 import CalloutBoxComponent from "../components/CalloutBox";
 import ChecklistItem from "../components/ChecklistItem";
 import { ListContainer, OrderedList, UnorderedList, Checklist } from "../styles/Page/List";
 import Table from "../components/Table";
 import Spreadsheet from "../components/Spreadsheet";
+import Editable from "../components/Editable";
+import EditableCodeBlock from "../components/EditableCodeBlock";
 
 export const text_types = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'];
 
-export function renderText(content: Content) {
-  switch (content.type) {
-    case 'h1':
-      return <h1 id={content.id}>{content.contents as string}</h1>;
-    case 'h2':
-      return <h2 id={content.id}>{content.contents as string}</h2>;
-    case 'h3':
-      return <h3 id={content.id}>{content.contents as string}</h3>;
-    case 'h4':
-      return <h4 id={content.id}>{content.contents as string}</h4>;
-    case 'h5':
-      return <h5 id={content.id}>{content.contents as string}</h5>;
-    case 'h6':
-      return <h6 id={content.id}>{content.contents as string}</h6>;
-    case 'p':
-      return <p id={content.id} dangerouslySetInnerHTML={{ __html: content.contents as string }}></p>;
-  }
+export function renderText(content: Content, onContentChange: (newContent: Content) => void) {
+  return (
+    <Editable content={content} onContentChange={onContentChange} />
+  );
 }
 
-export function renderCodeBlock(content: Content) {
+export function renderCodeBlock(content: Content, onContentChange: (newContent: Content) => void) {
   return (
-    <div id={content.id}>
-      {(content.contents as Content[]).map((item, index) => (
-        <CodeBlock key={index} language={item.type} contents={item.contents as string} />
-      ))}
-    </div>
+    <EditableCodeBlock content={content as CodeBlockContent} onContentChange={onContentChange} />
   );
 }
 
 export function renderCalloutBox(content: Content) {
-  if (text_types.includes(content.type)) {
-    return renderText(content);
-  }
-  switch (content.type) {
-    case 'code-block':
-      return renderCodeBlock(content);
-    default:
-      return null;
-  }
+  return <CalloutBoxComponent content={content as CalloutBoxContent} />;
 }
 
 function renderListItem(item: ListItemContent, depthNumbering: boolean) {
@@ -121,15 +98,15 @@ export function renderSpreadsheet(content: SpreadsheetContent) {
   );
 }
 
-export function renderPageContent(content: Content) {
+export function renderPageContent(content: Content, onContentChange: (newContent: Content) => void) {
   if (text_types.includes(content.type)) {
-    return renderText(content);
+    return renderText(content, onContentChange);
   }
   switch (content.type) {
     case 'code-block':
-      return renderCodeBlock(content);
+      return renderCodeBlock(content, onContentChange);
     case 'callout-box':
-      return <CalloutBoxComponent content={content as CalloutBoxContent} />;
+      return renderCalloutBox(content);
     case 'ordered-list':
       return renderOrderedList(content as OrderedListContent);
     case 'unordered-list':

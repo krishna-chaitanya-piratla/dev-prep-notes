@@ -1,16 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Content, TextContent } from '../types/Page';
+import { Content, TextContent, CodeBlockContent } from '../types/Page';
 import { renderPageContent } from '../utils/helpers';
-
-import styled from 'styled-components';
-
-const EditableDiv = styled.div`
-  &:focus,
-  &:focus-visible {
-    outline: none;
-    border: none;
-  }
-`;
+import {EditableDiv} from '../styles/EditableDiv';
+import EditableCodeBlock from './EditableCodeBlock';
 
 interface EditableProps {
   content: Content;
@@ -46,8 +38,16 @@ const Editable: React.FC<EditableProps> = ({ content, onContentChange }) => {
     );
   };
 
+  const isCodeBlockContent = (content: Content): content is CodeBlockContent => {
+    return content.type === 'code-block';
+  };
+
+  if (isCodeBlockContent(content)) {
+    return <EditableCodeBlock content={content} onContentChange={onContentChange} />;
+  }
+
   if (!isTextContent(content)) {
-    return <>{renderPageContent(content)}</>;
+    return <>{renderPageContent(content, onContentChange)}</>;
   }
 
   return (
