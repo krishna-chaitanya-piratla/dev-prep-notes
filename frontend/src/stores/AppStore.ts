@@ -4,11 +4,13 @@ class AppStore {
   navBackgroundColor: string;
   fontFamily: string;
   fontSize: number;
+  isPageNavigationMinimized: boolean;
 
   constructor() {
     this.navBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
     this.fontFamily = 'Wotfard, sans-serif'; // Default font
     this.fontSize = 16; // Default font size in pixels
+    this.isPageNavigationMinimized = true; // Default minimized state
     makeAutoObservable(this);
   }
 
@@ -25,6 +27,10 @@ class AppStore {
   setFontSize(size: number) {
     this.fontSize = size;
     document.documentElement.style.setProperty('--base-text-size', `${size}px`);
+  }
+
+  setPageNavigationMinimized(isMinimized: boolean) {
+    this.isPageNavigationMinimized = isMinimized;
   }
 }
 

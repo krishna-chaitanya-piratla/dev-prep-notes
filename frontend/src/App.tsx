@@ -6,6 +6,7 @@ import Page from './components/Page/Page';
 import Header from './components/Header/Header';
 import StyleHelmet from './components/StyleHelmet';
 import { AppWrapper, StyledLayout, AppContainer, PageContainer } from './styles/AppStyles';
+import appStore from './stores/AppStore';
 
 const App: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ const App: React.FC = () => {
         <AppContainer>
           <StyledLayout>
             <MainNavigation />
-            <PageContainer>
+            <PageContainer isMinimized={appStore.isPageNavigationMinimized}>
               <Header />
               <Page />
             </PageContainer>

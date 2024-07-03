@@ -7,7 +7,7 @@ interface PageWrapperProps {
 export const PageWrapper = styled.div<PageWrapperProps>`
   background-color: var(--page-background-color);
   color: black;
-  width: var(--page-width);
+  width: 100%;  /* Ensure the wrapper takes full width available */
   min-height: 100vh;
   padding: 0;
   border-radius: 10px;
@@ -16,6 +16,7 @@ export const PageWrapper = styled.div<PageWrapperProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   @media (max-width: 1240px) {
     width: auto;
   }
@@ -38,6 +39,8 @@ export const BannerWrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
+  width: 100%; /* Ensure the content wrapper takes full width available */
+  max-width: var(--page-width); /* Constrain the content to a max width */
   padding: 3.75rem;
   font-size: calc(1.125 * var(--base-text-size));
   line-height: calc(1.125 * var(--base-line-height));

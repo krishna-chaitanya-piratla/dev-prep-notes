@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const PageNavigationWrapper = styled.nav`
   background-color: var(--nav-background-color);
   color: var(--text-color);
-  width: var(--page-nav-width);
+  width: var(--page-nav-expanded-width);
   height: 100vh;
   padding: calc(var(--base-text-size) * 1.25);
   padding-left: calc(var(--base-text-size) * 3);
@@ -13,6 +13,11 @@ export const PageNavigationWrapper = styled.nav`
   display: flex;
   flex-direction: column;
 
+  @media (max-width: 1540px) {
+    visibility: hidden;
+    display: none;
+  }
+
   h2 {
     margin-bottom: calc(var(--base-text-size) * 1);
   }
@@ -21,7 +26,7 @@ export const PageNavigationWrapper = styled.nav`
 export const MinimizedPageNavigationWrapper = styled.div`
   background-color: var(--nav-background-color);
   color: var(--text-color);
-  width: 5%;
+  width: var(--page-nav-minimized-width);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -29,6 +34,11 @@ export const MinimizedPageNavigationWrapper = styled.div`
   position: sticky;
   top: 0;
   cursor: pointer;
+
+  @media (max-width: 1540px) {
+    visibility: hidden;
+    display: none;
+  }
 `;
 
 export const PageNavigationToggle = styled.div`

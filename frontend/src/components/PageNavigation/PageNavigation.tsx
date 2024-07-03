@@ -1,6 +1,7 @@
 import React, { useEffect, useState, ReactNode } from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../../stores/DataStore';
+import appStore from '../../stores/AppStore';
 import {
   PageNavigationWrapper,
   NavigationItem,
@@ -31,7 +32,6 @@ const scrollToSection = (id: string, setSelectedId: React.Dispatch<React.SetStat
 
 const PageNavigation: React.FC = observer(() => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [isMinimized, setIsMinimized] = useState<boolean>(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,10 +82,10 @@ const PageNavigation: React.FC = observer(() => {
   };
 
   const toggleNavigation = () => {
-    setIsMinimized(!isMinimized);
+    appStore.setPageNavigationMinimized(!appStore.isPageNavigationMinimized);
   };
 
-  if (isMinimized) {
+  if (appStore.isPageNavigationMinimized) {
     return (
       <MinimizedPageNavigationWrapper onClick={toggleNavigation}>
         <PageNavigationToggle>Navigation</PageNavigationToggle>

@@ -9,8 +9,9 @@ export const GlobalStyle = createGlobalStyle`
     --header-background-color: var(--background-color);
     --text-color: #ffffff;
     --main-nav-width: 280px;
-    --page-nav-width: 320px;
-    --page-width: 900px;
+    --page-nav-expanded-width: 320px;
+    --page-nav-minimized-width: 40px;
+    --page-width: calc(100% - var(--main-nav-width) - var(--page-nav-minimized-width));
     --header-height: 4%;
     --font-family: ${appStore.fontFamily}; /* Font family */
     --base-text-size: ${appStore.fontSize}px; /* Font size */
