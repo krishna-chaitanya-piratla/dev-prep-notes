@@ -1,7 +1,13 @@
 import React, { useEffect, useState, ReactNode } from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../../stores/DataStore';
-import { PageNavigationWrapper, NavigationItem, PageNavigationHeader } from '../../styles/PageNavigation/PageNavigation';
+import {
+  PageNavigationWrapper,
+  NavigationItem,
+  PageNavigationHeader,
+  PageNavigationToggle,
+  MinimizedPageNavigationWrapper
+} from '../../styles/PageNavigation/PageNavigation';
 import { Content, TextContent, CodeBlockContent, CalloutBoxContent } from '../../types/Page';
 
 const scrollToSection = (id: string, setSelectedId: React.Dispatch<React.SetStateAction<string | null>>) => {
@@ -17,15 +23,15 @@ const scrollToSection = (id: string, setSelectedId: React.Dispatch<React.SetStat
       behavior: 'smooth',
     });
 
-    // Introduce a delay to allow scrolling to finish before updating the selectedId
     setTimeout(() => {
       setSelectedId(id);
-    }, 1000); // Adjust the delay time as needed
+    }, 1000);
   }
 };
 
 const PageNavigation: React.FC = observer(() => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [isMinimized, setIsMinimized] = useState<boolean>(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,9 +81,21 @@ const PageNavigation: React.FC = observer(() => {
     }
   };
 
+  const toggleNavigation = () => {
+    setIsMinimized(!isMinimized);
+  };
+
+  if (isMinimized) {
+    return (
+      <MinimizedPageNavigationWrapper onClick={toggleNavigation}>
+        <PageNavigationToggle>Navigation</PageNavigationToggle>
+      </MinimizedPageNavigationWrapper>
+    );
+  }
+
   return (
     <PageNavigationWrapper>
-      <PageNavigationHeader>Contents</PageNavigationHeader>
+      <PageNavigationHeader onClick={toggleNavigation}>Navigation</PageNavigationHeader>
       <div>
         {headers.map(header => (
           <NavigationItem

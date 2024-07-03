@@ -5,7 +5,7 @@ export const PageNavigationWrapper = styled.nav`
   color: var(--text-color);
   width: var(--page-nav-width);
   height: 100vh;
-  padding: calc(var(--base-text-size) * 1.25); /* Adjust padding dynamically */
+  padding: calc(var(--base-text-size) * 1.25);
   padding-left: calc(var(--base-text-size) * 3);
   box-sizing: border-box;
   position: sticky;
@@ -16,11 +16,27 @@ export const PageNavigationWrapper = styled.nav`
   h2 {
     margin-bottom: calc(var(--base-text-size) * 1);
   }
+`;
 
-  @media (max-width: 1540px) {
-    visibility: hidden;
-    display: none;
-  }
+export const MinimizedPageNavigationWrapper = styled.div`
+  background-color: var(--nav-background-color);
+  color: var(--text-color);
+  width: 5%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  cursor: pointer;
+`;
+
+export const PageNavigationToggle = styled.div`
+  font-size: 1rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  color: var(--link-hover-color);
 `;
 
 interface NavigationItemProps {
@@ -32,10 +48,10 @@ export const NavigationItem = styled.div<NavigationItemProps>`
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding-left: ${({ depth }) => `calc(${depth} * var(--base-text-size) * 1.15)`}; /* Adjust padding dynamically */
-  height: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 2.5)' : 'calc(var(--base-text-size) * 2)')}; /* Adjust height dynamically */
+  padding-left: ${({ depth }) => `calc(${depth} * var(--base-text-size) * 1.15)`};
+  height: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 2.5)' : 'calc(var(--base-text-size) * 2)')};
   color: #9ca8b4;
-  font-size: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 0.9)' : 'calc(var(--base-text-size) * 0.75)')}; /* Use CSS variables */
+  font-size: ${({ depth }) => (depth === 0 ? 'calc(var(--base-text-size) * 0.9)' : 'calc(var(--base-text-size) * 0.75)')};
   letter-spacing: 1px;
   text-shadow: ${({ isActive }) => (isActive ? '0.5px 0.5px 0.5px rgb(68 51 255);' : 'none')};
 
@@ -44,26 +60,14 @@ export const NavigationItem = styled.div<NavigationItemProps>`
   }
 `;
 
-interface CircleProps {
-  isActive: boolean;
-}
-
-export const Circle = styled.div<CircleProps>`
-  width: ${({ isActive }) => (isActive ? 'calc(var(--base-text-size) * 0.75)' : 'calc(var(--base-text-size) * 0.5)')}; /* Use CSS variables */
-  height: ${({ isActive }) => (isActive ? 'calc(var(--base-text-size) * 0.75)' : 'calc(var(--base-text-size) * 0.5)')}; /* Use CSS variables */
-  border-radius: 50%;
-  background: ${({ isActive }) => (isActive ? '#1aecff' : '#5c6670')};
-  margin-right: calc(var(--base-text-size) * 0.5);
-  transform: ${({ isActive }) => (isActive ? 'translateX(calc(var(--base-text-size) * -0.167))' : 'none')};
-`;
-
 export const PageNavigationHeader = styled.h2`
-  padding-top: calc(var(--base-text-size) * 10); 
+  padding-top: calc(var(--base-text-size) * 10);
   margin-bottom: calc(var(--base-text-size) * 2);
   font-weight: 500;
-  font-size: calc(var(--base-text-size) * 1); /* Use CSS variable */
+  font-size: calc(var(--base-text-size) * 1);
   text-transform: uppercase;
   color: #d9e0e8;
   letter-spacing: calc(var(--base-text-size) * 0.125);
   text-rendering: optimizelegibility;
+  cursor: pointer;
 `;
