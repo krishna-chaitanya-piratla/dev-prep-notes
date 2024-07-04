@@ -1,4 +1,4 @@
-import { Content, CalloutBoxContent, OrderedListContent, UnorderedListContent, ChecklistContent, TableContent, SpreadsheetContent, CodeBlockContent, ListItemContent } from "../types/Page";
+import { CalloutBoxContent, ChecklistContent, CodeBlockContent, Content, ListItemContent, OrderedListContent, SpreadsheetContent, TableContent, UnorderedListContent } from "../types/Page";
 import CodeBlock from "../components/CodeBlock";
 import CalloutBoxComponent from "../components/CalloutBox";
 import ChecklistItem from "../components/ChecklistItem";
@@ -6,7 +6,6 @@ import { ListContainer, OrderedList, UnorderedList, Checklist } from "../styles/
 import Table from "../components/Table";
 import Spreadsheet from "../components/Spreadsheet";
 import Editable from "../components/Editable";
-import EditableCodeBlock from "../components/EditableCodeBlock";
 
 export const text_types = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'];
 
@@ -18,7 +17,7 @@ export function renderText(content: Content, onContentChange: (newContent: Conte
 
 export function renderCodeBlock(content: Content, onContentChange: (newContent: Content) => void) {
   return (
-    <EditableCodeBlock content={content as CodeBlockContent} onContentChange={onContentChange} />
+    <CodeBlock content={content as CodeBlockContent} onContentChange={onContentChange} />
   );
 }
 

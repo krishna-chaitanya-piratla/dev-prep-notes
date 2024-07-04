@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+// src/components/Editable.tsx
+
+import React from 'react';
 import { Content, TextContent, CodeBlockContent } from '../types/Page';
 import { renderPageContent } from '../utils/helpers';
-import {EditableDiv} from '../styles/EditableDiv';
-import EditableCodeBlock from './EditableCodeBlock';
+import { EditableDiv } from '../styles/EditableDiv';
+import CodeBlock from './CodeBlock';
 
 interface EditableProps {
   content: Content;
@@ -10,22 +12,6 @@ interface EditableProps {
 }
 
 const Editable: React.FC<EditableProps> = ({ content, onContentChange }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (isEditing && contentRef.current) {
-      contentRef.current.focus();
-    }
-  }, [isEditing]);
-
-  const handleBlur = () => {
-    if (contentRef.current && content.type !== 'code-block' && isTextContent(content)) {
-      onContentChange({ ...content, contents: contentRef.current.innerHTML });
-    }
-    setIsEditing(false);
-  };
-
   const isTextContent = (content: Content): content is TextContent => {
     return (
       content.type === 'p' ||
@@ -43,7 +29,7 @@ const Editable: React.FC<EditableProps> = ({ content, onContentChange }) => {
   };
 
   if (isCodeBlockContent(content)) {
-    return <EditableCodeBlock content={content} onContentChange={onContentChange} />;
+    return <CodeBlock content={content} onContentChange={onContentChange} />;
   }
 
   if (!isTextContent(content)) {
@@ -52,11 +38,9 @@ const Editable: React.FC<EditableProps> = ({ content, onContentChange }) => {
 
   return (
     <EditableDiv
-      ref={contentRef}
       contentEditable={true}
       suppressContentEditableWarning={true}
-      onBlur={handleBlur}
-      onClick={() => setIsEditing(true)}
+      onBlur={(e) => onContentChange({ ...content, contents: e.currentTarget.innerHTML })}
       dangerouslySetInnerHTML={{ __html: content.contents }}
     />
   );

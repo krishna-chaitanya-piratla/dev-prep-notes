@@ -1,5 +1,17 @@
 import styled from 'styled-components';
 
+export const CodeBlockWrapper = styled.div`
+  font-size: calc(0.95 * var(--base-text-size));
+  margin: 0;
+  letter-spacing: -0.25px;
+
+  .cm-editor {
+    background: #282c34 !important; // Dark background to match oneDark theme
+    color: #abb2bf;
+    border-radius: 5px;
+  }
+`;
+
 // Base styles for the code block
 export const StyledCodeBlock = styled.div`
   max-width: 95%;

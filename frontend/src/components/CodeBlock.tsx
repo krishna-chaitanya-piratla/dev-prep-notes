@@ -1,57 +1,85 @@
 import React, { useEffect, useRef, useState } from 'react';
-import "highlight.js/styles/github.css";
-import { marked } from "marked";
-import hljs from "highlight.js";
-import { StyledCodeBlock } from '../styles/CodeBlock';
+import { EditorState } from '@codemirror/state';
+import { EditorView, keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropCursor, rectangularSelection, crosshairCursor, lineNumbers, highlightActiveLineGutter } from '@codemirror/view';
+import { defaultHighlightStyle, syntaxHighlighting, indentOnInput, bracketMatching, foldGutter, foldKeymap } from '@codemirror/language';
+import { html } from '@codemirror/lang-html';
+import { css } from '@codemirror/lang-css';
+import { javascript } from '@codemirror/lang-javascript';
+import { python } from '@codemirror/lang-python';
+import { oneDark } from '@codemirror/theme-one-dark';
+import { CodeBlockContent } from '../types/Page';
+import { CodeBlockWrapper } from '../styles/CodeBlock';
 
 interface CodeBlockProps {
-  language: string;
-  contents: string;
+  content: CodeBlockContent;
+  onContentChange: (newContent: CodeBlockContent) => void;
 }
 
-const CodeBlock: React.FC<CodeBlockProps> = ({ language, contents }) => {
-  const codeBlockRef = useRef<HTMLDivElement | null>(null);
-  const [htmlContent, setHtmlContent] = useState<string>("");
+const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
+  const editorRef = useRef<HTMLDivElement>(null);
+  const [editorView, setEditorView] = useState<EditorView | null>(null);
 
   useEffect(() => {
-    const codeElement = codeBlockRef.current;
-    if (codeElement) {
-      codeElement.querySelectorAll('pre code').forEach((block) => {
-        const htmlBlock = block as HTMLElement;
-        if (htmlBlock.dataset.highlighted === "yes") {
-          // If already highlighted, skip
-          return;
-        }
-        hljs.highlightElement(htmlBlock);
-        htmlBlock.dataset.highlighted = "yes"; // Mark it as highlighted after applying highlightElement
+    if (editorRef.current && !editorView) {
+      const state = EditorState.create({
+        doc: content.contents.map(item => item.contents).join('\n'),
+        extensions: [
+          lineNumbers(),
+          highlightActiveLineGutter(),
+          highlightSpecialChars(),
+          drawSelection(),
+          dropCursor(),
+          EditorState.allowMultipleSelections.of(true),
+          indentOnInput(),
+          syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
+          bracketMatching(),
+          foldGutter(),
+          oneDark,
+          getLanguageExtension(content.contents[0].type),
+          keymap.of([...foldKeymap]),
+          EditorView.updateListener.of(update => {
+            if (update.docChanged) {
+              const newContent = update.state.doc.toString();
+              onContentChange({
+                ...content,
+                contents: [{ type: content.contents[0].type, contents: newContent }],
+              });
+            }
+          }),
+        ],
       });
-    }
-  }, [htmlContent]); // Depend on htmlContent
 
-  useEffect(() => {
-    const markdownContent = `
-\`\`\`${language}
-${contents}
-\`\`\`
-`;
-    // Using a promise to handle async parsing if it occurs
-    const parsedContent = marked.parse(markdownContent);
-    if (parsedContent instanceof Promise) {
-      parsedContent.then(setHtmlContent).catch((error) => {
-        console.error("Error parsing markdown:", error);
-        setHtmlContent(""); // Fallback in case of error
+      const view = new EditorView({
+        state,
+        parent: editorRef.current,
       });
-    } else {
-      setHtmlContent(parsedContent);
-    }
-  }, [contents, language]);
 
-  return (
-    <StyledCodeBlock
-      dangerouslySetInnerHTML={{ __html: htmlContent }}
-      ref={codeBlockRef}
-    />
-  );
+      setEditorView(view);
+    }
+
+    return () => {
+      if (editorView) {
+        editorView.destroy();
+      }
+    };
+  }, [editorRef, editorView, content, onContentChange]);
+
+  return <CodeBlockWrapper ref={editorRef} />;
+};
+
+const getLanguageExtension = (language: string) => {
+  switch (language) {
+    case 'html':
+      return html();
+    case 'css':
+      return css();
+    case 'javascript':
+      return javascript();
+    case 'python':
+      return python();
+    default:
+      return javascript();
+  }
 };
 
 export default CodeBlock;
