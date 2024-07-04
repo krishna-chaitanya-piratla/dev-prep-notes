@@ -6,7 +6,7 @@ interface PageWrapperProps {
 
 export const PageWrapper = styled.div<PageWrapperProps>`
   background-color: var(--page-background-color);
-  color: black;
+  color: var(--page-text-color);
   width: 100%;
   min-height: 100vh;
   padding: 0;

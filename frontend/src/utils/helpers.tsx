@@ -21,6 +21,7 @@ export function renderCodeBlock(content: Content, onContentChange: (newContent: 
   );
 }
 
+
 export function renderCalloutBox(content: Content) {
   return <CalloutBoxComponent content={content as CalloutBoxContent} />;
 }

@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
     --nav-background-color: var(--background-color);
     --header-background-color: var(--background-color);
     --text-color: #ffffff;
+    --page-text-color: black;
     --main-nav-width: 280px;
     --page-nav-expanded-width: 320px;
     --page-nav-minimized-width: 40px;

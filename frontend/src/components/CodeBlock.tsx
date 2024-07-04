@@ -1,14 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { EditorState } from '@codemirror/state';
-import { EditorView, keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropCursor, rectangularSelection, crosshairCursor, lineNumbers, highlightActiveLineGutter } from '@codemirror/view';
-import { defaultHighlightStyle, syntaxHighlighting, indentOnInput, bracketMatching, foldGutter, foldKeymap } from '@codemirror/language';
+import React, { useEffect, useRef } from 'react';
+import { EditorView, ViewUpdate } from '@codemirror/view';
+import { EditorState, Extension } from '@codemirror/state';
+import { javascript } from '@codemirror/lang-javascript';
 import { html } from '@codemirror/lang-html';
 import { css } from '@codemirror/lang-css';
-import { javascript } from '@codemirror/lang-javascript';
 import { python } from '@codemirror/lang-python';
 import { oneDark } from '@codemirror/theme-one-dark';
-import { CodeBlockContent } from '../types/Page';
+import { keymap } from '@codemirror/view';
+import { defaultKeymap } from '@codemirror/commands';
 import { CodeBlockWrapper } from '../styles/CodeBlock';
+import { CodeBlockContent } from '../types/Page';
 
 interface CodeBlockProps {
   content: CodeBlockContent;
@@ -17,69 +18,77 @@ interface CodeBlockProps {
 
 const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
   const editorRef = useRef<HTMLDivElement>(null);
-  const [editorView, setEditorView] = useState<EditorView | null>(null);
+  const viewRef = useRef<EditorView | null>(null);
 
   useEffect(() => {
-    if (editorRef.current && !editorView) {
-      const state = EditorState.create({
-        doc: content.contents.map(item => item.contents).join('\n'),
-        extensions: [
-          lineNumbers(),
-          highlightActiveLineGutter(),
-          highlightSpecialChars(),
-          drawSelection(),
-          dropCursor(),
-          EditorState.allowMultipleSelections.of(true),
-          indentOnInput(),
-          syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
-          bracketMatching(),
-          foldGutter(),
-          oneDark,
-          getLanguageExtension(content.contents[0].type),
-          keymap.of([...foldKeymap]),
-          EditorView.updateListener.of(update => {
-            if (update.docChanged) {
-              const newContent = update.state.doc.toString();
-              onContentChange({
-                ...content,
-                contents: [{ type: content.contents[0].type, contents: newContent }],
-              });
-            }
-          }),
-        ],
-      });
+    if (!editorRef.current) return;
 
-      const view = new EditorView({
-        state,
+    const handleUpdate = (update: ViewUpdate) => {
+      if (update.docChanged) {
+        const newDoc = update.state.doc.toString();
+        const updatedContent = {
+          ...content,
+          contents: [{ ...content.contents[0], contents: newDoc }],
+        };
+        onContentChange(updatedContent);
+      }
+    };
+
+    if (!viewRef.current) {
+      // Initialize the editor view only once
+      const startState = EditorState.create({
+        doc: content.contents[0].contents,
+        extensions: getExtensions(content.contents[0].type).concat(EditorView.updateListener.of(handleUpdate)),
+      });
+      viewRef.current = new EditorView({
+        state: startState,
         parent: editorRef.current,
       });
-
-      setEditorView(view);
+    } else {
+      // Update the state without recreating the view
+      const currentDoc = viewRef.current.state.doc.toString();
+      if (currentDoc !== content.contents[0].contents) {
+        viewRef.current.dispatch({
+          changes: { from: 0, to: currentDoc.length, insert: content.contents[0].contents },
+        });
+      }
     }
 
     return () => {
-      if (editorView) {
-        editorView.destroy();
+      if (viewRef.current) {
+        viewRef.current.destroy();
+        viewRef.current = null;
       }
     };
-  }, [editorRef, editorView, content, onContentChange]);
+  }, []);
+
+  const getExtensions = (lang: string): Extension[] => {
+    const extensions = [
+      keymap.of(defaultKeymap),
+      oneDark,
+    ];
+
+    switch (lang) {
+      case 'javascript':
+        extensions.push(javascript());
+        break;
+      case 'html':
+        extensions.push(html());
+        break;
+      case 'css':
+        extensions.push(css());
+        break;
+      case 'python':
+        extensions.push(python());
+        break;
+      default:
+        break;
+    }
+
+    return extensions;
+  };
 
   return <CodeBlockWrapper ref={editorRef} />;
-};
-
-const getLanguageExtension = (language: string) => {
-  switch (language) {
-    case 'html':
-      return html();
-    case 'css':
-      return css();
-    case 'javascript':
-      return javascript();
-    case 'python':
-      return python();
-    default:
-      return javascript();
-  }
 };
 
 export default CodeBlock;

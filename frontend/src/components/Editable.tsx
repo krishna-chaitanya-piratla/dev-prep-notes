@@ -1,5 +1,3 @@
-// src/components/Editable.tsx
-
 import React from 'react';
 import { Content, TextContent, CodeBlockContent } from '../types/Page';
 import { renderPageContent } from '../utils/helpers';
