@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@codemirror/commands": "^6.6.0",
+    "@codemirror/highlight": "^0.19.8",
     "@codemirror/lang-css": "^6.2.1",
     "@codemirror/lang-html": "^6.4.9",
     "@codemirror/lang-javascript": "^6.2.2",
@@ -29,6 +30,7 @@
     "marked": "^13.0.0",
     "mobx": "^6.12.4",
     "mobx-react-lite": "^4.0.7",
+    "npm-force-resolutions": "^0.0.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
@@ -38,7 +40,11 @@
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
+  "resolutions": {
+    "@codemirror/state": "6.4.1"
+  },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

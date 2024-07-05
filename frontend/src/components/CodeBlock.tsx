@@ -5,11 +5,11 @@ import { javascript } from '@codemirror/lang-javascript';
 import { html } from '@codemirror/lang-html';
 import { css } from '@codemirror/lang-css';
 import { python } from '@codemirror/lang-python';
-import { oneDark } from '@codemirror/theme-one-dark';
 import { keymap } from '@codemirror/view';
 import { defaultKeymap } from '@codemirror/commands';
 import { CodeBlockWrapper } from '../styles/CodeBlock';
 import { CodeBlockContent } from '../types/Page';
+import customCodeMirrorTheme from '../utils/CodeMirrorTheme';
 
 interface CodeBlockProps {
   content: CodeBlockContent;
@@ -76,7 +76,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
   const getExtensions = (lang: string): Extension[] => {
     const extensions = [
       keymap.of(defaultKeymap),
-      oneDark,
+      customCodeMirrorTheme,
     ];
 
     switch (lang) {

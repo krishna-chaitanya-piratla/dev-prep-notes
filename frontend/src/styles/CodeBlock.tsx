@@ -6,19 +6,19 @@ export const CodeBlockWrapper = styled.div`
   max-width: 95%;
   margin: 2rem 0;
 
-  .cm-editor {
-    background: #f5f6f9;
-    color: var(--page-text-color);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    outline: none;
-  }
+  // .cm-editor {
+  //   background: #f5f6f9;
+  //   color: var(--page-text-color);
+    // border-radius: 0.5rem;
+    // padding: 1.5rem;
+    // outline: none;
+  // }
 
-  .cm-scroller {
-    font-family: "Source Code Pro", "Fira Mono", monospace;
-  }
+  // .cm-scroller {
+  //   font-family: "Source Code Pro", "Fira Mono", monospace;
+  // }
 
-  .cm-content {
-    caret-color: var(--page-text-color);
-  }
+  // .cm-content {
+  //   caret-color: var(--page-text-color);
+  // }
 `;
