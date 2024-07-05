@@ -34,6 +34,12 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
       }
     };
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && viewRef.current) {
+        viewRef.current.contentDOM.blur();
+      }
+    };
+
     if (!viewRef.current) {
       // Initialize the editor view only once
       const startState = EditorState.create({
@@ -54,13 +60,18 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
       }
     }
 
+    // Add the keydown event listener
+    document.addEventListener('keydown', handleKeyDown);
+
     return () => {
       if (viewRef.current) {
         viewRef.current.destroy();
         viewRef.current = null;
       }
+      // Remove the keydown event listener
+      document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, []); // Empty dependency array ensures this runs only once
 
   const getExtensions = (lang: string): Extension[] => {
     const extensions = [
