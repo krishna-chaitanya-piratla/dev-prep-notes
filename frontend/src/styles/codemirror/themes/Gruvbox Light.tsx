@@ -79,6 +79,7 @@ export const gruvboxLightTheme = EditorView.theme(
       color: fg1,
       backgroundColor: background,
       padding: "1.5rem",
+      paddingTop: "0",
       borderRadius: "0.5rem",
     },
 

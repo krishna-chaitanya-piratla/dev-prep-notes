@@ -48,6 +48,7 @@ export const basicLightTheme = EditorView.theme(
       color: base00,
       backgroundColor: background,
       padding: "1.5rem",
+      paddingTop: "0",
       borderRadius: "0.5rem",
     },
 

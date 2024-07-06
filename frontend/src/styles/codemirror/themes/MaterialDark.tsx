@@ -38,6 +38,7 @@ export const materialDarkTheme = EditorView.theme(
       color: base05,
       backgroundColor: background,
       padding: "1.5rem",
+      paddingTop: "0",
       borderRadius: "0.5rem",
     },
 

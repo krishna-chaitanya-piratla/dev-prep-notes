@@ -8,6 +8,7 @@ const codeblockTheme = EditorView.theme({
     backgroundColor: "#f5f6f9",
     color: "var(--page-text-color);",
     padding: "1.5rem",
+    paddingTop: "0",
     borderRadius: "0.5rem",
   },
   "&.cm-focused": {

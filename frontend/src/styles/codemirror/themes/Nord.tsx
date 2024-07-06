@@ -43,6 +43,7 @@ export const nordTheme = EditorView.theme(
       color: base04,
       backgroundColor: background,
       padding: "1.5rem",
+      paddingTop: "0",
       borderRadius: "0.5rem",
     },
 
