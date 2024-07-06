@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { EditorView, ViewUpdate } from '@codemirror/view';
 import { EditorState, Extension } from '@codemirror/state';
 import { javascript } from '@codemirror/lang-javascript';
@@ -7,18 +7,26 @@ import { css } from '@codemirror/lang-css';
 import { python } from '@codemirror/lang-python';
 import { keymap } from '@codemirror/view';
 import { defaultKeymap } from '@codemirror/commands';
-import { CodeBlockWrapper, CodeBlockContainer, CodeBlockHeader } from '../styles/CodeBlock';
+import { CodeBlockWrapper, CodeBlockContainer, CodeBlockHeader, ThemeDropdown, DropdownContainer, DropdownItem } from '../styles/CodeBlock';
 import { CodeBlockContent } from '../types/Page';
 import customCodeBlockTheme from '../styles/codemirror/CustomTheme';
+import { solarizedDark } from 'cm6-theme-solarized-dark';
 
 interface CodeBlockProps {
   content: CodeBlockContent;
   onContentChange: (newContent: CodeBlockContent) => void;
 }
 
+// Define the themes
+const themes = [
+  { name: 'Default', theme: customCodeBlockTheme, background: '#f5f6f9', color: '#000000' },
+  { name: 'Solarized Dark', theme: solarizedDark, background: '#002b36', color: '#93a1a1' },
+];
+
 const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView | null>(null);
+  const [selectedTheme, setSelectedTheme] = useState(themes[0]);
 
   useEffect(() => {
     if (!editorRef.current) return;
@@ -71,12 +79,12 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
       // Remove the keydown event listener
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []); // Empty dependency array ensures this runs only once
+  }, [selectedTheme]); // Add selectedTheme as dependency
 
   const getExtensions = (lang: string): Extension[] => {
     const extensions = [
       keymap.of(defaultKeymap),
-      customCodeBlockTheme,
+      selectedTheme.theme,
     ];
 
     switch (lang) {
@@ -101,9 +109,18 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
 
   return (
     <CodeBlockContainer>
-      <CodeBlockHeader>
+      <CodeBlockHeader background={selectedTheme.background} color={selectedTheme.color}>
         <span>{content.contents[0].type.toUpperCase()}</span>
-        <span>Theme</span>
+        <ThemeDropdown>
+          Theme
+          <DropdownContainer>
+            {themes.map((theme) => (
+              <DropdownItem key={theme.name} onClick={() => setSelectedTheme(theme)}>
+                {theme.name}
+              </DropdownItem>
+            ))}
+          </DropdownContainer>
+        </ThemeDropdown>
       </CodeBlockHeader>
       <CodeBlockWrapper ref={editorRef} />
     </CodeBlockContainer>
