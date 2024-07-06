@@ -19,7 +19,9 @@ interface CodeBlockProps {
 const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView | null>(null);
-  const [selectedTheme, setSelectedTheme] = useState(codeblockThemes[0]);
+  const themeName = content.theme ? content.theme : 'Default'
+  const theme = codeblockThemes.find(obj => obj.name === themeName)
+  const [selectedTheme, setSelectedTheme] = useState(theme ? theme : codeblockThemes[0]);
 
   useEffect(() => {
     if (!editorRef.current) return;

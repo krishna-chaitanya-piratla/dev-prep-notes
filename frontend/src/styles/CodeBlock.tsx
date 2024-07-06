@@ -5,6 +5,10 @@ interface ThemeProps {
   color: string;
 }
 
+interface DropdownItemProps extends ThemeProps {
+  selected: boolean;
+}
+
 export const CodeBlockContainer = styled.div<ThemeProps>`
   display: flex;
   max-width: 95%;
@@ -17,7 +21,7 @@ export const CodeBlockContainer = styled.div<ThemeProps>`
 `;
 
 export const CodeBlockHeader = styled.div`
-  // border-radius: 1rem 1rem 0;
+  border-radius: 1rem;
   display: flex;
   width: 100%;
   flex-direction: row;
@@ -31,7 +35,7 @@ export const CodeBlockHeader = styled.div`
 export const CodeBlockWrapper = styled.div`
   font-size: calc(0.95 * var(--base-text-size));
   letter-spacing: -0.25px;
-  width: 100%; /* Ensure it matches the header width */
+  width: 100%;
   margin: 0;
 `;
 
@@ -41,16 +45,12 @@ export const ThemeDropdown = styled.div`
   cursor: pointer;
 `;
 
-interface DropdownProps extends ThemeProps {
-  selected?: boolean;
-}
-
-export const DropdownContainer = styled.div<DropdownProps>`
+export const DropdownContainer = styled.div<ThemeProps>`
   display: none;
   position: absolute;
   background: ${(props) => props.background};
   color: ${(props) => props.color};
-  min-width: 160px;
+  min-width: 8rem;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   ${ThemeDropdown}:hover & {
@@ -58,10 +58,10 @@ export const DropdownContainer = styled.div<DropdownProps>`
   }
 `;
 
-export const DropdownItem = styled.div<DropdownProps>`
+export const DropdownItem = styled.div<DropdownItemProps>`
   background: ${(props) => (props.selected ? props.color : props.background)};
   color: ${(props) => (props.selected ? props.background : props.color)};
-  padding: 12px 16px;
+  padding: 0.25rem 1rem;
   text-decoration: none;
   display: block;
   &:hover {

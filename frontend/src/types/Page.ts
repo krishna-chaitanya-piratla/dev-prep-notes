@@ -10,6 +10,7 @@ export interface TextContent extends BaseContent {
 
 export interface CodeBlockContent extends BaseContent {
   type: 'code-block';
+  theme?: string;
   contents: { type: string; contents: string }[];
 }
 

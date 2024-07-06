@@ -34,6 +34,7 @@ export const page_with_code_blocks: Page = {
 
           {
             type: "code-block",
+            theme: "Basic Dark",
             contents: [
               {
                 type: "html",
@@ -54,6 +55,7 @@ export const page_with_code_blocks: Page = {
           },
           {
             type: "code-block",
+            theme: 'Gruvbox Light',
             contents: [
               {
                 type: "javascript",
