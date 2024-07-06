@@ -106,9 +106,15 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
         <span>{content.contents[0].type.toUpperCase()}</span>
         <ThemeDropdown>
           Theme
-          <DropdownContainer>
+          <DropdownContainer background={selectedTheme.background} color={selectedTheme.color}>
             {codeblockThemes.map((theme) => (
-              <DropdownItem key={theme.name} onClick={() => setSelectedTheme(theme)}>
+              <DropdownItem
+                key={theme.name}
+                onClick={() => setSelectedTheme(theme)}
+                background={selectedTheme.background}
+                color={selectedTheme.color}
+                selected={theme === selectedTheme}
+              >
                 {theme.name}
               </DropdownItem>
             ))}

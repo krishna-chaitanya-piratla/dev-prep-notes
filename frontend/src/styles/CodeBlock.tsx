@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-interface CodeBlockContainerProps {
+interface ThemeProps {
   background: string;
   color: string;
 }
 
-export const CodeBlockContainer = styled.div<CodeBlockContainerProps>`
+export const CodeBlockContainer = styled.div<ThemeProps>`
   display: flex;
   max-width: 95%;
   flex-direction: column;
@@ -15,8 +15,6 @@ export const CodeBlockContainer = styled.div<CodeBlockContainerProps>`
   border-radius: 1rem;
   padding: 1rem 0;
 `;
-
-
 
 export const CodeBlockHeader = styled.div`
   // border-radius: 1rem 1rem 0;
@@ -43,10 +41,15 @@ export const ThemeDropdown = styled.div`
   cursor: pointer;
 `;
 
-export const DropdownContainer = styled.div`
+interface DropdownProps extends ThemeProps {
+  selected?: boolean;
+}
+
+export const DropdownContainer = styled.div<DropdownProps>`
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background: ${(props) => props.background};
+  color: ${(props) => props.color};
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -55,12 +58,14 @@ export const DropdownContainer = styled.div`
   }
 `;
 
-export const DropdownItem = styled.div`
-  color: black;
+export const DropdownItem = styled.div<DropdownProps>`
+  background: ${(props) => (props.selected ? props.color : props.background)};
+  color: ${(props) => (props.selected ? props.background : props.color)};
   padding: 12px 16px;
   text-decoration: none;
   display: block;
   &:hover {
-    background-color: #f1f1f1;
+    background: ${(props) => props.color};
+    color: ${(props) => props.background};
   }
 `;

@@ -1,4 +1,4 @@
-import customCodeBlockTheme from './DefaultTheme';
+import defaultCodeBlockTheme from './themes/DefaultTheme';
 import { solarizedDark } from './themes/SolarizedDark';
 import { basicLight } from './themes/BasicLight';
 import { basicDark } from './themes/BasicDark';
@@ -10,7 +10,7 @@ import { gruvboxDark } from './themes/Gruvbox Dark';
 
 
 export const codeblockThemes = [
-    { name: 'Default', theme: customCodeBlockTheme, background: '#f5f6f9', color: '#000000' },
+    { name: 'Default', theme: defaultCodeBlockTheme, background: '#f5f6f9', color: '#000000' },
     { name: 'Basic Light', theme: basicLight, background: '#ffffff', color: '#2e3440' },
     { name: 'Basic Dark', theme: basicDark, background: '#2E3235', color: '#DDDDDD' },
     { name: 'Solarized Light', theme: solarizedLight, background: '#fdf6e3', color: '#657b83' },
