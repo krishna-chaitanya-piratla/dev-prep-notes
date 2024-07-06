@@ -3,7 +3,7 @@ import {tags} from "@lezer/highlight";
 import { Extension } from '@codemirror/state';
 import {HighlightStyle, syntaxHighlighting} from "@codemirror/language";
 
-const customTheme = EditorView.theme({
+const codeblockTheme = EditorView.theme({
   "&": {
     backgroundColor: "#f5f6f9",
     color: "var(--page-text-color);",
@@ -21,7 +21,7 @@ const customTheme = EditorView.theme({
   
 }, { dark: false });
 
-const customHighlightStyle = HighlightStyle.define([
+const codeblockHighlightStyle = HighlightStyle.define([
   { tag: tags.keyword, color: "#651fff", fontWeight: "bold" }, // done: const, class
   { tag: tags.operator, color: "#651fff" }, 
   { tag: tags.string, color: "#682929" },
@@ -37,6 +37,6 @@ const customHighlightStyle = HighlightStyle.define([
   {tag: tags.paren, color: "#000000"},
 ]);
 
-const customCodeBlockTheme: Extension = [customTheme, syntaxHighlighting(customHighlightStyle)];
+const defaultCodeBlockTheme: Extension = [codeblockTheme, syntaxHighlighting(codeblockHighlightStyle)];
 
-export default customCodeBlockTheme;
+export default defaultCodeBlockTheme;

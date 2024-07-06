@@ -9,24 +9,17 @@ import { keymap } from '@codemirror/view';
 import { defaultKeymap } from '@codemirror/commands';
 import { CodeBlockWrapper, CodeBlockContainer, CodeBlockHeader, ThemeDropdown, DropdownContainer, DropdownItem } from '../styles/CodeBlock';
 import { CodeBlockContent } from '../types/Page';
-import customCodeBlockTheme from '../styles/codemirror/CustomTheme';
-import { solarizedDark } from 'cm6-theme-solarized-dark';
+import { codeblockThemes } from '../styles/codemirror/Themes';
 
 interface CodeBlockProps {
   content: CodeBlockContent;
   onContentChange: (newContent: CodeBlockContent) => void;
 }
 
-// Define the themes
-const themes = [
-  { name: 'Default', theme: customCodeBlockTheme, background: '#f5f6f9', color: '#000000' },
-  { name: 'Solarized Dark', theme: solarizedDark, background: '#002b36', color: '#93a1a1' },
-];
-
 const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView | null>(null);
-  const [selectedTheme, setSelectedTheme] = useState(themes[0]);
+  const [selectedTheme, setSelectedTheme] = useState(codeblockThemes[0]);
 
   useEffect(() => {
     if (!editorRef.current) return;
@@ -108,13 +101,13 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
   };
 
   return (
-    <CodeBlockContainer>
-      <CodeBlockHeader background={selectedTheme.background} color={selectedTheme.color}>
+    <CodeBlockContainer background={selectedTheme.background} color={selectedTheme.color}>
+      <CodeBlockHeader>
         <span>{content.contents[0].type.toUpperCase()}</span>
         <ThemeDropdown>
           Theme
           <DropdownContainer>
-            {themes.map((theme) => (
+            {codeblockThemes.map((theme) => (
               <DropdownItem key={theme.name} onClick={() => setSelectedTheme(theme)}>
                 {theme.name}
               </DropdownItem>

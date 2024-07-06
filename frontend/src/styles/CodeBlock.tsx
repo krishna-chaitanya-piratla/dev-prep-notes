@@ -1,27 +1,29 @@
 import styled from 'styled-components';
 
-export const CodeBlockContainer = styled.div`
-  display: flex;
-  max-width: 95%;
-  flex-direction: column;
-  background: #f5f6f9;
-  margin: 2rem 0;
-  border-radius: 1rem;
-`;
-
-interface CodeBlockHeaderProps {
+interface CodeBlockContainerProps {
   background: string;
   color: string;
 }
 
-export const CodeBlockHeader = styled.div<CodeBlockHeaderProps>`
-  border-radius: 1rem 1rem 0 0;
+export const CodeBlockContainer = styled.div<CodeBlockContainerProps>`
+  display: flex;
+  max-width: 95%;
+  flex-direction: column;
+  background: ${(props) => props.background};
+  color: ${(props) => props.color};
+  margin: 2rem 0;
+  border-radius: 1rem;
+  padding: 1rem 0;
+`;
+
+
+
+export const CodeBlockHeader = styled.div`
+  // border-radius: 1rem 1rem 0;
   display: flex;
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  background: ${(props) => props.background};
-  color: ${(props) => props.color};
   font-size: 0.75rem;
   font-weight: bold;
   padding: 0.5rem 1.75rem;
