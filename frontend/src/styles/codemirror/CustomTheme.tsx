@@ -1,8 +1,7 @@
 import { EditorView } from '@codemirror/view';
-// import { HighlightStyle } from '@codemirror/highlight';
 import {tags} from "@lezer/highlight";
 import { Extension } from '@codemirror/state';
-import {defaultHighlightStyle, HighlightStyle, syntaxHighlighting} from "@codemirror/language";
+import {HighlightStyle, syntaxHighlighting} from "@codemirror/language";
 
 const customTheme = EditorView.theme({
   "&": {
@@ -38,6 +37,6 @@ const customHighlightStyle = HighlightStyle.define([
   {tag: tags.paren, color: "#000000"},
 ]);
 
-const customCodeMirrorTheme: Extension = [customTheme, syntaxHighlighting(customHighlightStyle)];
+const customCodeBlockTheme: Extension = [customTheme, syntaxHighlighting(customHighlightStyle)];
 
-export default customCodeMirrorTheme;
+export default customCodeBlockTheme;

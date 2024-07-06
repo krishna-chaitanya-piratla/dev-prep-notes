@@ -7,9 +7,9 @@ import { css } from '@codemirror/lang-css';
 import { python } from '@codemirror/lang-python';
 import { keymap } from '@codemirror/view';
 import { defaultKeymap } from '@codemirror/commands';
-import { CodeBlockWrapper } from '../styles/CodeBlock';
+import { CodeBlockWrapper, CodeBlockContainer, CodeBlockHeader } from '../styles/CodeBlock';
 import { CodeBlockContent } from '../types/Page';
-import customCodeMirrorTheme from '../utils/CodeMirrorTheme';
+import customCodeBlockTheme from '../styles/codemirror/CustomTheme';
 
 interface CodeBlockProps {
   content: CodeBlockContent;
@@ -76,7 +76,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
   const getExtensions = (lang: string): Extension[] => {
     const extensions = [
       keymap.of(defaultKeymap),
-      customCodeMirrorTheme,
+      customCodeBlockTheme,
     ];
 
     switch (lang) {
@@ -99,7 +99,15 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
     return extensions;
   };
 
-  return <CodeBlockWrapper ref={editorRef} />;
+  return (
+    <CodeBlockContainer>
+      <CodeBlockHeader>
+        <span>{content.contents[0].type.toUpperCase()}</span>
+        <span>Theme</span>
+      </CodeBlockHeader>
+      <CodeBlockWrapper ref={editorRef} />
+    </CodeBlockContainer>
+  );
 };
 
 export default CodeBlock;
