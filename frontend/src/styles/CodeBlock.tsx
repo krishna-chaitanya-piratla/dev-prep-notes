@@ -9,6 +9,10 @@ interface DropdownItemProps extends ThemeProps {
   selected: boolean;
 }
 
+interface DropdownContainerProps extends ThemeProps {
+  position: 'top' | 'bottom';
+}
+
 export const CodeBlockContainer = styled.div<ThemeProps>`
   display: flex;
   max-width: 95%;
@@ -45,7 +49,7 @@ export const ThemeDropdown = styled.div`
   cursor: pointer;
 `;
 
-export const DropdownContainer = styled.div<ThemeProps>`
+export const DropdownContainer = styled.div<DropdownContainerProps>`
   display: none;
   position: absolute;
   background: ${(props) => props.background};
@@ -53,6 +57,8 @@ export const DropdownContainer = styled.div<ThemeProps>`
   min-width: 8rem;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  top: ${(props) => (props.position === 'top' ? 'auto' : '100%')};
+  bottom: ${(props) => (props.position === 'top' ? '100%' : 'auto')};
   ${ThemeDropdown}:hover & {
     display: block;
   }

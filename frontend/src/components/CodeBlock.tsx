@@ -19,9 +19,10 @@ interface CodeBlockProps {
 const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView | null>(null);
-  const themeName = content.theme ? content.theme : 'Default'
-  const theme = codeblockThemes.find(obj => obj.name === themeName)
+  const themeName = content.theme ? content.theme : 'Default';
+  const theme = codeblockThemes.find(obj => obj.name === themeName);
   const [selectedTheme, setSelectedTheme] = useState(theme ? theme : codeblockThemes[0]);
+  const [dropdownPosition, setDropdownPosition] = useState<'top' | 'bottom'>('bottom');
 
   useEffect(() => {
     if (!editorRef.current) return;
@@ -102,13 +103,27 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content, onContentChange }) => {
     return extensions;
   };
 
+  const handleThemeDropdownHover = (event: React.MouseEvent<HTMLDivElement>) => {
+    const viewportHeight = window.innerHeight;
+    const mouseY = event.clientY;
+    if (mouseY > viewportHeight / 2) {
+      setDropdownPosition('top');
+    } else {
+      setDropdownPosition('bottom');
+    }
+  };
+
   return (
     <CodeBlockContainer background={selectedTheme.background} color={selectedTheme.color}>
       <CodeBlockHeader>
         <span>{content.contents[0].type.toUpperCase()}</span>
-        <ThemeDropdown>
+        <ThemeDropdown onMouseEnter={handleThemeDropdownHover}>
           Theme
-          <DropdownContainer background={selectedTheme.background} color={selectedTheme.color}>
+          <DropdownContainer
+            background={selectedTheme.background}
+            color={selectedTheme.color}
+            position={dropdownPosition}
+          >
             {codeblockThemes.map((theme) => (
               <DropdownItem
                 key={theme.name}
