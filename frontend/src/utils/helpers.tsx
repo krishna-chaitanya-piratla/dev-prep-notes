@@ -21,9 +21,8 @@ export function renderCodeBlock(content: Content, onContentChange: (newContent: 
   );
 }
 
-
-export function renderCalloutBox(content: Content) {
-  return <CalloutBoxComponent content={content as CalloutBoxContent} />;
+export function renderCalloutBox(content: Content, onContentChange: (newContent: Content) => void) {
+  return <CalloutBoxComponent content={content as CalloutBoxContent} onContentChange={onContentChange} />;
 }
 
 function renderListItem(item: ListItemContent, depthNumbering: boolean) {
@@ -106,7 +105,7 @@ export function renderPageContent(content: Content, onContentChange: (newContent
     case 'code-block':
       return renderCodeBlock(content, onContentChange);
     case 'callout-box':
-      return renderCalloutBox(content);
+      return renderCalloutBox(content, onContentChange);
     case 'ordered-list':
       return renderOrderedList(content as OrderedListContent);
     case 'unordered-list':

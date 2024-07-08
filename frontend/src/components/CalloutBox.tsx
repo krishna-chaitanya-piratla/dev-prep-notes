@@ -8,18 +8,19 @@ import {
   CalloutIcon,
   ToggleIcon 
 } from '../styles/CalloutBox';
-import { CalloutBoxContent, Content } from '../types/Page';
+import { CalloutBoxContent, TextContent, CodeBlockContent, Content } from '../types/Page';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
 import KeyboardArrowUpSharpIcon from '@mui/icons-material/KeyboardArrowUpSharp';
-import { renderCalloutBox } from '../utils/helpers';
+import Editable from './Editable';
 
 interface CalloutBoxProps {
   content: CalloutBoxContent;
+  onContentChange: (newContent: Content) => void;
 }
 
-const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content }) => {
+const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content, onContentChange }) => {
   const [isCollapsed, setIsCollapsed] = useState(content.collapsedByDefault);
   const [hasClicked, setHasClicked] = useState(false);
   const [maxHeight, setMaxHeight] = useState('0px');
@@ -42,6 +43,14 @@ const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content }) => {
     setHasClicked(true);
   };
 
+  const handleContentChange = (contentId: string, newContent: Content) => {
+    const updatedContent = { ...content };
+    updatedContent.contents = updatedContent.contents.map((item) =>
+      item.id === contentId ? (newContent as TextContent | CodeBlockContent) : item
+    );
+    onContentChange(updatedContent);
+  };
+
   const title = isCollapsed && content.collapsedTitle ? content.collapsedTitle : content.title;
 
   const calloutBoxClasses = `${hasClicked ? 'clicked' : 'not-clicked'} ${content.collapsedByDefault ? 'collapsed-by-default' : 'expanded-by-default'}`;
@@ -61,13 +70,13 @@ const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content }) => {
           </ToggleIcon>
         </CalloutHeader>
         <div className="callout-body" ref={contentRef}>
-          {Array.isArray(content.contents) ? (
-            content.contents.map((item, index) => (
-              <div key={index}>{renderCalloutBox(item)}</div>
-            ))
-          ) : (
-            <div>{renderCalloutBox(content.contents as Content)}</div>
-          )}
+          {content.contents.map((item, index) => (
+            <Editable
+              key={index}
+              content={item}
+              onContentChange={(newContent) => handleContentChange(item.id || '', newContent)}
+            />
+          ))}
         </div>
       </CalloutContent>
     </CalloutBox>
