@@ -25,6 +25,8 @@ const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content, onContentChan
   const [isCollapsed, setIsCollapsed] = useState(content.collapsedByDefault);
   const [hasClicked, setHasClicked] = useState(false);
   const [maxHeight, setMaxHeight] = useState('0px');
+  const [title, setTitle] = useState(content.title);
+  const [collapsedTitle, setCollapsedTitle] = useState(content.collapsedTitle);
   const contentRef = useRef<HTMLDivElement>(null);
   const Icon = content.boxType === 'warning' ? WarningAmberIcon : InfoOutlinedIcon;
   const ToggleIconComponent = isCollapsed ? KeyboardArrowDownSharpIcon : KeyboardArrowUpSharpIcon;
@@ -40,17 +42,23 @@ const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content, onContentChan
   }, [isCollapsed, hasClicked, content.collapsedByDefault]);
 
   const toggleCollapse = () => {
-    console.log(`toggle clicked`);
     setIsCollapsed(!isCollapsed);
     setHasClicked(true);
   };
 
   const handleTitleChange = (newContent: string) => {
+    setTitle(newContent);
     const updatedContent = { ...content, title: newContent };
     onContentChange(updatedContent);
   };
 
-  const displayedTitle = isCollapsed && content.collapsedTitle ? content.collapsedTitle : content.title;
+  const handleCollapsedTitleChange = (newContent: string) => {
+    setCollapsedTitle(newContent);
+    const updatedContent = { ...content, collapsedTitle: newContent };
+    onContentChange(updatedContent);
+  };
+
+  const displayedTitle = isCollapsed && content.collapsedTitle ? collapsedTitle : title;
 
   const calloutBoxClasses = `${hasClicked ? 'clicked' : 'not-clicked'} ${content.collapsedByDefault ? 'collapsed-by-default' : 'expanded-by-default'}`;
 
@@ -67,7 +75,7 @@ const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content, onContentChan
             <CalloutTitle
               contentEditable
               suppressContentEditableWarning
-              onBlur={(e) => handleTitleChange(e.currentTarget.innerText)}
+              onBlur={(e) => isCollapsed ? handleCollapsedTitleChange(e.currentTarget.innerText) : handleTitleChange(e.currentTarget.innerText)}
               onClick={(e) => e.stopPropagation()} // Prevent collapse when clicking on title text
             >
               {displayedTitle}
