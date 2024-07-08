@@ -27,8 +27,9 @@ const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content, onContentChan
   const [maxHeight, setMaxHeight] = useState('0px');
   const [title, setTitle] = useState(content.title);
   const [collapsedTitle, setCollapsedTitle] = useState(content.collapsedTitle);
+  const [boxType, setBoxType] = useState<'info' | 'warning'>(content.boxType);
   const contentRef = useRef<HTMLDivElement>(null);
-  const Icon = content.boxType === 'warning' ? WarningAmberIcon : InfoOutlinedIcon;
+  const Icon = boxType === 'warning' ? WarningAmberIcon : InfoOutlinedIcon;
   const ToggleIconComponent = isCollapsed ? KeyboardArrowDownSharpIcon : KeyboardArrowUpSharpIcon;
 
   useEffect(() => {
@@ -48,13 +49,20 @@ const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content, onContentChan
 
   const handleTitleChange = (newContent: string) => {
     setTitle(newContent);
-    const updatedContent = { ...content, title: newContent };
+    const updatedContent: CalloutBoxContent = { ...content, title: newContent };
     onContentChange(updatedContent);
   };
 
   const handleCollapsedTitleChange = (newContent: string) => {
     setCollapsedTitle(newContent);
-    const updatedContent = { ...content, collapsedTitle: newContent };
+    const updatedContent: CalloutBoxContent = { ...content, collapsedTitle: newContent };
+    onContentChange(updatedContent);
+  };
+
+  const toggleBoxType = () => {
+    const newBoxType: 'info' | 'warning' = boxType === 'info' ? 'warning' : 'info';
+    setBoxType(newBoxType);
+    const updatedContent: CalloutBoxContent = { ...content, boxType: newBoxType };
     onContentChange(updatedContent);
   };
 
@@ -64,10 +72,10 @@ const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content, onContentChan
 
   return (
     <CalloutBox className={calloutBoxClasses}>
-      <CalloutContent type={content.boxType} maxHeight={maxHeight}>
+      <CalloutContent type={boxType} maxHeight={maxHeight}>
         <CalloutHeader>
-          <CalloutIconContainer type={content.boxType}>
-            <CalloutIcon type={content.boxType}>
+          <CalloutIconContainer type={boxType} onClick={toggleBoxType}>
+            <CalloutIcon type={boxType}>
               <Icon fontSize="inherit" />
             </CalloutIcon>
           </CalloutIconContainer>
