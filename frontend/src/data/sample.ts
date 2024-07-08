@@ -82,7 +82,7 @@ export const page_with_callout_boxes: Page = {
     pageType: "page"
   },
   title: {
-    bannerUrl: "../assets/banners/banner4.webp",
+    // bannerUrl: "../assets/banners/banner4.webp",
     h4Text: "Test2",
     h2Text: "Page with Callout Boxes"
   },

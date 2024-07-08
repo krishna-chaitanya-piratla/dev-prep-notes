@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface StyledBannerProps {
   imageUrl?: string;
+  position: number;
 }
 
 export const StyledBanner = styled.div<StyledBannerProps>`
@@ -19,6 +20,7 @@ export const StyledBanner = styled.div<StyledBannerProps>`
   background-image: ${({ imageUrl }) => imageUrl ? `url(${imageUrl})` : 'none'};
   background-color: ${({ imageUrl }) => (imageUrl ? 'transparent' : '#333333')}; /* Placeholder color if no image */
   cursor: ${({ imageUrl }) => (imageUrl ? 'default' : 'pointer')};
+  background-position-y: ${({ position }) => `-${position}px`};
 
   &:hover > .add-cover {
     display: ${({ imageUrl }) => (imageUrl ? 'none' : 'flex')};
@@ -68,16 +70,30 @@ export const AddCover = styled.div`
 `;
 
 export const ChangeCoverButton = styled.label`
-  position: absolute;
-  top: 10px;
-  right: 10px;
   background: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 0.5rem 1rem;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   cursor: pointer;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.7);
+    background: white;
+  }
+`;
+
+export const AdjustPositionButton = styled(ChangeCoverButton)`
+  margin-right: 0; /* Reset margin for the last button */
 `;
 
 export const FileInput = styled.input`
   display: none;
+`;
+
+export const ButtonContainer = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 0.25rem;
 `;
