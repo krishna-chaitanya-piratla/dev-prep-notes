@@ -66,3 +66,18 @@ export const AddCover = styled.div`
   box-sizing: border-box;
   z-index: 1;
 `;
+
+export const ChangeCoverButton = styled.label`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
+export const FileInput = styled.input`
+  display: none;
+`;

@@ -28,6 +28,20 @@ const Page: React.FC = observer(() => {
     dataStore.setPage(updatedPage); // Assuming you have a method to update the page in the store
   };
 
+  const handleImageChange = (newImage: File | null) => {
+    if (newImage) {
+      const fileURL = URL.createObjectURL(newImage);
+      const updatedPage = {
+        ...currentPage,
+        title: {
+          ...currentPage.title,
+          bannerUrl: fileURL,
+        },
+      };
+      dataStore.setPage(updatedPage);
+    }
+  };
+
   return (
     <PageWrapper depthNumbering={depthNumbering}>
       <BannerWrapper>
@@ -35,6 +49,7 @@ const Page: React.FC = observer(() => {
           imageUrl={currentPage.title.bannerUrl}
           h4Text={currentPage.title.h4Text}
           h2Text={currentPage.title.h2Text}
+          onImageChange={handleImageChange}
         />
       </BannerWrapper>
       <ContentWrapper>
