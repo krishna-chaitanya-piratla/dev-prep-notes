@@ -138,17 +138,39 @@ export const CalloutHeader = styled.div`
   flex-direction: row; /* Align items horizontally */
   align-items: center; /* Align items to the center vertically */
   justify-content: space-between; /* Add space between title and icon */
+`;
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
   cursor: pointer;
 `;
 
 export const CalloutTitle = styled.h4`
   margin: 0; /* Remove margin for tighter alignment */
   text-align: left; /* Align the title to the left */
+  cursor: text; /* Set cursor to text for editing */
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border: none;
+  }
 `;
 
-export const ToggleIcon = styled.div`
+export const ToggleIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  margin-left: 1rem;
+  cursor: pointer;
+  z-index: 100;
+  flex-grow: 1;
+`;
+
+export const ToggleIconComponent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 10px;
 `;

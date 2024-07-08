@@ -6,9 +6,10 @@ import {
   CalloutHeader, 
   CalloutTitle, 
   CalloutIcon,
-  ToggleIcon 
+  ToggleIconWrapper,
+  TitleWrapper 
 } from '../styles/CalloutBox';
-import { CalloutBoxContent, TextContent, CodeBlockContent, Content } from '../types/Page';
+import { CalloutBoxContent, Content } from '../types/Page';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
@@ -39,42 +40,49 @@ const CalloutBoxComponent: React.FC<CalloutBoxProps> = ({ content, onContentChan
   }, [isCollapsed, hasClicked, content.collapsedByDefault]);
 
   const toggleCollapse = () => {
+    console.log(`toggle clicked`);
     setIsCollapsed(!isCollapsed);
     setHasClicked(true);
   };
 
-  const handleContentChange = (contentId: string, newContent: Content) => {
-    const updatedContent = { ...content };
-    updatedContent.contents = updatedContent.contents.map((item) =>
-      item.id === contentId ? (newContent as TextContent | CodeBlockContent) : item
-    );
+  const handleTitleChange = (newContent: string) => {
+    const updatedContent = { ...content, title: newContent };
     onContentChange(updatedContent);
   };
 
-  const title = isCollapsed && content.collapsedTitle ? content.collapsedTitle : content.title;
+  const displayedTitle = isCollapsed && content.collapsedTitle ? content.collapsedTitle : content.title;
 
   const calloutBoxClasses = `${hasClicked ? 'clicked' : 'not-clicked'} ${content.collapsedByDefault ? 'collapsed-by-default' : 'expanded-by-default'}`;
 
   return (
     <CalloutBox className={calloutBoxClasses}>
       <CalloutContent type={content.boxType} maxHeight={maxHeight}>
-        <CalloutHeader onClick={toggleCollapse}>
+        <CalloutHeader>
           <CalloutIconContainer type={content.boxType}>
             <CalloutIcon type={content.boxType}>
               <Icon fontSize="inherit" />
             </CalloutIcon>
           </CalloutIconContainer>
-          <CalloutTitle>{title}</CalloutTitle>
-          <ToggleIcon>
-            <ToggleIconComponent />
-          </ToggleIcon>
+          <TitleWrapper>
+            <CalloutTitle
+              contentEditable
+              suppressContentEditableWarning
+              onBlur={(e) => handleTitleChange(e.currentTarget.innerText)}
+              onClick={(e) => e.stopPropagation()} // Prevent collapse when clicking on title text
+            >
+              {displayedTitle}
+            </CalloutTitle>
+            <ToggleIconWrapper onClick={toggleCollapse}>
+              <ToggleIconComponent />
+            </ToggleIconWrapper>
+          </TitleWrapper>
         </CalloutHeader>
         <div className="callout-body" ref={contentRef}>
           {content.contents.map((item, index) => (
             <Editable
               key={index}
               content={item}
-              onContentChange={(newContent) => handleContentChange(item.id || '', newContent)}
+              onContentChange={(newContent) => onContentChange(newContent)}
             />
           ))}
         </div>
