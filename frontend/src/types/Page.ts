@@ -109,6 +109,7 @@ export interface Page {
     bannerUrl?: string;
     h4Text: string;
     h2Text: string;
+    position?: { x: number; y: number };
   };
   contents: Block[];
 }

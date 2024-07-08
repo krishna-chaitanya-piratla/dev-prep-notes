@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import dataStore from '../../stores/DataStore';
 import {
   StyledBanner,
   StyledBannerText,
@@ -15,10 +17,10 @@ interface BannerProps {
   onImageChange: (newImage: File | null) => void;
 }
 
-const Banner: React.FC<BannerProps> = ({ imageUrl, h4Text, h2Text, onImageChange }) => {
+const Banner: React.FC<BannerProps> = observer(({ imageUrl, h4Text, h2Text, onImageChange }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isAdjusting, setIsAdjusting] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [currentPosition, setCurrentPosition] = useState(dataStore.getBannerPosition());
   const [isDragging, setIsDragging] = useState(false);
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const bannerRef = useRef<HTMLDivElement>(null);
@@ -105,11 +107,12 @@ const Banner: React.FC<BannerProps> = ({ imageUrl, h4Text, h2Text, onImageChange
       const maxPosX = Math.max(imageWidth - bannerWidth, 0);
 
       let newPos = {
-        x: Math.min(Math.max(position.x + deltaX, -maxPosX), 0),
-        y: Math.min(Math.max(position.y + deltaY, -maxPosY), 0)
+        x: Math.min(Math.max(currentPosition.x + deltaX, -maxPosX), 0),
+        y: Math.min(Math.max(currentPosition.y + deltaY, -maxPosY), 0)
       };
 
-      setPosition(newPos);
+      setCurrentPosition(newPos);
+      dataStore.setBannerPosition(newPos);
     }
   };
 
@@ -131,7 +134,7 @@ const Banner: React.FC<BannerProps> = ({ imageUrl, h4Text, h2Text, onImageChange
       onMouseDown={handleImageDragStart}
       onMouseMove={handleImageDrag}
       onMouseUp={handleImageDragEnd}
-      position={position}
+      position={currentPosition}
       isAdjusting={isAdjusting}
     >
       {isHovered && imageUrl && (
@@ -161,6 +164,6 @@ const Banner: React.FC<BannerProps> = ({ imageUrl, h4Text, h2Text, onImageChange
       </StyledBannerText>
     </StyledBanner>
   );
-};
+});
 
 export default Banner;

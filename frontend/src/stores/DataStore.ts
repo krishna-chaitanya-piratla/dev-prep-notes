@@ -25,6 +25,16 @@ class DataStore {
     this.processCurrentPage();
   };
 
+  setBannerPosition = (position: { x: number; y: number }) => {
+    if (this.currentPage.title) {
+      this.currentPage.title.position = position;
+    }
+  };
+
+  getBannerPosition = () => {
+    return this.currentPage.title.position || { x: 0, y: 0 };
+  };
+
   toggleExpand = (pageId: string) => {
     if (this.expandedPages.has(pageId)) {
       this.expandedPages.delete(pageId);
