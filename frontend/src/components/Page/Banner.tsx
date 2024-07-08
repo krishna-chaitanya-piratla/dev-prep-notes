@@ -18,14 +18,18 @@ interface BannerProps {
 const Banner: React.FC<BannerProps> = ({ imageUrl, h4Text, h2Text, onImageChange }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isAdjusting, setIsAdjusting] = useState(false);
-  const [position, setPosition] = useState(0);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const bannerRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const lastPositionRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (bannerRef.current && !bannerRef.current.contains(event.target as Node)) {
         setIsAdjusting(false);
+        setIsDragging(false);
       }
     };
 
@@ -34,6 +38,16 @@ const Banner: React.FC<BannerProps> = ({ imageUrl, h4Text, h2Text, onImageChange
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if (imageUrl) {
+      const img = new Image();
+      img.onload = () => {
+        setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+      };
+      img.src = imageUrl;
+    }
+  }, [imageUrl]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -64,22 +78,44 @@ const Banner: React.FC<BannerProps> = ({ imageUrl, h4Text, h2Text, onImageChange
 
   const handleAdjustPosition = () => {
     setIsAdjusting(!isAdjusting);
+    setIsDragging(false);
+  };
+
+  const handleImageDragStart = (e: React.MouseEvent) => {
+    if (isAdjusting) {
+      lastPositionRef.current = { x: e.clientX, y: e.clientY };
+      setIsDragging(true);
+      e.preventDefault();
+    }
   };
 
   const handleImageDrag = (e: React.MouseEvent) => {
-    if (isAdjusting && bannerRef.current) {
-      const bannerHeight = bannerRef.current.clientHeight;
-      const imageHeight = bannerRef.current.scrollHeight;
-      const maxPosition = imageHeight - bannerHeight;
-      let newPosition = position + e.movementY;
+    if (isDragging && bannerRef.current) {
+      const { x, y } = lastPositionRef.current;
+      const deltaX = e.clientX - x;
+      const deltaY = e.clientY - y;
+      lastPositionRef.current = { x: e.clientX, y: e.clientY };
 
-      if (newPosition < 0) {
-        newPosition = 0;
-      } else if (newPosition > maxPosition) {
-        newPosition = maxPosition;
-      }
+      const bannerRect = bannerRef.current.getBoundingClientRect();
+      const bannerHeight = bannerRect.height;
+      const bannerWidth = bannerRect.width;
+      const imageHeight = imageDimensions.height;
+      const imageWidth = imageDimensions.width;
+      const maxPosY = Math.max(imageHeight - bannerHeight, 0);
+      const maxPosX = Math.max(imageWidth - bannerWidth, 0);
 
-      setPosition(newPosition);
+      let newPos = {
+        x: Math.min(Math.max(position.x + deltaX, -maxPosX), 0),
+        y: Math.min(Math.max(position.y + deltaY, -maxPosY), 0)
+      };
+
+      setPosition(newPos);
+    }
+  };
+
+  const handleImageDragEnd = () => {
+    if (isDragging) {
+      setIsDragging(false);
     }
   };
 
@@ -92,8 +128,11 @@ const Banner: React.FC<BannerProps> = ({ imageUrl, h4Text, h2Text, onImageChange
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
+      onMouseDown={handleImageDragStart}
       onMouseMove={handleImageDrag}
+      onMouseUp={handleImageDragEnd}
       position={position}
+      isAdjusting={isAdjusting}
     >
       {isHovered && imageUrl && (
         <ButtonContainer>

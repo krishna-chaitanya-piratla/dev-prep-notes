@@ -2,14 +2,15 @@ import styled from 'styled-components';
 
 interface StyledBannerProps {
   imageUrl?: string;
-  position: number;
+  position: { x: number; y: number };
+  isAdjusting: boolean;
 }
 
 export const StyledBanner = styled.div<StyledBannerProps>`
   width: 100%;
-  height: ${({ imageUrl }) => imageUrl ? `calc(27.7*var(--base-text-size))` : `calc(13.85*var(--base-text-size))`}; /* 500px or 250px for root-level 16px*/
+  height: ${({ imageUrl }) => imageUrl ? `calc(27.7*var(--base-text-size))` : `calc(13.85*var(--base-text-size))`};
   background-size: cover;
-  background-position: center;
+  background-position: ${({ position }) => `${position.x}px ${position.y}px`};
   position: relative;
   display: flex;
   align-items: flex-end;
@@ -18,9 +19,8 @@ export const StyledBanner = styled.div<StyledBannerProps>`
   box-sizing: border-box;
   border-radius: 10px 10px 0 0;
   background-image: ${({ imageUrl }) => imageUrl ? `url(${imageUrl})` : 'none'};
-  background-color: ${({ imageUrl }) => (imageUrl ? 'transparent' : '#333333')}; /* Placeholder color if no image */
-  cursor: ${({ imageUrl }) => (imageUrl ? 'default' : 'pointer')};
-  background-position-y: ${({ position }) => `-${position}px`};
+  background-color: ${({ imageUrl }) => (imageUrl ? 'transparent' : '#333333')};
+  cursor: ${({ isAdjusting }) => (isAdjusting ? 'grab' : 'default')};
 
   &:hover > .add-cover {
     display: ${({ imageUrl }) => (imageUrl ? 'none' : 'flex')};
