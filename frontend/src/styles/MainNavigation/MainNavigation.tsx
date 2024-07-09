@@ -43,7 +43,6 @@ interface LinkItemProps {
   isActive: boolean;
   depth: number;
   hasChildren: boolean;
-  isHovered: boolean;
 }
 
 export const LinkItem = styled.div<LinkItemProps>`
@@ -69,13 +68,12 @@ interface ExpandIconProps {
   isHovered: boolean;
 }
 
-export const ExpandIcon = styled.div<ExpandIconProps>`
+export const ExpandIcon = styled.div`
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin-right: 0.5rem;
-  color: ${({ isHovered }) => (isHovered ? 'var(--nav-context-link-color)' : 'var(--nav-background-color)')};
   transition: color 0.3s ease;
 
   & > svg {
@@ -85,11 +83,6 @@ export const ExpandIcon = styled.div<ExpandIconProps>`
 
 export const LinkText = styled.span`
   flex-grow: 1; /* Ensure link text takes up remaining space */
-`;
-
-export const NavigationLogo = styled.div`
-  font-size: var(--navigation-text-size); /* Ensure logo matches the text size */
-  margin-right: 0.5rem; /* Space between the logo and text */
 `;
 
 export const NoPagesPlaceholder = styled.div<{depth: number}>`
@@ -102,4 +95,18 @@ export const NoPagesPlaceholder = styled.div<{depth: number}>`
   display: flex;
   align-items: center;
   position: relative;
+`;
+
+export const NavigationLogo = styled.div`
+  font-size: var(--navigation-text-size); /* Ensure logo matches the text size */
+  margin-right: 0.5rem;
+  cursor: pointer;
+`;
+
+export const EmojiPickerWrapper = styled.div`
+  position: absolute;
+  z-index: 1000;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 `;

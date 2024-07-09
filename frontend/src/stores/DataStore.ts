@@ -42,21 +42,32 @@ class DataStore {
     }
   };
 
-  getLogo = (pageId: string): string | undefined => {
-    const page = this.pages.find(page => page.metadata.id === pageId);
-    return page?.title.logo;
+  setLogoForPage = (pageId: string, logo: string) => {
+    console.log(`Setting logo for page: ${pageId}, logo: ${logo}`);
+    const page = this.pages.find(p => p.metadata.id === pageId);
+    if (page && page.title) {
+      console.log(`Found page: ${page.metadata.linkName}`);
+      page.title.logo = logo;
+      this.updatePage(page); // Ensure the update is processed
+    } else {
+      console.log(`Page not found for ID: ${pageId}`);
+    }
   };
 
   toggleExpand = (pageId: string) => {
     if (this.expandedPages.has(pageId)) {
       this.expandedPages.delete(pageId);
+      console.log(`Collapsed page: ${pageId}, expandedPages: `, Array.from(this.expandedPages));
     } else {
       this.expandedPages.add(pageId);
+      console.log(`Expanded page: ${pageId}, expandedPages: `, Array.from(this.expandedPages));
     }
   };
 
   isExpanded = (pageId: string): boolean => {
-    return this.expandedPages.has(pageId);
+    const expanded = this.expandedPages.has(pageId);
+    console.log(`Checking if page is expanded: ${pageId}, expanded: ${expanded}`);
+    return expanded;
   };
 
   buildPageTree() {
@@ -90,13 +101,21 @@ class DataStore {
     });
   }
 
-  updatePage(updatedPage: Page) {
-    const index = this.pages.findIndex(page => page.metadata.id === updatedPage.metadata.id);
-    if (index !== -1) {
-      this.pages[index] = updatedPage;
-      this.pageTree = this.buildPageTree(); // Rebuild the page tree to reflect changes
+  
+  updatePage = (updatedPage: Page) => {
+    console.log(`Updating page: ${updatedPage.metadata.linkName}`);
+    this.pages = this.pages.map(page => page.metadata.id === updatedPage.metadata.id ? updatedPage : page);
+    if (this.currentPage.metadata.id === updatedPage.metadata.id) {
+      this.currentPage = updatedPage;
     }
-  }
+    this.processCurrentPage();
+  };
+  
+  getLogo = (pageId: string) => {
+    const page = this.pages.find(p => p.metadata.id === pageId);
+    console.log(`Getting logo for page: ${pageId}, logo: ${page?.title.logo}`);
+    return page?.title.logo;
+  };
 }
 
 const dataStore = new DataStore();
