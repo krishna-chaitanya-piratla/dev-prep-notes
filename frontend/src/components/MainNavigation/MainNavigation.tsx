@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../../stores/DataStore';
 import mainNavigationStore from '../../stores/MainNavigationStore';
@@ -80,15 +80,22 @@ const RenderPageTree: React.FC<{ pages: PageWithChildren[], depth?: number }> = 
 });
 
 const MainNavigation: React.FC = observer(() => {
+  const emojiPickerRef = useRef<HTMLDivElement>(null);
+
   const handleEmojiSelect = (emoji: any) => {
     if (mainNavigationStore.pickerPageId) {
       dataStore.setLogoForPage(mainNavigationStore.pickerPageId, emoji.native);
       mainNavigationStore.hideEmojiPicker();
+    } else {
+      console.log('Picker page ID is null.');
     }
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (mainNavigationStore.pickerPosition) {
+    if (
+      emojiPickerRef.current &&
+      !emojiPickerRef.current.contains(event.target as Node)
+    ) {
       mainNavigationStore.hideEmojiPicker();
     }
   };
@@ -113,7 +120,9 @@ const MainNavigation: React.FC = observer(() => {
       </div>
       {mainNavigationStore.pickerPosition && (
         <EmojiPickerWrapper style={{ top: mainNavigationStore.pickerPosition.y, left: mainNavigationStore.pickerPosition.x }}>
-          <Picker data={data} onEmojiSelect={handleEmojiSelect} />
+          <div ref={emojiPickerRef} onClick={(e) => e.stopPropagation()}>
+            <Picker data={data} onEmojiSelect={handleEmojiSelect} />
+          </div>
         </EmojiPickerWrapper>
       )}
     </MainNavigationWrapper>

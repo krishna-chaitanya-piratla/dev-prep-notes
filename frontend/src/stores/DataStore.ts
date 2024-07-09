@@ -43,6 +43,8 @@ class DataStore {
     if (page && page.title) {
       page.title.logo = logo;
       this.updatePage(page); // Ensure the update is processed
+    } else {
+      console.log(`Page not found for ID: ${pageId}`);
     }
   };
 

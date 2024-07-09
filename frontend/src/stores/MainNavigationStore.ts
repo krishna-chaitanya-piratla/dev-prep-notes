@@ -13,7 +13,7 @@ class MainNavigationStore {
     this.pickerPageId = null;
     this.pickerPosition = null;
     this.pageTree = this.buildPageTree(data);
-    makeAutoObservable(this, {}, { autoBind: true });
+    makeAutoObservable(this);
   }
 
   toggleExpand(pageId: string) {
@@ -25,7 +25,8 @@ class MainNavigationStore {
   }
 
   isExpanded(pageId: string): boolean {
-    return this.expandedPages.has(pageId);
+    const expanded = this.expandedPages.has(pageId);
+    return expanded;
   }
 
   showEmojiPicker(pageId: string, position: { x: number; y: number }) {
