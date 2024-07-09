@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../../stores/DataStore';
+import mainNavigationStore from '../../stores/MainNavigationStore';
 import {
   HeaderWrapper,
   TitleContainer,
@@ -49,7 +50,7 @@ const getBreadcrumbPath = (currentPage: PageWithChildren, pages: PageWithChildre
 const Header: React.FC = observer(() => {
   const [isSettingsMenuOpen, setIsSettingsMenuOpen] = useState(false);
 
-  const breadcrumbPath = getBreadcrumbPath(dataStore.currentPage as PageWithChildren, dataStore.pageTree);
+  const breadcrumbPath = getBreadcrumbPath(dataStore.currentPage as PageWithChildren, mainNavigationStore.pageTree);
 
   const handlePageClick = (page: Page) => {
     dataStore.setPage(page);

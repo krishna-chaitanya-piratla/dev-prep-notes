@@ -1,6 +1,7 @@
-import React, { useState, useCallback, useEffect, memo, MouseEvent as ReactMouseEvent } from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../../stores/DataStore';
+import mainNavigationStore from '../../stores/MainNavigationStore';
 import { PageWithChildren } from '../../types/Page';
 import {
   MainNavigationWrapper,
@@ -23,19 +24,16 @@ import data from '@emoji-mart/data';
 interface NavigationItemProps {
   page: PageWithChildren;
   depth: number;
-  showEmojiPicker: (pageId: string, event: ReactMouseEvent) => void;
 }
 
-const NavigationItem: React.FC<NavigationItemProps> = memo(observer(({ page, depth, showEmojiPicker }) => {
+const NavigationItem: React.FC<NavigationItemProps> = observer(({ page, depth }) => {
   const logo = dataStore.getLogo(page.metadata.id);
-  const isExpanded = dataStore.isExpanded(page.metadata.id);
-  console.log(`Rendering page: ${page.metadata.linkName}, logo: ${logo}, isExpanded: ${isExpanded}`);
+  const isExpanded = mainNavigationStore.isExpanded(page.metadata.id);
 
   return (
     <>
       <LinkItem
         onClick={() => {
-          console.log(`Navigating to page: ${page.metadata.linkName}`);
           dataStore.setPage(page);
         }}
         isActive={dataStore.currentPage.metadata.link === page.metadata.link}
@@ -45,19 +43,21 @@ const NavigationItem: React.FC<NavigationItemProps> = memo(observer(({ page, dep
         <ExpandIcon
           onClick={(e) => {
             e.stopPropagation();
-            console.log(`Toggling expand for page: ${page.metadata.linkName}`);
-            dataStore.toggleExpand(page.metadata.id);
+            mainNavigationStore.toggleExpand(page.metadata.id);
           }}
         >
           {isExpanded ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
         </ExpandIcon>
-        {logo && <NavigationLogo onClick={(e) => showEmojiPicker(page.metadata.id, e)}>{logo}</NavigationLogo>}
+        {logo && <NavigationLogo onClick={(e) => {
+          e.stopPropagation();
+          mainNavigationStore.showEmojiPicker(page.metadata.id, { x: e.clientX, y: e.clientY });
+        }}>{logo}</NavigationLogo>}
         <LinkText>{page.metadata.linkName}</LinkText>
       </LinkItem>
       {isExpanded && (
         <>
           {page.children.length > 0 ? (
-            <RenderPageTree pages={page.children} depth={depth + 1} showEmojiPicker={showEmojiPicker} />
+            <RenderPageTree pages={page.children} depth={depth + 1} />
           ) : (
             <NoPagesPlaceholder depth={depth + 1}>
               No pages inside
@@ -67,60 +67,38 @@ const NavigationItem: React.FC<NavigationItemProps> = memo(observer(({ page, dep
       )}
     </>
   );
-}));
+});
 
-interface RenderPageTreeProps {
-  pages: PageWithChildren[];
-  depth?: number;
-  showEmojiPicker: (pageId: string, event: ReactMouseEvent) => void;
-}
-
-const RenderPageTree: React.FC<RenderPageTreeProps> = observer(({ pages, depth = 0, showEmojiPicker }) => {
+const RenderPageTree: React.FC<{ pages: PageWithChildren[], depth?: number }> = observer(({ pages, depth = 0 }) => {
   return (
     <>
       {pages.map((page) => (
-        <NavigationItem key={page.metadata.link} page={page} depth={depth} showEmojiPicker={showEmojiPicker} />
+        <NavigationItem key={page.metadata.link} page={page} depth={depth} />
       ))}
     </>
   );
 });
 
 const MainNavigation: React.FC = observer(() => {
-  const [pickerPosition, setPickerPosition] = useState<{ x: number; y: number } | null>(null);
-  const [pickerPageId, setPickerPageId] = useState<string | null>(null);
-
-  const showEmojiPicker = useCallback((pageId: string, event: ReactMouseEvent) => {
-    event.stopPropagation();
-    console.log(`Showing emoji picker for page: ${pageId}`);
-    setPickerPageId(pageId);
-    setPickerPosition({ x: event.clientX, y: event.clientY });
-  }, []);
-
-  const handleEmojiSelect = useCallback((emoji: any) => {
-    if (pickerPageId) {
-      console.log(`Selected emoji: ${emoji.native} for page: ${pickerPageId}`);
-      dataStore.setLogoForPage(pickerPageId, emoji.native);
-      setPickerPageId(null);
-      setPickerPosition(null);
-    } else {
-      console.log('Picker page ID is null.');
+  const handleEmojiSelect = (emoji: any) => {
+    if (mainNavigationStore.pickerPageId) {
+      dataStore.setLogoForPage(mainNavigationStore.pickerPageId, emoji.native);
+      mainNavigationStore.hideEmojiPicker();
     }
-  }, [pickerPageId]);
+  };
 
-  const handleClickOutside = useCallback((event: MouseEvent) => {
-    if (pickerPosition) {
-      console.log('Click outside emoji picker, closing picker.');
-      setPickerPageId(null);
-      setPickerPosition(null);
+  const handleClickOutside = (event: MouseEvent) => {
+    if (mainNavigationStore.pickerPosition) {
+      mainNavigationStore.hideEmojiPicker();
     }
-  }, [pickerPosition]);
+  };
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [handleClickOutside]);
+  }, []);
 
   return (
     <MainNavigationWrapper>
@@ -131,10 +109,10 @@ const MainNavigation: React.FC = observer(() => {
       </IconContainer>
       <MainNavigationHeader>Main Navigation</MainNavigationHeader>
       <div>
-        <RenderPageTree pages={dataStore.pageTree} showEmojiPicker={showEmojiPicker} />
+        <RenderPageTree pages={mainNavigationStore.pageTree} />
       </div>
-      {pickerPosition && (
-        <EmojiPickerWrapper style={{ top: pickerPosition.y, left: pickerPosition.x }}>
+      {mainNavigationStore.pickerPosition && (
+        <EmojiPickerWrapper style={{ top: mainNavigationStore.pickerPosition.y, left: mainNavigationStore.pickerPosition.x }}>
           <Picker data={data} onEmojiSelect={handleEmojiSelect} />
         </EmojiPickerWrapper>
       )}
