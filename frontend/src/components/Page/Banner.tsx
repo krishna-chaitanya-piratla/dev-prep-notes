@@ -1,9 +1,9 @@
-// src/components/Page/Banner.tsx
-
 import React, { useState, useRef, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../../stores/DataStore';
 import Logo from './Logo';
+import data from '@emoji-mart/data';
+import Picker from '@emoji-mart/react';
 import {
   StyledBanner,
   StyledBannerText,
@@ -26,15 +26,21 @@ const Banner: React.FC<BannerProps> = observer(({ imageUrl, h2Text, onImageChang
   const [currentPosition, setCurrentPosition] = useState(dataStore.getBannerPosition());
   const [isDragging, setIsDragging] = useState(false);
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const bannerRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const lastPositionRef = useRef({ x: 0, y: 0 });
+  const emojiPickerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (bannerRef.current && !bannerRef.current.contains(event.target as Node)) {
+      if (
+        bannerRef.current && !bannerRef.current.contains(event.target as Node) &&
+        emojiPickerRef.current && !emojiPickerRef.current.contains(event.target as Node)
+      ) {
         setIsAdjusting(false);
         setIsDragging(false);
+        setShowEmojiPicker(false);
       }
     };
 
@@ -125,6 +131,14 @@ const Banner: React.FC<BannerProps> = observer(({ imageUrl, h2Text, onImageChang
     }
   };
 
+  const handleEmojiSelect = (emoji: any) => {
+    dataStore.setLogo(emoji.native);
+  };
+
+  const handleAddLogoClick = () => {
+    setShowEmojiPicker(true);
+  };
+
   const logo = dataStore.currentPage.title.logo;
 
   return (
@@ -165,8 +179,15 @@ const Banner: React.FC<BannerProps> = observer(({ imageUrl, h2Text, onImageChang
       />
       <StyledBannerText>
         {logo ? <Logo logo={logo} /> : <></>}
-        <h2>{h2Text}</h2>
-        {!logo && <AddLogoButton>Add Logo</AddLogoButton>}
+        <h2>
+          {h2Text}
+        </h2>
+        {!logo && isHovered && <AddLogoButton onClick={handleAddLogoClick}>Add Logo</AddLogoButton>}
+        {showEmojiPicker && (
+          <div ref={emojiPickerRef} style={{ position: 'absolute', top: '0rem', left: '0rem'}}>
+            <Picker data={data} onEmojiSelect={handleEmojiSelect} />
+          </div>
+        )}
       </StyledBannerText>
     </StyledBanner>
   );

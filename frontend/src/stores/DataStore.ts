@@ -35,6 +35,12 @@ class DataStore {
     return this.currentPage.title.position || { x: 0, y: 0 };
   };
 
+  setLogo = (logo: string) => {
+    if (this.currentPage.title) {
+      this.currentPage.title.logo = logo;
+    }
+  };
+
   toggleExpand = (pageId: string) => {
     if (this.expandedPages.has(pageId)) {
       this.expandedPages.delete(pageId);

@@ -39,13 +39,6 @@ export const StyledBannerText = styled.div`
   display: flex;
   flex-direction: column;
 
-  h4 {
-    margin: 0;
-    font-size: calc(1.5*var(--base-text-size));
-    font-weight: 400;
-    letter-spacing: 2px;
-  }
-
   h2 {
     margin: 0.5rem 0 0;
     font-size: calc(2.5*var(--base-text-size));
