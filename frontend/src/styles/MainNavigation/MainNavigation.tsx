@@ -87,6 +87,11 @@ export const LinkText = styled.span`
   flex-grow: 1; /* Ensure link text takes up remaining space */
 `;
 
+export const NavigationLogo = styled.div`
+  font-size: var(--navigation-text-size); /* Ensure logo matches the text size */
+  margin-right: 0.5rem; /* Space between the logo and text */
+`;
+
 export const NoPagesPlaceholder = styled.div<{depth: number}>`
   font-size: var(--navigation-text-size);
   line-height: var(--navigation-line-height);

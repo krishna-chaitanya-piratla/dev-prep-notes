@@ -38,7 +38,13 @@ class DataStore {
   setLogo = (logo: string) => {
     if (this.currentPage.title) {
       this.currentPage.title.logo = logo;
+      this.updatePage(this.currentPage);
     }
+  };
+
+  getLogo = (pageId: string): string | undefined => {
+    const page = this.pages.find(page => page.metadata.id === pageId);
+    return page?.title.logo;
   };
 
   toggleExpand = (pageId: string) => {
@@ -82,6 +88,14 @@ class DataStore {
         content.id = generateId(content.type, blockIndex, contentIndex);
       });
     });
+  }
+
+  updatePage(updatedPage: Page) {
+    const index = this.pages.findIndex(page => page.metadata.id === updatedPage.metadata.id);
+    if (index !== -1) {
+      this.pages[index] = updatedPage;
+      this.pageTree = this.buildPageTree(); // Rebuild the page tree to reflect changes
+    }
   }
 }
 
