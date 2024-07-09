@@ -47,7 +47,6 @@ const Page: React.FC = observer(() => {
       <BannerWrapper>
         <Banner
           imageUrl={currentPage.title.bannerUrl}
-          h4Text={currentPage.title.h4Text}
           h2Text={currentPage.title.h2Text}
           onImageChange={handleImageChange}
         />

@@ -107,7 +107,8 @@ export interface Page {
   };
   title: {
     bannerUrl?: string;
-    h4Text: string;
+    logo?: string; // Optional logo property
+    h4Text?: string;
     h2Text: string;
     position?: { x: number; y: number };
   };

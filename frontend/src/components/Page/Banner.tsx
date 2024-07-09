@@ -1,23 +1,26 @@
+// src/components/Page/Banner.tsx
+
 import React, { useState, useRef, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import dataStore from '../../stores/DataStore';
+import Logo from './Logo';
 import {
   StyledBanner,
   StyledBannerText,
   ChangeCoverButton,
   AdjustPositionButton,
+  AddLogoButton,
   FileInput,
   ButtonContainer
 } from '../../styles/Page/Banner';
 
 interface BannerProps {
   imageUrl?: string;
-  h4Text: string;
   h2Text: string;
   onImageChange: (newImage: File | null) => void;
 }
 
-const Banner: React.FC<BannerProps> = observer(({ imageUrl, h4Text, h2Text, onImageChange }) => {
+const Banner: React.FC<BannerProps> = observer(({ imageUrl, h2Text, onImageChange }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isAdjusting, setIsAdjusting] = useState(false);
   const [currentPosition, setCurrentPosition] = useState(dataStore.getBannerPosition());
@@ -122,6 +125,8 @@ const Banner: React.FC<BannerProps> = observer(({ imageUrl, h4Text, h2Text, onIm
     }
   };
 
+  const logo = dataStore.currentPage.title.logo;
+
   return (
     <StyledBanner
       ref={bannerRef}
@@ -159,8 +164,9 @@ const Banner: React.FC<BannerProps> = observer(({ imageUrl, h4Text, h2Text, onIm
         onChange={handleFileChange}
       />
       <StyledBannerText>
-        <h4>{h4Text}</h4>
+        {logo ? <Logo logo={logo} /> : <></>}
         <h2>{h2Text}</h2>
+        {!logo && <AddLogoButton>Add Logo</AddLogoButton>}
       </StyledBannerText>
     </StyledBanner>
   );

@@ -9,7 +9,7 @@ export const page_with_code_blocks: Page = {
     },
     title: {
       bannerUrl: "../assets/banners/banner3.webp",
-      h4Text: "Test1",
+      logo: "🚀",
       h2Text: "Page With Code Blocks"
     },
     contents: [

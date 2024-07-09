@@ -36,6 +36,8 @@ export const StyledBannerText = styled.div`
   position: absolute;
   bottom: 3.75rem; /* Match the padding value to position correctly */
   left: 3.75rem; /* Match the padding value to position correctly */
+  display: flex;
+  flex-direction: column;
 
   h4 {
     margin: 0;
@@ -49,6 +51,29 @@ export const StyledBannerText = styled.div`
     font-size: calc(2.5*var(--base-text-size));
     font-weight: 400;
     letter-spacing: 3px;
+    position: relative;
+  }
+
+  &:hover > button {
+    display: block;
+  }
+`;
+
+export const AddLogoButton = styled.button`
+  display: none;
+  position: absolute;
+  top: -2rem; /* Adjust as necessary to position the button */
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.7);
+    background: white;
   }
 `;
 
