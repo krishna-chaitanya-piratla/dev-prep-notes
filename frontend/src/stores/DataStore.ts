@@ -72,6 +72,13 @@ class DataStore {
     const page = this.pages.find(p => p.metadata.id === pageId);
     return page?.title.logo;
   };
+
+  reorderContent = (dragIndex: number, hoverIndex: number) => {
+    const updatedPage = { ...this.currentPage };
+    const [removed] = updatedPage.contents.splice(dragIndex, 1);
+    updatedPage.contents.splice(hoverIndex, 0, removed);
+    this.setPage(updatedPage);
+  };
 }
 
 const dataStore = new DataStore();
