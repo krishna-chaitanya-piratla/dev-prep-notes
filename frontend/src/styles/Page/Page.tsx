@@ -28,6 +28,11 @@ export const PageWrapper = styled.div<PageWrapperProps>`
     padding-right: 0.25rem;
     letter-spacing: -0.25px;
   }
+
+  & img {
+    max-width: 100%;
+    height: auto;
+  }
 `;
 
 export const BannerWrapper = styled.div`

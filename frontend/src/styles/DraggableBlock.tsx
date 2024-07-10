@@ -12,9 +12,9 @@ export const DraggableBlockWrapper = styled.div<{ isDragging: boolean }>`
 `;
 
 export const DragHandle = styled.div`
-  width: 10px;
+  width: 0.75rem;
   height: 100%;
-  background-color: #ccc;
+  background-color: #ddd;
   cursor: grab;
   position: absolute;
   left: 0;

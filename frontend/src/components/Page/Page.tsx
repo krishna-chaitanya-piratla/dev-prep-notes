@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -38,6 +38,20 @@ const Page: React.FC = observer(() => {
     dataStore.setPage(updatedPage);
   };
 
+  const handleImageChange = (newImage: File | null) => {
+    if (newImage) {
+      const fileURL = URL.createObjectURL(newImage);
+      const updatedPage = {
+        ...currentPage,
+        title: {
+          ...currentPage.title,
+          bannerUrl: fileURL,
+        },
+      };
+      dataStore.setPage(updatedPage);
+    }
+  };
+
   const handleImageDrop = (event: React.DragEvent) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
@@ -59,26 +73,12 @@ const Page: React.FC = observer(() => {
     }
   };
 
-  const handleImageChange = (newImage: File | null) => {
-    if (newImage) {
-      const fileURL = URL.createObjectURL(newImage);
-      const updatedPage = {
-        ...currentPage,
-        title: {
-          ...currentPage.title,
-          bannerUrl: fileURL,
-        },
-      };
-      dataStore.setPage(updatedPage);
-    }
-  };
-
   return (
     <DndProvider backend={HTML5Backend}>
       <PageWrapper
         depthNumbering={depthNumbering}
-        onDragOver={(e) => e.preventDefault()}
         onDrop={handleImageDrop}
+        onDragOver={(e) => e.preventDefault()}
       >
         <BannerWrapper>
           <Banner

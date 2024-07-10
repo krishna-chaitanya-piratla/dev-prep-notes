@@ -45,7 +45,7 @@ const Editable: React.FC<EditableProps> = ({ content, onContentChange }) => {
   }
 
   if (isImageContent(content)) {
-    return <Image src={content.src} alt={content.alt} />;
+    return <Image content={content} onContentChange={onContentChange} />;
   }
 
   if (!isTextContent(content)) {

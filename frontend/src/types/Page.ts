@@ -78,8 +78,11 @@ export interface SpreadsheetContent extends BaseContent {
 
 export interface ImageContent extends BaseContent {
   type: 'image';
+  id?: string;
   src: string;
-  alt: string;
+  alt?: string;
+  width?: number;
+  height?: number;
 }
 
 export type Content =
