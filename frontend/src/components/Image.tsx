@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Resizable } from 're-resizable';
 import { ImageContent } from '../types/Page';
-import { ImageWrapper } from '../styles/Image';
+import { ImageWrapper, StyledResizable, CustomHandle } from '../styles/Image';
 
 interface ImageProps extends ImageContent {
   alignment?: 'left' | 'center' | 'right';
@@ -12,6 +12,7 @@ const Image: React.FC<ImageProps> = ({ src, alt, alignment = 'center' }) => {
   const [originalWidth, setOriginalWidth] = useState(0);
   const [originalHeight, setOriginalHeight] = useState(0);
   const [width, setWidth] = useState('auto');
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     if (imgRef.current) {
@@ -32,8 +33,9 @@ const Image: React.FC<ImageProps> = ({ src, alt, alignment = 'center' }) => {
   };
 
   return (
-    <ImageWrapper alignment={alignment}>
-      <Resizable
+    <ImageWrapper alignment={alignment} onMouseEnter={() => setHovered(true)}
+    onMouseLeave={() => setHovered(false)}>
+      <StyledResizable
         defaultSize={{
           width: '100%',
           height: 'auto',
@@ -45,9 +47,29 @@ const Image: React.FC<ImageProps> = ({ src, alt, alignment = 'center' }) => {
         onResize={handleResize}
         lockAspectRatio
         maxWidth="100%"
+        enable={{
+          top: false,
+          right: true,
+          bottom: false,
+          left: true,
+          topRight: false,
+          bottomRight: false,
+          bottomLeft: false,
+          topLeft: false,
+        }}
+        handleComponent={{
+          right: <CustomHandle visible={hovered} position="right" />,
+          left: <CustomHandle visible={hovered} position="left" />,
+        }}
       >
-        <img ref={imgRef} src={src} alt={alt} style={{ width: '100%', height: 'auto' }} />
-      </Resizable>
+        <img
+          ref={imgRef}
+          src={src}
+          alt={alt}
+          style={{ width: '100%', height: 'auto' }}
+          
+        />
+      </StyledResizable>
     </ImageWrapper>
   );
 };
