@@ -76,6 +76,12 @@ export interface SpreadsheetContent extends BaseContent {
   };
 }
 
+export interface ImageContent extends BaseContent {
+  type: 'image';
+  src: string;
+  alt: string;
+}
+
 export type Content =
   | TextContent
   | CodeBlockContent
@@ -84,7 +90,8 @@ export type Content =
   | UnorderedListContent
   | ChecklistContent
   | TableContent
-  | SpreadsheetContent;
+  | SpreadsheetContent
+  | ImageContent;
 
 export interface Block {
   type: string;

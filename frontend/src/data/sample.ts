@@ -2,8 +2,8 @@ import { Page } from "../types/Page"
 
 export const page_with_code_blocks: Page = {
     metadata: {
-      id: "001",
-      link: "/test-page-01",
+      id: "000",
+      link: "/test-page-00",
       linkName: "Page With Code Blocks",
       pageType: "page"
     },
@@ -19,17 +19,17 @@ export const page_with_code_blocks: Page = {
           {
             type: "h1",
             contents: "This is Heading1 text",
-            id: "heading1-001"
+            id: "heading1-000"
           },
           {
             type: "p",
             contents: "This is a paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, and some <em>emphasis</em> styling.",
-            id: "paragraph-001"
+            id: "paragraph-000"
           },
           {
             type: "p",
             contents: "This is a paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, <code>variable</code>, and some <em>emphasis</em> styling.",
-            id: "paragraph-001"
+            id: "paragraph-000"
           },
 
           {
@@ -41,7 +41,7 @@ export const page_with_code_blocks: Page = {
                 contents: "<p>Hello from codeblock world</p>\n<p>Another Hello from codeblock world</p>"
               }
             ],
-            id: "codeblock-html-001"
+            id: "codeblock-html-000"
           },
           {
             type: "code-block",
@@ -51,7 +51,7 @@ export const page_with_code_blocks: Page = {
                 contents: "p {\n  color: red;\n}\n"
               }
             ],
-            id: "codeblock-css-001"
+            id: "codeblock-css-000"
           },
           {
             type: "code-block",
@@ -62,16 +62,83 @@ export const page_with_code_blocks: Page = {
                 contents: "const abcd = 123;\n"
               }
             ],
-            id: "codeblock-js-001"
+            id: "codeblock-js-000"
           },
           {
             type: "p",
             contents: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu non sodales neque sodales ut etiam sit amet. At auctor urna nunc id cursus metus aliquam. Suscipit adipiscing bibendum est ultricies. Ac auctor augue mauris augue neque gravida in. Proin libero nunc consequat interdum varius. Fusce ut placerat orci nulla pellentesque dignissim enim sit. Morbi tempus iaculis urna id volutpat lacus laoreet non. Adipiscing tristique risus nec feugiat in fermentum posuere. Nibh sit amet commodo nulla facilisi. Urna cursus eget nunc scelerisque viverra mauris in aliquam. Semper quis lectus nulla at volutpat diam ut venenatis. Quam nulla porttitor massa id. Risus nec feugiat in fermentum posuere urna nec tincidunt.",
-            id: "paragraph-002"
+            id: "paragraph-000002"
           },
         ]
       },
     ]
+}
+
+export const page_with_images: Page = {
+  metadata: {
+    id: "001",
+    link: "/test-page-01",
+    linkName: "Page With Images",
+    pageType: "page"
+  },
+  title: {
+    bannerUrl: "../assets/banners/banner3.webp",
+    logo: "🚀",
+    h2Text: "Page With Images"
+  },
+  contents: [
+    {
+      type: "text",
+      contents: [
+        {
+          type: "h1",
+          contents: "This is Heading1 text",
+          id: "heading1-001"
+        },
+        {
+          type: "p",
+          contents: "This is first paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, and some <em>emphasis</em> styling.",
+          id: "paragraph-001"
+        },
+        {
+          type: "image",
+          src: "../assets/banners/banner4.webp",
+          alt: "Test Image",
+        },
+        {
+          type: "p",
+          contents: "This is second paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, and some <em>emphasis</em> styling.",
+          id: "paragraph-001"
+        },
+        {
+          type: "p",
+          contents: "This is third paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, and some <em>emphasis</em> styling.",
+          id: "paragraph-001"
+        },
+        {
+          type: "p",
+          contents: "This is fourth paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, and some <em>emphasis</em> styling.",
+          id: "paragraph-001"
+        },
+        {
+          type: "p",
+          contents: "This is fifth paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, and some <em>emphasis</em> styling.",
+          id: "paragraph-001"
+        },
+        {
+          type: "p",
+          contents: "This is sixth paragraph text with some <i>italic</i>, <b>bold</b>, <u>underline</u>, and some <em>emphasis</em> styling.",
+          id: "paragraph-001"
+        },
+        
+        {
+          type: "p",
+          contents: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu non sodales neque sodales ut etiam sit amet. At auctor urna nunc id cursus metus aliquam. Suscipit adipiscing bibendum est ultricies. Ac auctor augue mauris augue neque gravida in. Proin libero nunc consequat interdum varius. Fusce ut placerat orci nulla pellentesque dignissim enim sit. Morbi tempus iaculis urna id volutpat lacus laoreet non. Adipiscing tristique risus nec feugiat in fermentum posuere. Nibh sit amet commodo nulla facilisi. Urna cursus eget nunc scelerisque viverra mauris in aliquam. Semper quis lectus nulla at volutpat diam ut venenatis. Quam nulla porttitor massa id. Risus nec feugiat in fermentum posuere urna nec tincidunt.",
+          id: "paragraph-002"
+        },
+      ]
+    },
+  ]
 }
 
 export const page_with_callout_boxes: Page = {
@@ -961,4 +1028,4 @@ export const dummy_page_04: Page = {
   ]
 }
 
-export const data: Page[] = [page_with_code_blocks, page_with_callout_boxes, page_with_lists, page_with_checklists, page_with_tables, page_with_spreadsheet];
+export const data: Page[] = [page_with_code_blocks, page_with_images, page_with_callout_boxes, page_with_lists, page_with_checklists, page_with_tables, page_with_spreadsheet];

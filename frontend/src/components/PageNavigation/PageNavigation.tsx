@@ -61,11 +61,11 @@ const PageNavigation: React.FC = observer(() => {
 
   const headers = dataStore.currentPage.contents.flatMap(block =>
     block.contents.filter(content =>
-      ['h1', 'h2'].includes(content.type)
+      ['h1', 'h2'].includes((content as TextContent).type)
     ).map(content => ({
-      id: content.id!,
-      type: content.type,
-      contents: content.contents
+      id: (content as TextContent).id!,
+      type: (content as TextContent).type,
+      contents: (content as TextContent).contents
     }))
   );
 

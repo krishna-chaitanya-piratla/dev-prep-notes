@@ -1,8 +1,10 @@
 import React from 'react';
-import { Content, TextContent, CodeBlockContent } from '../types/Page';
+import { Content, TextContent, CodeBlockContent, CalloutBoxContent, ImageContent } from '../types/Page';
 import { renderPageContent } from '../utils/helpers';
 import { EditableDiv } from '../styles/EditableDiv';
 import CodeBlock from './CodeBlock';
+import CalloutBoxComponent from './CalloutBox';
+import Image from './Image';
 
 interface EditableProps {
   content: Content;
@@ -26,8 +28,24 @@ const Editable: React.FC<EditableProps> = ({ content, onContentChange }) => {
     return content.type === 'code-block';
   };
 
+  const isCalloutBoxContent = (content: Content): content is CalloutBoxContent => {
+    return content.type === 'callout-box';
+  };
+
+  const isImageContent = (content: Content): content is ImageContent => {
+    return content.type === 'image';
+  };
+
   if (isCodeBlockContent(content)) {
     return <CodeBlock content={content} onContentChange={onContentChange} />;
+  }
+
+  if (isCalloutBoxContent(content)) {
+    return <CalloutBoxComponent content={content} onContentChange={onContentChange} />;
+  }
+
+  if (isImageContent(content)) {
+    return <Image src={content.src} alt={content.alt} />;
   }
 
   if (!isTextContent(content)) {

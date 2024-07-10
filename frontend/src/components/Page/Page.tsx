@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -7,7 +7,7 @@ import { BannerWrapper, ContentWrapper, PageWrapper } from '../../styles/Page/Pa
 import Banner from './Banner';
 import Editable from '../Editable';
 import DraggableBlock from '../DraggableBlock';
-import { Content, OrderedListContent } from '../../types/Page';
+import { Content, OrderedListContent, ImageContent } from '../../types/Page';
 
 const Page: React.FC = observer(() => {
   const { currentPage } = dataStore;
@@ -38,6 +38,27 @@ const Page: React.FC = observer(() => {
     dataStore.setPage(updatedPage);
   };
 
+  const handleImageDrop = (event: React.DragEvent) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const src = e.target?.result as string;
+        const newImageContent: ImageContent = {
+          type: 'image',
+          src,
+          alt: file.name,
+          id: `image_${Date.now()}`
+        };
+        const updatedPage = { ...currentPage };
+        updatedPage.contents[0].contents.push(newImageContent);
+        dataStore.setPage(updatedPage);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleImageChange = (newImage: File | null) => {
     if (newImage) {
       const fileURL = URL.createObjectURL(newImage);
@@ -54,7 +75,11 @@ const Page: React.FC = observer(() => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <PageWrapper depthNumbering={depthNumbering}>
+      <PageWrapper
+        depthNumbering={depthNumbering}
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={handleImageDrop}
+      >
         <BannerWrapper>
           <Banner
             imageUrl={currentPage.title.bannerUrl}
