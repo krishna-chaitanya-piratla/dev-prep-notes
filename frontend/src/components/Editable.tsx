@@ -45,8 +45,16 @@ const Editable: React.FC<EditableProps> = ({ content, onContentChange }) => {
   }
 
   if (isImageContent(content)) {
-    return <Image content={content} onContentChange={onContentChange} />;
+    return (
+      <Image
+        src={content.src}
+        alt={content.alt}
+        alignment="center"
+        type="image" // Ensure the type property is added
+      />
+    );
   }
+
 
   if (!isTextContent(content)) {
     return <>{renderPageContent(content, onContentChange)}</>;

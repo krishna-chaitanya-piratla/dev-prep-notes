@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 
-export const ImageWrapper = styled.div`
-  position: relative;
-  display: inline-block;
+interface ImageWrapperProps {
+  alignment: 'left' | 'center' | 'right';
+}
+
+export const ImageWrapper = styled.div<ImageWrapperProps>`
+  display: flex;
+  justify-content: ${({ alignment }) =>
+    alignment === 'left' ? 'flex-start' : alignment === 'right' ? 'flex-end' : 'center'};
+  margin: 1rem 0;
 `;
 
 export const ResizeHandle = styled.div`
