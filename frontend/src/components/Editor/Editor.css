@@ -1,0 +1,79 @@
+.editor-input {
+    border: none;
+    padding: 10px;
+    min-height: 150px;
+    border-radius: 4px;
+    background-color: #fff;
+    &:focus-visible {
+        outline: none;
+    }
+  }
+  
+  .editor-placeholder {
+    position: relative;
+    color: #aaa;
+    pointer-events: none;
+  }
+  
+  .editor-paragraph {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .editor-heading-h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+  }
+  
+  .editor-heading-h2 {
+    font-size: 1.5em;
+    margin: 0.83em 0;
+  }
+  
+  .editor-heading-h3 {
+    font-size: 1.17em;
+    margin: 1em 0;
+  }
+  
+  .editor-list-ol,
+  .editor-list-ul {
+    margin: 0;
+    padding-left: 40px;
+  }
+  
+  .editor-listitem {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .editor-nested-listitem {
+    list-style-type: none;
+  }
+  
+  .editor-quote {
+    border-left: 4px solid #ddd;
+    color: #666;
+    font-style: italic;
+    margin: 1.5em 10px;
+    padding-left: 10px;
+  }
+  
+  .editor-text-bold {
+    font-weight: bold;
+  }
+  
+  .editor-text-italic {
+    font-style: italic;
+  }
+  
+  .editor-text-underline {
+    text-decoration: underline;
+  }
+  
+  .editor-text-code {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f4f4f4;
+    border-radius: 3px;
+    padding: 2px 4px;
+  }
+  

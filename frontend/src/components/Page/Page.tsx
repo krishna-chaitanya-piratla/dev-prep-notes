@@ -8,6 +8,7 @@ import Banner from './Banner';
 import Editable from '../Editable';
 import DraggableBlock from '../DraggableBlock';
 import { Content, OrderedListContent, ImageContent } from '../../types/Page';
+import Editor from '../Editor/Editor';
 
 const Page: React.FC = observer(() => {
   const { currentPage } = dataStore;
@@ -88,14 +89,15 @@ const Page: React.FC = observer(() => {
           />
         </BannerWrapper>
         <ContentWrapper>
-          {currentPage.contents[0].contents.map((content, index) => (
+          {/* {currentPage.contents[0].contents.map((content, index) => (
             <DraggableBlock key={content.id} index={index} moveBlock={moveBlock} content={content}>
               <Editable
                 content={content}
                 onContentChange={(newContent) => handleContentChange(content.id || '', newContent)}
               />
             </DraggableBlock>
-          ))}
+          ))} */}
+          <Editor />
         </ContentWrapper>
       </PageWrapper>
     </DndProvider>
